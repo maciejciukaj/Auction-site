@@ -1,44 +1,48 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Top navbar</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarCollapse"
-      aria-controls="navbarCollapse"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link disabled"
-            href="#"
-            tabindex="-1"
-            aria-disabled="true"
-            >Disabled</a
-          >
-        </li>
-      </ul>
-      <form class="d-flex">
+<body>
+  <div id="navbar">
+    <ul class="main-bar">
+      <li class="main-bar">
+        <a class="logo" routerLink="/" routerLinkActive="active">CARCLUB</a>
+      </li>
+      <li class="main-bar">
+        <a
+          *ngIf="accountService.currentUser$ | async"
+          routerLink="/main"
+          routerLinkActive="active"
+          >Home</a
+        >
+      </li>
+      <li class="main-bar">
+        <a
+          *ngIf="accountService.currentUser$ | async"
+          routerLink="/auc"
+          routerLinkActive="active"
+          >Auctions</a
+        >
+      </li>
+      <li *ngIf="accountService.currentUser$ | async" class="main-bar">
+        <a routerLink="/adv" routerLinkActive="active">Advertisments</a>
+      </li>
+      <li
+        *ngIf="(accountService.currentUser$ | async) === null"
+        class="main-bar"
+      >
         <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
+          class="menu-icon"
+          type="checkbox"
+          id="menu-icon"
+          name="menu-icon"
         />
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
+        <label for="menu-icon"></label>
+        <nav class="nav">
+          <ul class="pt-5">
+            <li><a href="/log">Login</a></li>
+            <li><a href="#">Register</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+      </li>
+    </ul>
   </div>
-</nav>
+</body>
