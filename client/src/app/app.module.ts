@@ -16,6 +16,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { RegisterPageComponent } from './register-page/register-page.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
     RegisterComponent,
     NavComponent,
     LoginPageComponent,
+    RegisterPageComponent,
   ],
   imports: [
     BrowserModule,

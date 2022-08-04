@@ -70,7 +70,6 @@ body {
 }
 .logo {
   font-size: 21px;
-  
 }
 
 .section-center {
@@ -87,7 +86,7 @@ body {
 }
 h1 {
   font-family: "Montserrat", sans-serif;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 7vw;
   line-height: 1;
   color: #ffeba7;
@@ -339,4 +338,28 @@ h1 {
   .nav ul li a {
     font-size: 8vh;
   }
+}
+
+.dropdown {
+  margin-right: 5%;
+}
+.dropdown-toggle {
+  text-decoration: none;
+}
+.dropdown-menu {
+  background-color: #4d6875;
+  opacity: 100%;
+}
+.dropdown-item {
+  color: #ffffff;
+  font-weight: 500;
+}
+.dropdown-item:hover {
+  background-color: #4b606b;
+}
+.dropdown-divider {
+  opacity: 20%;
+}
+.usernameColor {
+  color: #ff4081;
 }

@@ -1,0 +1,60 @@
+<div class="login-box container">
+  <h2>Register</h2>
+  <form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
+    <div class="user-box">
+      <input
+        [(ngModel)]="model.username"
+        type="text"
+        name="username"
+        required=""
+      />
+      <label>Username</label>
+    </div>
+    <div class="user-box">
+      <input
+        [(ngModel)]="model.password"
+        type="password"
+        name="password"
+        required=""
+      />
+      <label>Password</label>
+    </div>
+    <div class="user-box">
+      <input
+        [(ngModel)]="model.firstname"
+        type="text"
+        name="firstname"
+        required=""
+      />
+      <label>First name</label>
+    </div>
+    <div class="user-box">
+      <input
+        [(ngModel)]="model.lastname"
+        type="text"
+        name="lastname"
+        required=""
+      />
+      <label>Last name</label>
+    </div>
+    <div class="user-box">
+      <input [(ngModel)]="model.email" type="email" name="email" required="" />
+      <label>Email</label>
+    </div>
+    <div class="user-box">
+      <input
+        [(ngModel)]="model.phonenumber"
+        type="text"
+        name="phonenumber"
+        required=""
+      />
+      <label>Phone number</label>
+    </div>
+    <button class="blue-light" type="submit">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>Submit
+    </button>
+  </form>
+</div>

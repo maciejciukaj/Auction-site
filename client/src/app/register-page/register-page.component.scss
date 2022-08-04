@@ -2,9 +2,11 @@
   font-family: "Montserrat", sans-serif;
   font-weight: 200;
   position: fixed;
+  margin-top: 2%;
   top: 50%;
   left: 50%;
-  width: 400px;
+  width: 30%;
+
   padding: 40px;
   transform: translate(-50%, -50%);
   background: rgba(0, 0, 0, 0.5);
@@ -64,7 +66,7 @@
   text-transform: uppercase;
   overflow: hidden;
   transition: 0.5s;
-  margin-top: 40px;
+  margin-top: 10px;
   letter-spacing: 4px;
 }
 

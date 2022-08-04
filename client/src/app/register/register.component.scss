@@ -1,0 +1,17 @@
+.container {
+  color: azure;
+}
+.car {
+  width: 200px;
+  height: 100px;
+  background: url("car.png") no-repeat center;
+  background-size: cover;
+  position: absolute;
+  transition: all 0.1s;
+}
+.cancelCar {
+  position: fixed;
+  width: 5%;
+  bottom: 30px;
+  left: 40px;
+}

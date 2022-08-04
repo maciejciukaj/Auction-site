@@ -23,6 +23,26 @@
       <li *ngIf="accountService.currentUser$ | async" class="main-bar">
         <a routerLink="/adv" routerLinkActive="active">Advertisments</a>
       </li>
+
+      <li
+        class="dropdown"
+        *ngIf="accountService.currentUser$ | async as user"
+        dropdown
+      >
+        <a class="dropdown-toggle text-light" dropdownToggle
+          >Witaj, <span class="usernameColor">{{ user.userName }}</span></a
+        >
+        <div class="dropdown-menu mt-3" *dropdownMenu>
+          <a class="dropdown-item">My profile</a>
+
+          <a class="dropdown-item">My auctions</a>
+
+          <a class="dropdown-item">My offers</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
+        </div>
+      </li>
+
       <li
         *ngIf="(accountService.currentUser$ | async) === null"
         class="main-bar"
@@ -37,7 +57,7 @@
         <nav class="nav">
           <ul class="pt-5">
             <li><a href="/log">Login</a></li>
-            <li><a href="#">Register</a></li>
+            <li><a href="/reg">Register</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
           </ul>
