@@ -2,7 +2,7 @@
   <div id="navbar">
     <ul class="main-bar">
       <li class="main-bar">
-        <a class="logo" routerLink="/" routerLinkActive="active">CARCLUB</a>
+        <a class="logo" routerLink="/main" routerLinkActive="active">CARCLUB</a>
       </li>
       <li class="main-bar">
         <a
@@ -33,7 +33,7 @@
           >Witaj, <span class="usernameColor">{{ user.userName }}</span></a
         >
         <div class="dropdown-menu mt-3" *dropdownMenu>
-          <a class="dropdown-item">My profile</a>
+          <a class="dropdown-item" routerLink="/userP">My profile</a>
 
           <a class="dropdown-item">My auctions</a>
 

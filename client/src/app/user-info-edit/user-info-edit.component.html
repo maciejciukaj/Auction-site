@@ -1,0 +1,49 @@
+<div class="login-box">
+  <h2>Edit your information</h2>
+  <form #editForm="ngForm" (ngSubmit)="editUserInfo()" autocomplete="off">
+    <div class="user-box">
+      <input
+        [(ngModel)]="model.firstname"
+        type="text"
+        name="firstname"
+        required=""
+      />
+      <label>First name</label>
+    </div>
+    <div class="user-box">
+      <input
+        [(ngModel)]="model.lastname"
+        type="text"
+        name="lastname"
+        required=""
+      />
+      <label>Last name</label>
+    </div>
+    <div class="user-box">
+      <input [(ngModel)]="model.email" type="email" name="email" required="" />
+      <label>E-mail</label>
+    </div>
+    <div class="user-box">
+      <input
+        [(ngModel)]="model.phonenumber"
+        type="text"
+        name="phonenumber"
+        required=""
+      />
+      <label>Phone number</label>
+    </div>
+    <div class="user-tip mb-3 mt-2">Fill fields that require editing</div>
+    <button class="blue-light" type="submit">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>Submit
+    </button>
+    <button class="blue-light ml-5 cancelButton" (click)="cancel()">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>Cancel
+    </button>
+  </form>
+</div>

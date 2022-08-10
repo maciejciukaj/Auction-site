@@ -1,0 +1,27 @@
+.container {
+  color: white;
+}
+ul {
+  margin-top: 6%;
+  list-style: none;
+  padding: 0;
+}
+li {
+  padding-left: 1.3em;
+  font-size: 170%;
+  margin-bottom: 5%;
+}
+li:before {
+  content: "\f1b9"; /* FontAwesome Unicode */
+  font-family: FontAwesome;
+  display: inline-block;
+  margin-left: -1.3em; /* same as padding-left set on li */
+  width: 1.3em; /* same as padding-left set on li */
+}
+li span {
+  position: relative;
+  left: 10px;
+}
+.dataColor{
+  color: #03e9f4
+}

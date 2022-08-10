@@ -1,0 +1,35 @@
+<div *ngIf="!editMode" class="container">
+  <div *ngIf="accountService.currentUser$ | async as user">
+    <h1 class="mt-3">{{ welcome }},&nbsp; {{ user.userName | uppercase }} !</h1>
+  </div>
+  <div class="mt-5">
+    <ul>
+      <li>
+        <span
+          >First name:
+          <span class="dataColor">{{ currentUser.firstName }}</span></span
+        >
+      </li>
+      <li>
+        <span>Last name: {{ currentUser.lastName }}</span>
+      </li>
+      <li>
+        <span>Email: {{ currentUser.email }}</span>
+      </li>
+      <li>
+        <span>Phone number: {{ currentUser.phoneNumber }}</span>
+      </li>
+    </ul>
+  </div>
+  <button (click)="editToggle()" class="btn btn-success mr-3">
+    Edit personal info
+  </button>
+  <button (click)="editToggle()" class="btn btn-warning">
+    Change password
+  </button>
+</div>
+<div *ngIf="editMode">
+  <app-user-info-edit
+    (cancelEdit)="cancelEditMode($event)"
+  ></app-user-info-edit>
+</div>

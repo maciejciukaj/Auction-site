@@ -6,9 +6,9 @@ import { AccountService } from '../_services/account.service';
 declare function setCar();
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  selector: 'app-minigame',
+  templateUrl: './minigame.component.html',
+  styleUrls: ['./minigame.component.scss'],
 })
 export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();

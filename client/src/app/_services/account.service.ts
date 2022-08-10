@@ -28,6 +28,10 @@ export class AccountService {
   setCurrentUser(user: User) {
     this.currentUserSource.next(user);
   }
+
+  getCurrentUser() {
+    return this.currentUserSource;
+  }
   logout() {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
@@ -42,5 +46,9 @@ export class AccountService {
         }
       })
     );
+  }
+
+  editUserInfo(model: any){
+    return this.http.put(this.baseUrl+'user/editUsername', model);
   }
 }

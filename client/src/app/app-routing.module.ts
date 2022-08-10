@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { MainComponent } from './main/main.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'main', component: MainComponent },
       { path: 'auc', component: AuctionsComponent },
       { path: 'adv', component: AdvertismentsComponent },
+      { path: 'userP', component: UserProfileComponent },
     ],
   },
   { path: '**', component: HomeComponent, pathMatch: 'full' },
