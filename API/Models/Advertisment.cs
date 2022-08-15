@@ -16,9 +16,9 @@ namespace API.Models
         public string Owner {get;set;}
         public string Price {get;set;}
 
-        public Vehicle Vehicle {get; set;}
+        public  Vehicle Vehicle {get; set;}
 
-        public User User {get; set;}
+        public  User User {get; set;}
 
     }
 }

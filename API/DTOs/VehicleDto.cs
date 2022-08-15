@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Models;
 
-namespace API.Models
+namespace API.DTOs
 {
-    public class Vehicle
+    public class VehicleDto
     {
-        public long VehicleId {get; set;}
 
         public string Type {get;set;}
 
@@ -29,10 +29,10 @@ namespace API.Models
 
         public int ProductionYear{get;set;}
 
-        public ICollection<Auction> Auctions {get; set;}
 
-        public ICollection<Advertisment> Advertisments {get; set;}
-
+        public long UserId {get; set;}
         public User User {get; set;}
-        }
+       
+
+    }
 }

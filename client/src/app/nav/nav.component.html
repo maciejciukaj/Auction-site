@@ -1,24 +1,20 @@
 <body>
   <div id="navbar">
     <ul class="main-bar">
-      <li class="main-bar">
+      <li *ngIf="accountService.currentUser$ | async" class="main-bar">
         <a class="logo" routerLink="/main" routerLinkActive="active">CARCLUB</a>
       </li>
-      <li class="main-bar">
-        <a
-          *ngIf="accountService.currentUser$ | async"
-          routerLink="/main"
-          routerLinkActive="active"
-          >Home</a
-        >
+      <li
+        *ngIf="(accountService.currentUser$ | async) === null"
+        class="main-bar"
+      >
+        <a class="logo" routerLink="/" routerLinkActive="active">CARCLUB</a>
       </li>
-      <li class="main-bar">
-        <a
-          *ngIf="accountService.currentUser$ | async"
-          routerLink="/auc"
-          routerLinkActive="active"
-          >Auctions</a
-        >
+      <li *ngIf="accountService.currentUser$ | async" class="main-bar">
+        <a routerLink="/main" routerLinkActive="active">Home</a>
+      </li>
+      <li *ngIf="accountService.currentUser$ | async" class="main-bar">
+        <a routerLink="/auc" routerLinkActive="active">Auctions</a>
       </li>
       <li *ngIf="accountService.currentUser$ | async" class="main-bar">
         <a routerLink="/adv" routerLinkActive="active">Advertisments</a>

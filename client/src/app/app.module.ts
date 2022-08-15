@@ -19,6 +19,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserInfoEditComponent } from './user-info-edit/user-info-edit.component';
+import { AdvertFormComponent } from './advert-form/advert-form.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { UserInfoEditComponent } from './user-info-edit/user-info-edit.component
     RegisterPageComponent,
     UserProfileComponent,
     UserInfoEditComponent,
+    AdvertFormComponent,
   ],
   imports: [
     BrowserModule,

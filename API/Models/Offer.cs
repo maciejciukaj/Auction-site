@@ -19,7 +19,7 @@ namespace API.Models
 
        
 
-        public User User {get; set;}
+        public  User User {get; set;}
 
        
         

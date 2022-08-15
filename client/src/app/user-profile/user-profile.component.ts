@@ -14,6 +14,7 @@ export class UserProfileComponent implements OnInit {
   currentUser: any;
   name: any;
   editMode = false;
+  passwordMode = false;
 
   constructor(public accountService: AccountService, private http: HttpClient) {
     this.getUser();
@@ -25,7 +26,6 @@ export class UserProfileComponent implements OnInit {
     } else {
       this.welcome = '🌜 Good Evening';
     }
-    //console.log(this.now.getHours());
   }
 
   getUser() {
@@ -47,9 +47,14 @@ export class UserProfileComponent implements OnInit {
     this.editMode = !this.editMode;
   }
 
-  
+  passwordToggle() {
+    this.passwordMode = !this.passwordMode;
+  }
 
   cancelEditMode(event: boolean) {
     this.editMode = event;
+  }
+  cancelPasswordMode(event: boolean) {
+    this.passwordMode = event;
   }
 }

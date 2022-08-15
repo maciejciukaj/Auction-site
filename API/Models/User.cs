@@ -24,7 +24,7 @@ namespace API.Models
 
         public byte[] PasswordSalt {get; set;}
 
-        public ICollection<Offer> Offers {get; set;}
+        public  ICollection<Offer> Offers {get; set;}
 
         public ICollection<Auction> Auctions {get; set;}
 

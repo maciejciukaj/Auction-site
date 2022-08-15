@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdvertFormComponent } from './advert-form/advert-form.component';
 import { AdvertismentsComponent } from './advertisments/advertisments.component';
 import { AuctionsComponent } from './auctions/auctions.component';
 import { HomeComponent } from './home/home.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'auc', component: AuctionsComponent },
       { path: 'adv', component: AdvertismentsComponent },
       { path: 'userP', component: UserProfileComponent },
+      { path: 'advForm', component: AdvertFormComponent },
     ],
   },
   { path: '**', component: HomeComponent, pathMatch: 'full' },
