@@ -9,5 +9,5 @@ export interface Vehicle {
   isCrashed: boolean;
   mileage: number;
   productionYear: number;
-  user: object;
+  userId: object;
 }

@@ -6,6 +6,7 @@ using API.Data;
 using API.DTOs;
 using API.Interfaces;
 using API.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,8 +17,11 @@ namespace API.Controllers
     {
         private readonly IUserRepository _userRepository;
 
-        public UserController (IUserRepository userRepository){
+        private readonly IMapper _mapper;
+
+        public UserController (IUserRepository userRepository, IMapper mapper){
             _userRepository = userRepository;
+            _mapper = mapper;
         }
         
         [HttpPut("editUsername")]
@@ -41,10 +45,12 @@ namespace API.Controllers
 
         [HttpGet("getUsers")]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers(){
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers(){
             
             
-           var users = await _userRepository.GetUserAsync();
+           var users = await _userRepository.GetUsersAsync();
+
+           var usersToReturn = _mapper.Map<IEnumerable<MemberDto>>(users);
            return Ok(users);
         }
 
@@ -56,8 +62,10 @@ namespace API.Controllers
         // }
 
         [HttpGet("getUsers/{name}")]
-        public async Task<ActionResult<User>> GetUser(string name){
-            return await _userRepository.GetUserByUsernameAsync(name);
+        public async Task<ActionResult<MemberDto>> GetUser(string name){
+            
+            var user =  await _userRepository.GetUserByUsernameAsync(name);
+            return _mapper.Map<MemberDto>(user);
            
         }
     }

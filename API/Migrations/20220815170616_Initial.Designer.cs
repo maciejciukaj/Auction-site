@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.Migrations
 {
     [DbContext(typeof(AuctionContext))]
-    [Migration("20220815161339_Forth")]
-    partial class Forth
+    [Migration("20220815170616_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -210,7 +210,7 @@ namespace API.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("text");
 
-                    b.Property<long?>("UserId")
+                    b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
                     b.HasKey("VehicleId");
@@ -269,7 +269,9 @@ namespace API.Migrations
                 {
                     b.HasOne("API.Models.User", "User")
                         .WithMany("Vehicles")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });

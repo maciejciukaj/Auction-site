@@ -11,6 +11,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
+
+        //nie tworzyc zbioru z pojazdami bo to bezsensu, lepiej stworzyc pojazd i dodac do listy Usera
+
     public class VehicleController : BaseApiController
     {
         
@@ -29,7 +32,7 @@ namespace API.Controllers
 
         [HttpPost("addVehicles")]
         [AllowAnonymous]
-        public async Task<ActionResult<Vehicle>> AddVehicle(VehicleDto vehicle){
+        public async Task<ActionResult<Vehicle>> AddVehicle(Vehicle vehicle){
             
              var newVehicle = new Vehicle{
                 Type = vehicle.Type,
@@ -42,9 +45,7 @@ namespace API.Controllers
                 IsCrashed = vehicle.IsCrashed,
                 Mileage = vehicle.Mileage,
                 ProductionYear = vehicle.ProductionYear,
-                User = vehicle.User
-               
-
+                UserId = vehicle.UserId
             };
 
             _context.Vehicles.Add(newVehicle);

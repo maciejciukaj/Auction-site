@@ -17,9 +17,9 @@ namespace API.Data
         public UserRepository(AuctionContext context){
             _context = context;
         }
-        public async Task<IEnumerable<User>> GetUserAsync()
+        public async Task<IEnumerable<User>> GetUsersAsync()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users.Include(v => v.Vehicles).Include(a => a.Advertisments).Include(o => o.Offers).Include(x => x.Auctions).ToListAsync();
         }
 
         public async Task<User> GetUserByIdAsync(long id)
@@ -29,7 +29,7 @@ namespace API.Data
 
         public async Task<User> GetUserByUsernameAsync(string username)
         {
-            return await _context.Users.SingleOrDefaultAsync(x => x.UserName == username);
+            return await _context.Users.Include(v => v.Vehicles).Include(a => a.Advertisments).Include(o => o.Offers).Include(x => x.Auctions).SingleOrDefaultAsync(x => x.UserName == username);
         }
 
         public async Task<bool> SaveAllAsyc()

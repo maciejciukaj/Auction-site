@@ -16,25 +16,23 @@ export class AdvertFormComponent implements OnInit {
 
   vehicle: Vehicle = {
     type: 'coupe',
-    brand: 'dodge',
-    model: 'demon',
-    price: 10000,
-    color: 'red',
-    power: 800,
+    brand: 'bmw',
+    model: '7',
+    price: 20000,
+    color: 'black',
+    power: 300,
     engine: 5,
     isCrashed: false,
     mileage: 12,
     productionYear: 2020,
-    user: null,
+    userId: null,
   };
 
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
     public accountService: AccountService
-  ) {
-    this.getUser();
-  }
+  ) {}
 
   ngOnInit(): void {
     this.getUser();
@@ -47,7 +45,10 @@ export class AdvertFormComponent implements OnInit {
     this.http
       .get('https://localhost:5001/api/user/getUsers/' + this.name.userName)
       .subscribe({
-        next: (response) => ((this.vehicle.user = response)),
+        next: (response) => (
+          (this.pass = response),
+          ((this.vehicle.userId = this.pass.userId), this.addVehicle()) //tu ma byc jeszcze wywolanie funkcji add Vehicle, ogarnac cascade i walidacje hasla
+        ),
         error: (error) => console.log(error),
       });
   }

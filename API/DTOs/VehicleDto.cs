@@ -30,8 +30,6 @@ namespace API.DTOs
         public int ProductionYear{get;set;}
 
 
-        public long UserId {get; set;}
-        public User User {get; set;}
        
 
     }

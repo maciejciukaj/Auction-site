@@ -46,7 +46,7 @@ namespace API.Migrations
                     IsCrashed = table.Column<bool>(type: "boolean", nullable: false),
                     Mileage = table.Column<int>(type: "integer", nullable: false),
                     ProductionYear = table.Column<int>(type: "integer", nullable: false),
-                    UserId = table.Column<long>(type: "bigint", nullable: true)
+                    UserId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -55,7 +55,8 @@ namespace API.Migrations
                         name: "FK_Vehicles_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId");
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

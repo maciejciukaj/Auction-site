@@ -208,7 +208,7 @@ namespace API.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("text");
 
-                    b.Property<long?>("UserId")
+                    b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
                     b.HasKey("VehicleId");
@@ -267,7 +267,9 @@ namespace API.Migrations
                 {
                     b.HasOne("API.Models.User", "User")
                         .WithMany("Vehicles")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
