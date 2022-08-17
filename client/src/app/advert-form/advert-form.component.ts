@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Vehicle } from '../_models/vehicle';
 import { AccountService } from '../_services/account.service';
@@ -13,12 +14,12 @@ export class AdvertFormComponent implements OnInit {
   currentUser: any = {};
   name: any;
   pass: any = {};
+  step: number = 0;
 
   vehicle: Vehicle = {
     type: 'coupe',
     brand: 'bmw',
     model: '7',
-    price: 20000,
     color: 'black',
     power: 300,
     engine: 5,
@@ -31,13 +32,24 @@ export class AdvertFormComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
-    public accountService: AccountService
+    public accountService: AccountService,
+    public router: Router
   ) {}
 
   ngOnInit(): void {
-    this.getUser();
+    // this.getUser();
 
     console.log(this.vehicle);
+  }
+  nextStep() {
+    if (this.step < 3) this.step = this.step + 1;
+    if (this.step == 3) {
+      this.router.navigateByUrl('/main');
+    }
+  }
+
+  previousStep() {
+    if (this.step > 0) this.step = this.step - 1;
   }
 
   getUser() {

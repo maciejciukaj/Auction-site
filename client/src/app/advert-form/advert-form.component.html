@@ -1,1 +1,110 @@
-<p>advert-form works!</p>
+<div class="login-box mt-5 container">
+  <form autocomplete="off" (ngSubmit)="nextStep()">
+    <div class="step0" *ngIf="step == 0">
+      <h2>Step 1 - Add vehicle photos</h2>
+      <div class="user-box">
+        <input
+          type="file"
+          id="avatar"
+          accept="image/png, image/jpeg"
+          required=""
+        />
+        <label>Your photos</label>
+      </div>
+
+      <button class="blue-light mt-5" type="submit">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>Next
+      </button>
+    </div>
+  </form>
+  <form autocomplete="off" (ngSubmit)="nextStep()">
+    <div class="step1 mb-1" *ngIf="step == 1">
+      <h2>Step 2</h2>
+      <div class="user-box">
+        <input type="text" name="title" required="" />
+        <label>Title</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="username" required="" />
+        <label>Type</label>
+      </div>
+      <div class="user-box">
+        <input type="password" name="password" required="" />
+        <label>Brand</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="firstname" required="" />
+        <label>Model</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="price" required="" />
+        <label>Price</label>
+      </div>
+      <div class="user-box">
+        <textarea name="description"> </textarea>
+        <label>Description</label>
+      </div>
+
+      <button class="blue-light mt-3 prev" (click)="previousStep()">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>Previous
+      </button>
+      <button class="blue-light mt-3 next" type="submit">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>Next
+      </button>
+    </div>
+  </form>
+  <form autocomplete="off" (ngSubmit)="nextStep()">
+    <div class="step2" *ngIf="step == 2">
+      <h2>Step 3</h2>
+      <div class="user-box">
+        <input type="text" name="phonenumber" required="" />
+        <label>Production year</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="lastname" required="" />
+        <label>Color</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="phonenumber" required="" />
+        <label>Mileage</label>
+      </div>
+      <div class="user-box">
+        <input type="email" name="email" required="" />
+        <label>Power</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="phonenumber" required="" />
+        <label>Engine</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="phonenumber" required="" />
+        <label>Crashed</label>
+      </div>
+
+      <button class="blue-light mt-3 prev" (click)="previousStep()">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>Previous
+      </button>
+
+      <button class="blue-light mt-3 next" type="submit">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>Create
+      </button>
+    </div>
+  </form>
+</div>
+color: string; power: number; engine: number; isCrashed: boolean; mileage:
+number; productionYear: number;

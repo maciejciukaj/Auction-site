@@ -32,18 +32,20 @@
       />
       <label>Phone number</label>
     </div>
-    <div class="user-tip mb-3 mt-2">Input data into fields that require editing</div>
-    <button class="blue-light" type="submit">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>Submit
-    </button>
-    <button class="blue-light ml-5 cancelButton" (click)="cancel()">
+    <div class="user-tip mb-3 mt-2">
+      Input data into fields that require editing
+    </div>
+    <button class="blue-light" (click)="cancel()">
       <span></span>
       <span></span>
       <span></span>
       <span></span>Cancel
+    </button>
+    <button class="blue-light ml-5 cancelButton" type="submit">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>Submit
     </button>
   </form>
 </div>

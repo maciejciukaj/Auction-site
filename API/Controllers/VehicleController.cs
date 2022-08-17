@@ -38,7 +38,6 @@ namespace API.Controllers
                 Type = vehicle.Type,
                 Brand = vehicle.Brand,
                 Model = vehicle.Model,
-                Price = vehicle.Price,
                 Color = vehicle.Color,
                 Power = vehicle.Power,
                 Engine = vehicle.Engine,
