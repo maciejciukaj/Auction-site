@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Advertisment } from '../_models/advertisment';
 import { Vehicle } from '../_models/vehicle';
 import { AccountService } from '../_services/account.service';
 
@@ -15,18 +16,28 @@ export class AdvertFormComponent implements OnInit {
   name: any;
   pass: any = {};
   step: number = 0;
+  vehicleData: any = {};
+  advertismentData: any = {};
 
   vehicle: Vehicle = {
-    type: 'coupe',
-    brand: 'bmw',
-    model: '7',
-    color: 'black',
-    power: 300,
+    type: 'combi',
+    brand: 'chevrolet',
+    model: 'camaro',
+    color: 'yellow',
+    power: 400,
     engine: 5,
     isCrashed: false,
     mileage: 12,
     productionYear: 2020,
     userId: null,
+  };
+
+  advertisment: Advertisment = {
+    title: 'bmw na sprzedaz',
+    description: 'super ekstra',
+    price: '100000',
+    userId: null,
+    vehicleId: null,
   };
 
   constructor(
@@ -37,9 +48,9 @@ export class AdvertFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.getUser();
+    //this.getUser();
 
-    console.log(this.vehicle);
+    //console.log(this.vehicle);
   }
   nextStep() {
     if (this.step < 3) this.step = this.step + 1;
@@ -59,7 +70,7 @@ export class AdvertFormComponent implements OnInit {
       .subscribe({
         next: (response) => (
           (this.pass = response),
-          ((this.vehicle.userId = this.pass.userId), this.addVehicle()) //tu ma byc jeszcze wywolanie funkcji add Vehicle, ogarnac cascade i walidacje hasla
+          ((this.vehicleData.userId = this.pass.userId), this.addVehicle()) //tu ma byc jeszcze wywolanie funkcji add Vehicle, ogarnac cascade i walidacje hasla
         ),
         error: (error) => console.log(error),
       });
@@ -67,10 +78,33 @@ export class AdvertFormComponent implements OnInit {
 
   addVehicle() {
     this.http
-      .post('https://localhost:5001/api/vehicle/addVehicles', this.vehicle)
+      .post('https://localhost:5001/api/vehicle/addVehicles', this.vehicleData)
       .subscribe({
-        next: (response) => this.toastr.success('poszlo'),
+        next: (response) => (
+          (this.pass = response),
+          (this.advertismentData.vehicleId = this.pass.vehicleId),
+          (this.advertismentData.userId = this.pass.userId),
+          console.log(this.advertismentData),
+          this.toastr.success('super'),
+          this.addAdvertisment()
+        ),
         error: (error) => console.log(error),
       });
+  }
+
+  addAdvertisment() {
+    this.http
+      .post(
+        'https://localhost:5001/api/advertisment/addAdvertisment',
+        this.advertismentData
+      )
+      .subscribe({
+        next: (response) => this.toastr.success('dodano ogloszenie'),
+        error: (error) => console.log(error),
+      });
+  }
+  showLog() {
+    console.log(this.advertismentData);
+    console.log(this.vehicleData);
   }
 }

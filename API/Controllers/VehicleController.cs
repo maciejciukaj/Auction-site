@@ -12,12 +12,13 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Controllers
 {
 
-        //nie tworzyc zbioru z pojazdami bo to bezsensu, lepiej stworzyc pojazd i dodac do listy Usera
+        
 
     public class VehicleController : BaseApiController
     {
         
         private readonly AuctionContext _context;
+        
         public VehicleController(AuctionContext context){
             _context = context;
         }
@@ -28,6 +29,10 @@ namespace API.Controllers
             
             
             return await _context.Vehicles.ToListAsync();
+
+            
+
+            
         }
 
         [HttpPost("addVehicles")]

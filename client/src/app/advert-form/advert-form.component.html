@@ -1,5 +1,5 @@
 <div class="login-box mt-5 container">
-  <form autocomplete="off" (ngSubmit)="nextStep()">
+  <form autocomplete="off" #advertForm="ngForm" (ngSubmit)="nextStep()">
     <div class="step0" *ngIf="step == 0">
       <h2>Step 1 - Add vehicle photos</h2>
       <div class="user-box">
@@ -20,31 +20,57 @@
       </button>
     </div>
   </form>
-  <form autocomplete="off" (ngSubmit)="nextStep()">
+  <form autocomplete="off" #advertForm="ngForm" (ngSubmit)="nextStep()">
     <div class="step1 mb-1" *ngIf="step == 1">
       <h2>Step 2</h2>
       <div class="user-box">
-        <input type="text" name="title" required="" />
+        <input
+          [(ngModel)]="advertismentData.title"
+          type="text"
+          name="title"
+          required=""
+        />
         <label>Title</label>
       </div>
       <div class="user-box">
-        <input type="text" name="username" required="" />
+        <input
+          [(ngModel)]="vehicleData.type"
+          type="text"
+          name="type"
+          required=""
+        />
         <label>Type</label>
       </div>
       <div class="user-box">
-        <input type="password" name="password" required="" />
+        <input
+          [(ngModel)]="vehicleData.brand"
+          type="text"
+          name="brand"
+          required=""
+        />
         <label>Brand</label>
       </div>
       <div class="user-box">
-        <input type="text" name="firstname" required="" />
+        <input
+          [(ngModel)]="vehicleData.model"
+          type="text"
+          name="firstname"
+          required=""
+        />
         <label>Model</label>
       </div>
       <div class="user-box">
-        <input type="text" name="price" required="" />
+        <input
+          [(ngModel)]="advertismentData.price"
+          type="text"
+          name="price"
+          required=""
+        />
         <label>Price</label>
       </div>
       <div class="user-box">
-        <textarea name="description"> </textarea>
+        <textarea [(ngModel)]="advertismentData.description" name="description">
+        </textarea>
         <label>Description</label>
       </div>
 
@@ -62,31 +88,61 @@
       </button>
     </div>
   </form>
-  <form autocomplete="off" (ngSubmit)="nextStep()">
+  <form autocomplete="off" #advertForm="ngForm" (ngSubmit)="getUser()">
     <div class="step2" *ngIf="step == 2">
       <h2>Step 3</h2>
       <div class="user-box">
-        <input type="text" name="phonenumber" required="" />
+        <input
+          [(ngModel)]="vehicleData.productionYear"
+          type="text"
+          name="productionYear"
+          required=""
+        />
         <label>Production year</label>
       </div>
       <div class="user-box">
-        <input type="text" name="lastname" required="" />
+        <input
+          [(ngModel)]="vehicleData.color"
+          type="text"
+          name="color"
+          required=""
+        />
         <label>Color</label>
       </div>
       <div class="user-box">
-        <input type="text" name="phonenumber" required="" />
+        <input
+          [(ngModel)]="vehicleData.mileage"
+          type="text"
+          name="mileage"
+          required=""
+        />
         <label>Mileage</label>
       </div>
       <div class="user-box">
-        <input type="email" name="email" required="" />
+        <input
+          [(ngModel)]="vehicleData.power"
+          type="text"
+          name="power"
+          required=""
+        />
         <label>Power</label>
       </div>
       <div class="user-box">
-        <input type="text" name="phonenumber" required="" />
+        <input
+          [(ngModel)]="vehicleData.engine"
+          type="text"
+          name="engine"
+          required=""
+        />
         <label>Engine</label>
       </div>
       <div class="user-box">
-        <input type="text" name="phonenumber" required="" />
+        <input
+          [(ngModel)]="vehicleData.isCrashed"
+          type="text"
+          name="isCrashed"
+          required=""
+        />
         <label>Crashed</label>
       </div>
 
@@ -106,5 +162,3 @@
     </div>
   </form>
 </div>
-color: string; power: number; engine: number; isCrashed: boolean; mileage:
-number; productionYear: number;

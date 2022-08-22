@@ -28,6 +28,6 @@ namespace API.DTOs
 
         public ICollection<VehicleDto> Vehicles {get; set;}
 
-        public ICollection<Advertisment> Advertisments {get; set;}
+        public ICollection<AdvertismentDto> Advertisments {get; set;}
     }
 }

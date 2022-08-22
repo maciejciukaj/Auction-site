@@ -14,6 +14,7 @@ namespace API.Helpers
         public AutoMapperProfiles(){
             CreateMap<User, MemberDto>();
             CreateMap<Vehicle, VehicleDto>();
+            CreateMap<Advertisment, AdvertismentDto>();
         }
         
     }

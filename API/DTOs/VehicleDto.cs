@@ -29,6 +29,11 @@ namespace API.DTOs
 
         public int ProductionYear{get;set;}
 
+       
+
+
+        public ICollection<AdvertismentDto> Advertisments {get; set;}
+
 
        
 

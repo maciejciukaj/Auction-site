@@ -19,7 +19,7 @@ namespace API.Data
         }
         public async Task<IEnumerable<User>> GetUsersAsync()
         {
-            return await _context.Users.Include(v => v.Vehicles).Include(a => a.Advertisments).Include(o => o.Offers).Include(x => x.Auctions).ToListAsync();
+            return await _context.Users.Include(v => v.Vehicles).Include(a => a.Advertisments).Include(o => o.Offers).Include(x => x.Auctions).AsSplitQuery().ToListAsync();
         }
 
         public async Task<User> GetUserByIdAsync(long id)
@@ -29,7 +29,7 @@ namespace API.Data
 
         public async Task<User> GetUserByUsernameAsync(string username)
         {
-            return await _context.Users.Include(v => v.Vehicles).Include(a => a.Advertisments).Include(o => o.Offers).Include(x => x.Auctions).SingleOrDefaultAsync(x => x.UserName == username);
+            return await _context.Users.Include(v => v.Vehicles).Include(a => a.Advertisments).Include(o => o.Offers).Include(x => x.Auctions).AsSplitQuery().SingleOrDefaultAsync(x => x.UserName == username);
         }
 
         public async Task<bool> SaveAllAsyc()

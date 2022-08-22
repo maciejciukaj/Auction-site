@@ -26,7 +26,7 @@ namespace API.Controllers
         }
         
 
-        [HttpPost("addAdvertisments")]
+        [HttpPost("addAdvertisment")]
         [AllowAnonymous]
         public async Task<ActionResult<Advertisment>> AddAdvertisments(Advertisment advertisment){
 
@@ -35,10 +35,10 @@ namespace API.Controllers
             var newAdvert = new Advertisment{
                 Title = advertisment.Title,
                 Description = advertisment.Description,
-                Owner = advertisment.Owner,
+ 
                 Price = advertisment.Price,
-                User = advertisment.User,
-                Vehicle = advertisment.Vehicle
+                UserId = advertisment.UserId,
+                VehicleId = advertisment.VehicleId
 
 
             };
