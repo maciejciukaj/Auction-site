@@ -25,7 +25,7 @@
       <h2>Step 2</h2>
       <div class="user-box">
         <input
-          [(ngModel)]="advertismentData.title"
+          [(ngModel)]="advertisment.title"
           type="text"
           name="title"
           required=""
@@ -34,7 +34,7 @@
       </div>
       <div class="user-box">
         <input
-          [(ngModel)]="vehicleData.type"
+          [(ngModel)]="vehicle.type"
           type="text"
           name="type"
           required=""
@@ -43,7 +43,7 @@
       </div>
       <div class="user-box">
         <input
-          [(ngModel)]="vehicleData.brand"
+          [(ngModel)]="vehicle.brand"
           type="text"
           name="brand"
           required=""
@@ -52,7 +52,7 @@
       </div>
       <div class="user-box">
         <input
-          [(ngModel)]="vehicleData.model"
+          [(ngModel)]="vehicle.model"
           type="text"
           name="firstname"
           required=""
@@ -61,7 +61,7 @@
       </div>
       <div class="user-box">
         <input
-          [(ngModel)]="advertismentData.price"
+          [(ngModel)]="advertisment.price"
           type="text"
           name="price"
           required=""
@@ -69,7 +69,7 @@
         <label>Price</label>
       </div>
       <div class="user-box">
-        <textarea [(ngModel)]="advertismentData.description" name="description">
+        <textarea [(ngModel)]="advertisment.description" name="description">
         </textarea>
         <label>Description</label>
       </div>
@@ -88,12 +88,12 @@
       </button>
     </div>
   </form>
-  <form autocomplete="off" #advertForm="ngForm" (ngSubmit)="getUser()">
+  <form autocomplete="off" #advertForm="ngForm" (ngSubmit)="createAdvertisment()">
     <div class="step2" *ngIf="step == 2">
       <h2>Step 3</h2>
       <div class="user-box">
         <input
-          [(ngModel)]="vehicleData.productionYear"
+          [(ngModel)]="vehicle.productionYear"
           type="text"
           name="productionYear"
           required=""
@@ -102,7 +102,7 @@
       </div>
       <div class="user-box">
         <input
-          [(ngModel)]="vehicleData.color"
+          [(ngModel)]="vehicle.color"
           type="text"
           name="color"
           required=""
@@ -111,7 +111,7 @@
       </div>
       <div class="user-box">
         <input
-          [(ngModel)]="vehicleData.mileage"
+          [(ngModel)]="vehicle.mileage"
           type="text"
           name="mileage"
           required=""
@@ -120,7 +120,7 @@
       </div>
       <div class="user-box">
         <input
-          [(ngModel)]="vehicleData.power"
+          [(ngModel)]="vehicle.power"
           type="text"
           name="power"
           required=""
@@ -129,7 +129,7 @@
       </div>
       <div class="user-box">
         <input
-          [(ngModel)]="vehicleData.engine"
+          [(ngModel)]="vehicle.engine"
           type="text"
           name="engine"
           required=""
@@ -138,7 +138,7 @@
       </div>
       <div class="user-box">
         <input
-          [(ngModel)]="vehicleData.isCrashed"
+          [(ngModel)]="vehicle.isCrashed"
           type="text"
           name="isCrashed"
           required=""

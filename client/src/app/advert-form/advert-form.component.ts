@@ -16,26 +16,25 @@ export class AdvertFormComponent implements OnInit {
   name: any;
   pass: any = {};
   step: number = 0;
-  vehicleData: any = {};
-  advertismentData: any = {};
+
 
   vehicle: Vehicle = {
-    type: 'combi',
-    brand: 'chevrolet',
-    model: 'camaro',
-    color: 'yellow',
-    power: 400,
-    engine: 5,
+    type: '',
+    brand: '',
+    model: '',
+    color: '',
+    power: null,
+    engine: null,
     isCrashed: false,
-    mileage: 12,
-    productionYear: 2020,
+    mileage: null,
+    productionYear: null,
     userId: null,
   };
 
   advertisment: Advertisment = {
-    title: 'bmw na sprzedaz',
-    description: 'super ekstra',
-    price: '100000',
+    title: '',
+    description: '',
+    price: '',
     userId: null,
     vehicleId: null,
   };
@@ -49,7 +48,6 @@ export class AdvertFormComponent implements OnInit {
 
   ngOnInit(): void {
     //this.getUser();
-
     //console.log(this.vehicle);
   }
   nextStep() {
@@ -63,28 +61,29 @@ export class AdvertFormComponent implements OnInit {
     if (this.step > 0) this.step = this.step - 1;
   }
 
-  getUser() {
+  createAdvertisment() {
     this.accountService.currentUser$.subscribe((val) => (this.name = val));
     this.http
       .get('https://localhost:5001/api/user/getUsers/' + this.name.userName)
       .subscribe({
         next: (response) => (
           (this.pass = response),
-          ((this.vehicleData.userId = this.pass.userId), this.addVehicle()) //tu ma byc jeszcze wywolanie funkcji add Vehicle, ogarnac cascade i walidacje hasla
+          ((this.vehicle.userId = this.pass.userId), this.addVehicle()) //tu ma byc jeszcze wywolanie funkcji add Vehicle, ogarnac cascade i walidacje hasla
         ),
         error: (error) => console.log(error),
       });
   }
 
   addVehicle() {
+    this.showLog();
     this.http
-      .post('https://localhost:5001/api/vehicle/addVehicles', this.vehicleData)
+      .post('https://localhost:5001/api/vehicle/addVehicles', this.vehicle)
       .subscribe({
         next: (response) => (
           (this.pass = response),
-          (this.advertismentData.vehicleId = this.pass.vehicleId),
-          (this.advertismentData.userId = this.pass.userId),
-          console.log(this.advertismentData),
+          (this.advertisment.vehicleId = this.pass.vehicleId),
+          (this.advertisment.userId = this.pass.userId),
+          console.log(this.advertisment),
           this.toastr.success('super'),
           this.addAdvertisment()
         ),
@@ -96,15 +95,15 @@ export class AdvertFormComponent implements OnInit {
     this.http
       .post(
         'https://localhost:5001/api/advertisment/addAdvertisment',
-        this.advertismentData
+        this.advertisment
       )
       .subscribe({
-        next: (response) => this.toastr.success('dodano ogloszenie'),
+        next: (response) => (this.toastr.success('dodano ogloszenie'),this.router.navigateByUrl('/main')),
         error: (error) => console.log(error),
       });
   }
   showLog() {
-    console.log(this.advertismentData);
-    console.log(this.vehicleData);
+    console.log(this.advertisment);
+    console.log(this.vehicle);
   }
 }
