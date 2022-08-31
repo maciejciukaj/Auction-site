@@ -1,0 +1,63 @@
+.container {
+  color: aliceblue;
+}
+h1 {
+  font-size: 45px;
+  text-align: center;
+  margin-top: 2%;
+  margin-bottom: 4%;
+}
+
+.elem {
+  background: #222;
+  color: white;
+  margin-bottom: 2%;
+  width: 100%;
+  font-size: 1rem;
+  padding: 1rem 2rem;
+  text-align: left;
+  justify-content: center;
+  
+}
+.elem:active {
+  border-style: outset;
+}
+.elem:hover,
+.elem:focus {
+  outline: none;
+}
+
+.border-gradient {
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 5px;
+}
+.border-gradient-purple {
+  border-image-source: linear-gradient(to left, #743ad5, #ce489d);
+}
+.border-gradient-green {
+  border-image-source: linear-gradient(to left, #00c853, #b2ff59);
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > div {
+    width: 100%;
+    text-align: center;
+  }
+  > div > div {
+    width: 100%;
+    padding: 1rem;
+  }
+}
+
+.on-dark {
+  background: #222;
+  button {
+    color: white;
+  }
+}

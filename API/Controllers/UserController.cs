@@ -68,5 +68,15 @@ namespace API.Controllers
             return _mapper.Map<MemberDto>(user);
            
         }
+
+         [HttpGet("getUserPosts/{name}")]
+        public async Task<ActionResult<IEnumerable<AdvertismentDto>>> GetUserPost(string name){
+            
+            var user =  await _userRepository.GetUserByUsernameAsync(name);
+            var adverts = user.Advertisments.ToList();
+            var toReturn =  _mapper.Map<IEnumerable<AdvertismentDto>>(adverts);
+            return Ok(toReturn);
+           
+        }
     }
 }

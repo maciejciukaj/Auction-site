@@ -20,6 +20,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserInfoEditComponent } from './user-info-edit/user-info-edit.component';
 import { AdvertFormComponent } from './advert-form/advert-form.component';
+import { MyAuctionsComponent } from './my-auctions/my-auctions.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AdvertFormComponent } from './advert-form/advert-form.component';
     UserProfileComponent,
     UserInfoEditComponent,
     AdvertFormComponent,
+    MyAuctionsComponent,
   ],
   imports: [
     BrowserModule,
