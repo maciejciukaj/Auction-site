@@ -11,6 +11,10 @@ import { AccountService } from '../_services/account.service';
 export class MyAuctionsComponent implements OnInit {
   currentUser: any = {};
   posts: any = [];
+  pages: any = [];
+  max: number = 5;
+  min: number = 0;
+  capslockOn: boolean;
   constructor(
     private http: HttpClient,
     public accountService: AccountService
@@ -33,8 +37,33 @@ export class MyAuctionsComponent implements OnInit {
         next: (response) => {
           this.posts = response;
           console.log(this.posts);
+          this.getPages();
         },
         error: (error) => console.log(error),
       });
   }
+
+  getPages() {
+    var number = (this.posts.length % 5) + 1;
+
+    for (var i = 1; i <= number; i++) {
+      console.log(i);
+      this.pages[i - 1] = i;
+    }
+    console.log(number);
+  }
+  more() {
+    console.log();
+    if (this.max + 5 <= this.posts.length + (5 - (this.posts.length % 5))) {
+      this.min = this.min + 5;
+      this.max = this.max + 5;
+    }
+  }
+  less() {
+    if (this.min - 5 >= 0) {
+      this.min = this.min - 5;
+      this.max = this.max - 5;
+    }
+  }
+ 
 }

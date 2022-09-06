@@ -20,7 +20,7 @@ export class UserProfileComponent implements OnInit {
     this.getUser();
     this.now = new Date();
     if (this.now.getHours() > 5 && this.now.getHours() < 12) {
-      this.welcome = '🌝 Good Morning';
+      this.welcome = '☀️ Good Morning';
     } else if (this.now.getHours() >= 12 && this.now.getHours() < 18) {
       this.welcome = '🌞 Good Afternoon';
     } else {

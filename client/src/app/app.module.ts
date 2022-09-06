@@ -12,8 +12,12 @@ import { RegisterComponent } from './minigame/minigame.component';
 import { NavComponent } from './nav/nav.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { ToastrModule } from 'ngx-toastr';
 
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
@@ -21,7 +25,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserInfoEditComponent } from './user-info-edit/user-info-edit.component';
 import { AdvertFormComponent } from './advert-form/advert-form.component';
 import { MyAuctionsComponent } from './my-auctions/my-auctions.component';
-
+import { environment } from '../environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +50,10 @@ import { MyAuctionsComponent } from './my-auctions/my-auctions.component';
     FormsModule,
     ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
     BsDropdownModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

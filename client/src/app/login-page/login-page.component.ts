@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../_services/account.service';
 
@@ -11,6 +12,7 @@ declare function next(): any;
 })
 export class LoginPageComponent implements OnInit {
   model: any = {};
+  capslockOn: boolean;
   constructor(
     private accountService: AccountService,
     private toastr: ToastrService,
@@ -29,5 +31,31 @@ export class LoginPageComponent implements OnInit {
         this.toastr.error(error.error);
       }
     );
+  }
+
+  @HostListener('window:click', ['$event']) onClick(event) {
+    if (event.getModifierState && event.getModifierState('CapsLock')) {
+      this.capslockOn = true;
+    } else {
+      this.capslockOn = false;
+    }
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  onKeyDown(event) {
+    if (event.getModifierState && event.getModifierState('CapsLock')) {
+      this.capslockOn = true;
+    } else {
+      this.capslockOn = false;
+    }
+  }
+
+  @HostListener('window:keyup', ['$event'])
+  onKeyUp(event) {
+    if (event.getModifierState && event.getModifierState('CapsLock')) {
+      this.capslockOn = true;
+    } else {
+      this.capslockOn = false;
+    }
   }
 }

@@ -3,7 +3,7 @@
 }
 h1 {
   font-size: 45px;
-  text-align: center;
+
   margin-top: 2%;
   margin-bottom: 4%;
 }
@@ -17,7 +17,8 @@ h1 {
   padding: 1rem 2rem;
   text-align: left;
   justify-content: center;
-  
+  text-decoration: none;
+  font-size: 18px;
 }
 .elem:active {
   border-style: outset;
@@ -38,7 +39,7 @@ h1 {
 .border-gradient-green {
   border-image-source: linear-gradient(to left, #00c853, #b2ff59);
 }
-
+/*
 body {
   height: 100vh;
   margin: 0;
@@ -54,10 +55,32 @@ body {
     padding: 1rem;
   }
 }
-
+*/
 .on-dark {
   background: #222;
   button {
     color: white;
   }
+}
+.numbers {
+  text-align: center;
+  justify-content: center;
+  font-size: 28px;
+}
+.page {
+  background: none;
+  border: none;
+  color: white;
+}
+.page:hover {
+  color: #03e9f4;
+}
+.less {
+  content: "\f359"; /* FontAwesome Unicode */
+  font-family: FontAwesome;
+  margin-right: 15%;
+}
+.more {
+  content: "\f061"; /* FontAwesome Unicode */
+  font-family: FontAwesome;
 }

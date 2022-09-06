@@ -33,3 +33,21 @@
     (cancelEdit)="cancelEditMode($event)"
   ></app-user-info-edit>
 </div>
+<div class="right login-box">
+  <form #loginForm="ngForm" autocomplete="off">
+    <div class="user-box">
+      <input type="password" name="password" required="" />
+      <label>New password</label>
+    </div>
+    <div class="user-box">
+      <input type="password" name="password" required="" />
+      <label>Repeat password</label>
+    </div>
+    <button class="blue-light" type="submit">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>Change
+    </button>
+  </form>
+</div>

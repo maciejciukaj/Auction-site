@@ -71,3 +71,18 @@
 .aucButton {
   margin-right: 20%;
 }
+.photo-container{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom:20px;
+  
+}
+
+
+.photo img{
+  width:100%;
+  height:100%;
+}

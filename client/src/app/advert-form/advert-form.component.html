@@ -1,14 +1,29 @@
 <div class="login-box mt-5 container">
-  <form autocomplete="off" #advertForm="ngForm" (ngSubmit)="nextStep()">
+  <form
+    [formGroup]="formTemplate"
+    autocomplete="off"
+    (ngSubmit)="onSubmit(formTemplate.value)"
+  >
     <div class="step0" *ngIf="step == 0">
       <h2>Step 1 - Add vehicle photos</h2>
       <div class="user-box">
         <input
+          formControlName="imageUrl"
+          (change)="showPreview($event)"
+          #fileUploader
           type="file"
           id="avatar"
-          accept="image/png, image/jpeg"
+          accept="image/png,image/jpg,image/jpeg"
           required=""
         />
+        <div class="text-center">
+          <img
+            [src]="imgSrc"
+            width="300px"
+            height="200px"
+            (click)="fileUploader.click()"
+          />
+        </div>
         <label>Your photos</label>
       </div>
 
@@ -20,6 +35,7 @@
       </button>
     </div>
   </form>
+
   <form autocomplete="off" #advertForm="ngForm" (ngSubmit)="nextStep()">
     <div class="step1 mb-1" *ngIf="step == 1">
       <h2>Step 2</h2>
@@ -33,12 +49,7 @@
         <label>Title</label>
       </div>
       <div class="user-box">
-        <input
-          [(ngModel)]="vehicle.type"
-          type="text"
-          name="type"
-          required=""
-        />
+        <input [(ngModel)]="vehicle.type" type="text" name="type" required="" />
         <label>Type</label>
       </div>
       <div class="user-box">
@@ -88,7 +99,11 @@
       </button>
     </div>
   </form>
-  <form autocomplete="off" #advertForm="ngForm" (ngSubmit)="createAdvertisment()">
+  <form
+    autocomplete="off"
+    #advertForm="ngForm"
+    (ngSubmit)="createAdvertisment()"
+  >
     <div class="step2" *ngIf="step == 2">
       <h2>Step 3</h2>
       <div class="user-box">
