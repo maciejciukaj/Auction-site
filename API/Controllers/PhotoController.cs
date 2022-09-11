@@ -8,6 +8,7 @@ using API.Data;
 using API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -18,7 +19,28 @@ namespace API.Controllers
             _context = context;
         }
 
+        [HttpPost("addPhoto")]
+        [AllowAnonymous]
+        public async Task<ActionResult<Photo>> AddPhoto(Photo photo){
+            var newPhoto = new Photo{
+                PhotoUrl = photo.PhotoUrl,
+                IsMain = photo.IsMain,
+                VehicleId = photo.VehicleId
 
+
+            };
+            _context.Photos.Add(newPhoto);
+            await _context.SaveChangesAsync();
+
+            return newPhoto;
+        }
+
+
+        [HttpGet("getPhotos")]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<Photo>>> GetPhotos(){
+            return await  _context.Photos.ToListAsync();
+        }
 
         
     }

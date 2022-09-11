@@ -23,7 +23,7 @@ namespace API.Data
 
         public async Task<IEnumerable<Vehicle>> GetVehiclesAsync()
         {
-            return await _context.Vehicles.Include(a => a.Advertisments).AsSplitQuery().ToListAsync();
+            return await _context.Vehicles.Include(a => a.Advertisments).Include(a => a.Photos).AsSplitQuery().ToListAsync();
         }
 
         public async Task<bool> SaveAllAsyc()

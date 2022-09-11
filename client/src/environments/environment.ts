@@ -4,15 +4,16 @@
 
 export const environment = {
   production: false,
-  firebaseConfig : {
-    apiKey: "AIzaSyBB0Gtjnj3lW7mCm7acShgOBIIJlsTB5PQ",
-    authDomain: "auction-site-f01ab.firebaseapp.com",
-    databaseURL: "https://auction-site-f01ab-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "auction-site-f01ab",
-    storageBucket: "auction-site-f01ab.appspot.com",
-    messagingSenderId: "365089599391",
-    appId: "1:365089599391:web:6fcbc4a0c5346c7cd017aa"
-  }
+  firebaseConfig: {
+    apiKey: 'AIzaSyCjrmskA8zLOHN8qTZaGd2V5kl7_5sx_2I',
+    authDomain: 'auction-site-ebcee.firebaseapp.com',
+    databaseURL:
+      'https://auction-site-ebcee-default-rtdb.europe-west1.firebasedatabase.app',
+    projectId: 'auction-site-ebcee',
+    storageBucket: 'auction-site-ebcee.appspot.com',
+    messagingSenderId: '664179684848',
+    appId: '1:664179684848:web:3642a9c21bb3f619d11935',
+  },
 };
 
 /*

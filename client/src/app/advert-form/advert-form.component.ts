@@ -22,7 +22,10 @@ export class AdvertFormComponent implements OnInit {
   step: number = 0;
   imgSrc: string;
   selectedImage: any = null;
+  previewPhotos: any = [];
+  addedPhotos: any = [];
   isSubmitter: boolean;
+  editMode = false;
 
   vehicle: Vehicle = {
     type: '',
@@ -46,9 +49,8 @@ export class AdvertFormComponent implements OnInit {
   };
 
   formTemplate = new FormGroup({
-    caption: new FormControl(''),
-    category: new FormControl(''),
-    imageUrl: new FormControl('', Validators.required),
+    main: new FormControl(false),
+    imageUrl: new FormControl(''),
   });
 
   constructor(
@@ -56,7 +58,8 @@ export class AdvertFormComponent implements OnInit {
     private toastr: ToastrService,
     public accountService: AccountService,
     public router: Router,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private service: ImageService
   ) {}
 
   ngOnInit(): void {
@@ -78,7 +81,9 @@ export class AdvertFormComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.onload = (e: any) => (this.imgSrc = e.target.result);
+
       reader.readAsDataURL(event.target.files[0]);
+
       this.selectedImage = event.target.files[0];
     } else {
       this.imgSrc = '/assets/img_placeholder/img_placeholder.png';
@@ -86,28 +91,71 @@ export class AdvertFormComponent implements OnInit {
     }
   }
 
-  onSubmit(formValue) {
-    this.isSubmitter = true;
-    if (this.formTemplate.valid) {
-      var filePath = `images/${this.selectedImage.name
-        .split('.')
-        .slice(0, -1)
-        .join('.')}_${new Date().getTime()}`;
-      const fileRef = this.storage.ref(filePath);
-      this.storage
-        .upload(filePath, this.selectedImage)
-        .snapshotChanges()
-        .pipe(
-          finalize(() => {
-            fileRef.getDownloadURL().subscribe((url) => {
-              formValue['imageUrl'] = url;
-              this.resetForm();
-            });
-          })
-        )
-        .subscribe();
-      this.nextStep();
+  addPhoto() {
+    if (this.selectedImage != null) {
+      this.previewPhotos.push(this.imgSrc);
+      this.addedPhotos.push(this.selectedImage);
+      console.log(this.previewPhotos);
+      this.resetForm();
+      if (this.previewPhotos.length == 1)
+        this.toastr.success(
+          'To change it enter -Preview photos- page ',
+          'Main photo added',
+          {
+            timeOut: 4000,
+          }
+        );
+    } else {
+      this.toastr.error('No photo has been selected');
     }
+  }
+
+  savePhoto(formValue, file: File) {
+    this.isSubmitter = true;
+    // if (this.formTemplate.valid) {
+    var filePath = `images/${file.name
+      .split('.')
+      .slice(0, -1)
+      .join('.')}_${new Date().getTime()}`;
+    const fileRef = this.storage.ref(filePath);
+    this.storage
+      .upload(filePath, file)
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((url) => {
+            console.log(formValue);
+            console.log(url);
+            formValue['imageUrl'] = url;
+            this.service.insertImageDetails(formValue);
+            this.resetForm();
+          });
+        })
+      )
+      .subscribe();
+   
+    // this.nextStep();
+    // } else {
+    // this.toastr.error('Add at least one photo');
+    //}
+  }
+
+  saveList() {
+    if (this.addedPhotos.length > 0) {
+      this.addedPhotos.forEach((elem) => {
+        this.savePhoto(this.formTemplate.value, elem);
+      }, this.toastr.success('added'), this.nextStep());
+    } else {
+      this.toastr.error('Add at least one photo');
+    }
+  }
+  editToggle() {
+    this.editMode = !this.editMode;
+    this.resetForm();
+  }
+
+  cancelEditMode(event: boolean) {
+    this.editMode = event;
   }
 
   formControls() {
@@ -117,9 +165,8 @@ export class AdvertFormComponent implements OnInit {
   resetForm() {
     this.formTemplate.reset();
     this.formTemplate.setValue({
-      caption: '',
+      main: false,
       imageUrl: '',
-      category: '',
     });
     this.imgSrc = '/assets/img_placeholder/img_placeholder.png';
     this.isSubmitter = false;
@@ -158,10 +205,7 @@ export class AdvertFormComponent implements OnInit {
 
   addAdvertisment() {
     this.http
-      .post(
-        'https://localhost:5001/api/advertisment/addAdvertisment',
-        this.advertisment
-      )
+      .post('https://localhost:5001/api/card/addCard', this.advertisment)
       .subscribe({
         next: (response) => (
           this.toastr.success('dodano ogloszenie'),

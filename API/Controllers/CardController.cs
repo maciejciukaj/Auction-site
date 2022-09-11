@@ -10,25 +10,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    public class AdvertismentController : BaseApiController
+    public class CardController : BaseApiController
     {
         private readonly AuctionContext _context;
-        public AdvertismentController(AuctionContext context){
+        public CardController(AuctionContext context){
             _context = context;
         }
 
-        [HttpGet("getAdvertisments")]
+        [HttpGet("getCards")]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<Advertisment>>> GetAdvertisments(){
+        public async Task<ActionResult<IEnumerable<Advertisment>>> GetCards(){
             
             
             return await _context.Advertisments.ToListAsync();
         }
         
 
-        [HttpPost("addAdvertisment")]
+        [HttpPost("addCard")]
         [AllowAnonymous]
-        public async Task<ActionResult<Advertisment>> AddAdvertisments(Advertisment advertisment){
+        public async Task<ActionResult<Advertisment>> AddCard(Advertisment advertisment){
 
            
 

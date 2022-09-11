@@ -1,0 +1,13 @@
+<div class="login-box">
+  <form #editForm="ngForm" autocomplete="off">
+    <div class="user-box" *ngFor="let photo of photos">
+      <img width="200px" height="auto" src="{{ photo }}" />
+    </div>
+    <button class="blue-light" (click)="cancel()">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>Back
+    </button>
+  </form>
+</div>

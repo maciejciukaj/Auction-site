@@ -1,9 +1,5 @@
-<div class="login-box mt-5 container">
-  <form
-    [formGroup]="formTemplate"
-    autocomplete="off"
-    (ngSubmit)="onSubmit(formTemplate.value)"
-  >
+<div *ngIf="!editMode" class="login-box mt-5 container">
+  <form [formGroup]="formTemplate" autocomplete="off" (ngSubmit)="saveList()">
     <div class="step0" *ngIf="step == 0">
       <h2>Step 1 - Add vehicle photos</h2>
       <div class="user-box">
@@ -18,20 +14,40 @@
         />
         <div class="text-center">
           <img
+            class="photoPreview"
             [src]="imgSrc"
-            width="300px"
-            height="200px"
+            width="260px"
+            height="auto"
             (click)="fileUploader.click()"
           />
         </div>
         <label>Your photos</label>
       </div>
-
-      <button class="blue-light mt-5" type="submit">
+      <button
+        type="button"
+        class="blue-light float-left mt-5"
+        (click)="addPhoto()"
+      >
         <span></span>
         <span></span>
         <span></span>
-        <span></span>Next
+        <span></span>Add photo
+      </button>
+      <button
+        type="button"
+        class="blue-light center mt-5 mr-5"
+        (click)="editToggle()"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>Preview photos
+      </button>
+      <button class="blue-light float-right mt-5" type="submit">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>Save
       </button>
     </div>
   </form>
@@ -176,4 +192,10 @@
       </button>
     </div>
   </form>
+</div>
+<div *ngIf="editMode">
+  <app-photo-preview
+    (cancelEdit)="cancelEditMode($event)"
+    [photos]="previewPhotos"
+  ></app-photo-preview>
 </div>

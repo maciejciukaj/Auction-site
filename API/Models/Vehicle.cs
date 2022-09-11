@@ -32,6 +32,8 @@ namespace API.Models
 
         public ICollection<Advertisment> Advertisments {get; set;}
 
+        public ICollection<Photo> Photos {get; set;}
+
         public long UserId {get; set;}
 
         public User User {get; set;}

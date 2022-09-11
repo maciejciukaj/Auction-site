@@ -6,7 +6,7 @@
   top: 50%;
   left: 50%;
   width: 70%;
-
+  color: white;
   padding: 40px;
   transform: translate(-50%, -50%);
   background: rgba(0, 0, 0, 0.5);
@@ -169,35 +169,4 @@
   cursor: pointer;
   overflow: hidden;
   outline: none;
-}
-form {
-  text-align: center;
-}
-.prev {
-  float: left;
-}
-.next {
-  float: right;
-}
-.desc {
-  width: 202%;
-  height: 20%;
-}
-textarea {
-  background: rgba(0, 0, 0, 0.5);
-  box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
-
-  color: #fff;
-  width: 45%;
-  height: 120px;
-  resize: none;
-
-  border-radius: 10px;
-}
-.photos > input {
-  display: none;
-}
-.photoPreview {
-  border: 1px solid #03e9f4;
 }

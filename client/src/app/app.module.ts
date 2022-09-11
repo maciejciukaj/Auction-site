@@ -26,6 +26,8 @@ import { UserInfoEditComponent } from './user-info-edit/user-info-edit.component
 import { AdvertFormComponent } from './advert-form/advert-form.component';
 import { MyAuctionsComponent } from './my-auctions/my-auctions.component';
 import { environment } from '../environments/environment';
+import { PhotoPreviewComponent } from './photo-preview/photo-preview.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +43,7 @@ import { environment } from '../environments/environment';
     UserInfoEditComponent,
     AdvertFormComponent,
     MyAuctionsComponent,
+    PhotoPreviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,8 +56,9 @@ import { environment } from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
+
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -9,6 +9,11 @@ namespace API.Models
     {
         public long photoId {get; set;}
 
-        public byte[] content { get; set; }
+        public string PhotoUrl {get;set;}
+
+        public Boolean IsMain {get; set; }
+
+        public long VehicleId {get; set;}
+        public  Vehicle Vehicle {get; set;}
     }
 }
