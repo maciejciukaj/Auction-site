@@ -70,6 +70,7 @@ namespace API.Controllers
         }
 
          [HttpGet("getUserPosts/{name}")]
+         [Authorize]
         public async Task<ActionResult<IEnumerable<AdvertismentDto>>> GetUserPost(string name){
             
             var user =  await _userRepository.GetUserByUsernameAsync(name);

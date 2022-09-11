@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { MainComponent } from './main/main.component';
 import { RegisterComponent } from './minigame/minigame.component';
 import { NavComponent } from './nav/nav.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -27,6 +27,7 @@ import { AdvertFormComponent } from './advert-form/advert-form.component';
 import { MyAuctionsComponent } from './my-auctions/my-auctions.component';
 import { environment } from '../environments/environment';
 import { PhotoPreviewComponent } from './photo-preview/photo-preview.component';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,13 @@ import { PhotoPreviewComponent } from './photo-preview/photo-preview.component';
     ReactiveFormsModule,
   ],
 
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
