@@ -50,7 +50,8 @@ export class AdvertFormComponent implements OnInit {
 
   formTemplate = new FormGroup({
     main: new FormControl(false),
-    imageUrl: new FormControl(''),
+    photoUrl: new FormControl(''),
+    vehicleId: new FormControl(0),
   });
 
   constructor(
@@ -91,11 +92,11 @@ export class AdvertFormComponent implements OnInit {
     }
   }
 
-  addPhoto() {
+  addPhotoToPreview() {
     if (this.selectedImage != null) {
       this.previewPhotos.push(this.imgSrc);
       this.addedPhotos.push(this.selectedImage);
-      console.log(this.previewPhotos);
+      // console.log(this.previewPhotos);
       this.resetForm();
       if (this.previewPhotos.length == 1)
         this.toastr.success(
@@ -124,16 +125,20 @@ export class AdvertFormComponent implements OnInit {
       .pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
+            formValue['photoUrl'] = url;
+
             console.log(formValue);
-            console.log(url);
-            formValue['imageUrl'] = url;
+            this.service.addPhoto(formValue).subscribe({
+              next: (response) => this.toastr.success('dodano zdjecie'),
+              error: (error) => console.log(error),
+            });
             this.service.insertImageDetails(formValue);
             this.resetForm();
           });
         })
       )
       .subscribe();
-   
+
     // this.nextStep();
     // } else {
     // this.toastr.error('Add at least one photo');
@@ -141,32 +146,26 @@ export class AdvertFormComponent implements OnInit {
   }
 
   saveList() {
+    console.log(this.formTemplate.value);
     if (this.addedPhotos.length > 0) {
-      this.addedPhotos.forEach((elem) => {
-        this.savePhoto(this.formTemplate.value, elem);
-      }, this.toastr.success('added'), this.nextStep());
+      this.addedPhotos.forEach(
+        (elem) => {
+          this.savePhoto(this.formTemplate.value, elem);
+        },
+        this.toastr.success('added'),
+        this.nextStep()
+      );
     } else {
       this.toastr.error('Add at least one photo');
     }
-  }
-  editToggle() {
-    this.editMode = !this.editMode;
-    this.resetForm();
-  }
-
-  cancelEditMode(event: boolean) {
-    this.editMode = event;
-  }
-
-  formControls() {
-    return this.formTemplate['controls'];
   }
 
   resetForm() {
     this.formTemplate.reset();
     this.formTemplate.setValue({
       main: false,
-      imageUrl: '',
+      photoUrl: '',
+      vehicleId: 0,
     });
     this.imgSrc = '/assets/img_placeholder/img_placeholder.png';
     this.isSubmitter = false;
@@ -194,6 +193,7 @@ export class AdvertFormComponent implements OnInit {
         next: (response) => (
           (this.pass = response),
           (this.advertisment.vehicleId = this.pass.vehicleId),
+          (this.formTemplate.value.vehicleId = this.pass.vehicleId),
           (this.advertisment.userId = this.pass.userId),
           console.log(this.advertisment),
           this.toastr.success('super'),
@@ -208,6 +208,7 @@ export class AdvertFormComponent implements OnInit {
       .post('https://localhost:5001/api/card/addCard', this.advertisment)
       .subscribe({
         next: (response) => (
+          this.saveList(),
           this.toastr.success('dodano ogloszenie'),
           this.router.navigateByUrl('/main')
         ),
@@ -217,5 +218,18 @@ export class AdvertFormComponent implements OnInit {
   showLog() {
     console.log(this.advertisment);
     console.log(this.vehicle);
+  }
+
+  editToggle() {
+    this.editMode = !this.editMode;
+    this.resetForm();
+  }
+
+  cancelEditMode(event: boolean) {
+    this.editMode = event;
+  }
+
+  formControls() {
+    return this.formTemplate['controls'];
   }
 }

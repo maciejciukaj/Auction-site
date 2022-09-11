@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.Migrations
 {
     [DbContext(typeof(AuctionContext))]
-    [Migration("20220817144945_Second")]
-    partial class Second
+    [Migration("20220911165634_First")]
+    partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,19 +35,16 @@ namespace API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<string>("Owner")
-                        .HasColumnType("text");
-
                     b.Property<string>("Price")
                         .HasColumnType("text");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<long?>("UserId")
+                    b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("VehicleId")
+                    b.Property<long>("VehicleId")
                         .HasColumnType("bigint");
 
                     b.HasKey("AdvertismentId");
@@ -133,6 +130,30 @@ namespace API.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Offers");
+                });
+
+            modelBuilder.Entity("API.Models.Photo", b =>
+                {
+                    b.Property<long>("photoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("photoId"));
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("PhotoUrl")
+                        .HasColumnType("text");
+
+                    b.Property<long>("VehicleId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("photoId");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("API.Models.User", b =>
@@ -221,11 +242,15 @@ namespace API.Migrations
                 {
                     b.HasOne("API.Models.User", "User")
                         .WithMany("Advertisments")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("API.Models.Vehicle", "Vehicle")
                         .WithMany("Advertisments")
-                        .HasForeignKey("VehicleId");
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
 
@@ -262,6 +287,17 @@ namespace API.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("API.Models.Photo", b =>
+                {
+                    b.HasOne("API.Models.Vehicle", "Vehicle")
+                        .WithMany("Photos")
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Vehicle");
+                });
+
             modelBuilder.Entity("API.Models.Vehicle", b =>
                 {
                     b.HasOne("API.Models.User", "User")
@@ -294,6 +330,8 @@ namespace API.Migrations
                     b.Navigation("Advertisments");
 
                     b.Navigation("Auctions");
+
+                    b.Navigation("Photos");
                 });
 #pragma warning restore 612, 618
         }

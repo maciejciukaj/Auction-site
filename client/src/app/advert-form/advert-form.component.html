@@ -1,10 +1,10 @@
 <div *ngIf="!editMode" class="login-box mt-5 container">
-  <form [formGroup]="formTemplate" autocomplete="off" (ngSubmit)="saveList()">
+  <form [formGroup]="formTemplate" autocomplete="on" (ngSubmit)="nextStep()">
     <div class="step0" *ngIf="step == 0">
       <h2>Step 1 - Add vehicle photos</h2>
       <div class="user-box">
         <input
-          formControlName="imageUrl"
+          formControlName="photoUrl"
           (change)="showPreview($event)"
           #fileUploader
           type="file"
@@ -26,7 +26,7 @@
       <button
         type="button"
         class="blue-light float-left mt-5"
-        (click)="addPhoto()"
+        (click)="addPhotoToPreview()"
       >
         <span></span>
         <span></span>

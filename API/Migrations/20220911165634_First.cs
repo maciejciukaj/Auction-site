@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace API.Migrations
 {
-    public partial class Initial : Migration
+    public partial class First : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,7 +39,6 @@ namespace API.Migrations
                     Type = table.Column<string>(type: "text", nullable: true),
                     Brand = table.Column<string>(type: "text", nullable: true),
                     Model = table.Column<string>(type: "text", nullable: true),
-                    Price = table.Column<float>(type: "real", nullable: false),
                     Color = table.Column<string>(type: "text", nullable: true),
                     Power = table.Column<int>(type: "integer", nullable: false),
                     Engine = table.Column<float>(type: "real", nullable: false),
@@ -67,10 +66,9 @@ namespace API.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    Owner = table.Column<string>(type: "text", nullable: true),
                     Price = table.Column<string>(type: "text", nullable: true),
-                    VehicleId = table.Column<long>(type: "bigint", nullable: true),
-                    UserId = table.Column<long>(type: "bigint", nullable: true)
+                    VehicleId = table.Column<long>(type: "bigint", nullable: false),
+                    UserId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -79,12 +77,14 @@ namespace API.Migrations
                         name: "FK_Advertisments_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId");
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Advertisments_Vehicles_VehicleId",
                         column: x => x.VehicleId,
                         principalTable: "Vehicles",
-                        principalColumn: "VehicleId");
+                        principalColumn: "VehicleId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -118,6 +118,27 @@ namespace API.Migrations
                         column: x => x.VehicleId,
                         principalTable: "Vehicles",
                         principalColumn: "VehicleId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Photos",
+                columns: table => new
+                {
+                    photoId = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    PhotoUrl = table.Column<string>(type: "text", nullable: true),
+                    IsMain = table.Column<bool>(type: "boolean", nullable: false),
+                    VehicleId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Photos", x => x.photoId);
+                    table.ForeignKey(
+                        name: "FK_Photos_Vehicles_VehicleId",
+                        column: x => x.VehicleId,
+                        principalTable: "Vehicles",
+                        principalColumn: "VehicleId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,6 +197,11 @@ namespace API.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Photos_VehicleId",
+                table: "Photos",
+                column: "VehicleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Vehicles_UserId",
                 table: "Vehicles",
                 column: "UserId");
@@ -188,6 +214,9 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Offers");
+
+            migrationBuilder.DropTable(
+                name: "Photos");
 
             migrationBuilder.DropTable(
                 name: "Auctions");

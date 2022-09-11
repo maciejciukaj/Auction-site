@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   AngularFireDatabase,
@@ -10,15 +11,17 @@ import { Image } from '../_models/image';
   providedIn: 'root',
 })
 export class ImageService {
+  baseUrl = 'https://localhost:5001/api/photo/';
   imageDetailList: AngularFireList<any>;
   imageElement: Image;
 
   dataset: Image = {
     main: false,
-    imageUrl: '',
+    photoUrl: '',
+    vehicleId: 0,
   };
 
-  constructor(private firebase: AngularFireDatabase) {
+  constructor(private firebase: AngularFireDatabase, private http: HttpClient) {
     this.getImageDetailList();
   }
 
@@ -29,8 +32,13 @@ export class ImageService {
   insertImageDetails(imageDetails) {
     this.dataset = {
       main: imageDetails.main,
-      imageUrl: imageDetails.imageUrl,
+      photoUrl: imageDetails.photoUrl,
+      vehicleId: imageDetails.vehicleId,
     };
     this.imageDetailList.push(this.dataset);
+  }
+
+  addPhoto(model: any) {
+    return this.http.post(this.baseUrl + 'addPhoto/', model);
   }
 }

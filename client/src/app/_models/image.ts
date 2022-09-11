@@ -1,5 +1,7 @@
 export interface Image {
   main: boolean;
 
-  imageUrl: string;
+  photoUrl: string;
+
+  vehicleId: number;
 }
