@@ -27,7 +27,7 @@ namespace API.Controllers
         
 
         [HttpPost("addCard")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<ActionResult<Advertisment>> AddCard(Advertisment advertisment){
 
            

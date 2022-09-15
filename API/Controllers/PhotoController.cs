@@ -20,7 +20,7 @@ namespace API.Controllers
         }
 
         [HttpPost("addPhoto")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<ActionResult<Photo>> AddPhoto(Photo photo){
             var newPhoto = new Photo{
                 PhotoUrl = photo.PhotoUrl,

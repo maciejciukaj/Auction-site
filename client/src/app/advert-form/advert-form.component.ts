@@ -94,9 +94,13 @@ export class AdvertFormComponent implements OnInit {
 
   addPhotoToPreview() {
     if (this.selectedImage != null) {
-      this.previewPhotos.push(this.imgSrc);
-      this.addedPhotos.push(this.selectedImage);
-      // console.log(this.previewPhotos);
+      if (this.previewPhotos.length < 8) {
+        this.previewPhotos.push(this.imgSrc);
+        this.addedPhotos.push(this.selectedImage);
+      } else {
+        this.toastr.error('You reached max 8 photos');
+      }
+       console.log(this.previewPhotos);
       this.resetForm();
       if (this.previewPhotos.length == 1)
         this.toastr.success(

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
@@ -25,7 +27,7 @@ namespace API.Controllers
         }
         
         [HttpPut("editUsername")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<IActionResult> EditUsername(UsereditDto usereditmodel){
             var user =  await _userRepository.GetUserByUsernameAsync(usereditmodel.UserName);
             user.FirstName = usereditmodel.FirstName ?? user.FirstName;
@@ -33,14 +35,29 @@ namespace API.Controllers
             user.Email = usereditmodel.Email ?? user.Email;
             user.PhoneNumber = usereditmodel.PhoneNumber ?? user.PhoneNumber;
             try{
-               await _userRepository.SaveAllAsyc();
+               await _userRepository.SaveAllAsync();
                 return Ok(usereditmodel);
             }catch{
                 return BadRequest("User was not updated");
             }
+        }
+
+        [HttpPut("changePassword")]
+        [AllowAnonymous ]
+        public async Task <IActionResult> ChangePassword(PasswordSchemeDto userNewPassword){
            
+            var user =  await _userRepository.GetUserByUsernameAsync(userNewPassword.UserName);
+              
            
-            
+            using var hmac = new HMACSHA512();
+            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(userNewPassword.NewPassword));
+            user.PasswordSalt = hmac.Key;
+            try{
+               await _userRepository.SaveAllAsync();
+                return Ok(userNewPassword);
+            }catch{
+                return BadRequest("Password was not updated");
+            }
         }
 
         [HttpGet("getUsers")]
@@ -62,6 +79,7 @@ namespace API.Controllers
         // }
 
         [HttpGet("getUsers/{name}")]
+        [Authorize]
         public async Task<ActionResult<MemberDto>> GetUser(string name){
             
             var user =  await _userRepository.GetUserByUsernameAsync(name);
@@ -79,5 +97,8 @@ namespace API.Controllers
             return Ok(toReturn);
            
         }
+
+
+        
     }
 }

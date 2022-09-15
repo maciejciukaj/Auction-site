@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../_services/account.service';
+import { PasswordScheme } from '../_models/passwordScheme';
 
 @Component({
   selector: 'app-user-profile',
@@ -16,7 +18,13 @@ export class UserProfileComponent implements OnInit {
   editMode = false;
   passwordMode = false;
 
-  constructor(public accountService: AccountService, private http: HttpClient) {
+  newUserPassword: any = {};
+
+  constructor(
+    public accountService: AccountService,
+    private http: HttpClient,
+    private toastr: ToastrService
+  ) {
     this.getUser();
     this.now = new Date();
     if (this.now.getHours() > 5 && this.now.getHours() < 12) {
@@ -41,20 +49,26 @@ export class UserProfileComponent implements OnInit {
       });
   }
 
+  changePassword() {
+    this.newUserPassword.username = this.name.userName;
+    console.log(this.newUserPassword);
+    this.accountService.changePassword(this.newUserPassword).subscribe({
+      next: (response) => (this.toastr.success('Password changed'),(this.editPasswordMode())),
+      error: (error) => console.log(error),
+    });
+  }
+
   ngOnInit(): void {}
 
   editToggle() {
     this.editMode = !this.editMode;
   }
 
-  passwordToggle() {
+  editPasswordMode() {
     this.passwordMode = !this.passwordMode;
   }
 
   cancelEditMode(event: boolean) {
     this.editMode = event;
-  }
-  cancelPasswordMode(event: boolean) {
-    this.passwordMode = event;
   }
 }

@@ -24,7 +24,7 @@
   <button (click)="editToggle()" class="btn btn-success mr-3">
     Edit personal info
   </button>
-  <button (click)="editToggle()" class="btn btn-warning">
+  <button (click)="editPasswordMode()" class="btn btn-warning">
     Change password
   </button>
 </div>
@@ -33,10 +33,15 @@
     (cancelEdit)="cancelEditMode($event)"
   ></app-user-info-edit>
 </div>
-<div class="right login-box">
-  <form #loginForm="ngForm" autocomplete="off">
+<div *ngIf="passwordMode" class="right login-box">
+  <form #loginForm="ngForm" autocomplete="off" (ngSubmit)="changePassword()">
     <div class="user-box">
-      <input type="password" name="password" required="" />
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="newUserPassword.newPassword"
+        required=""
+      />
       <label>New password</label>
     </div>
     <div class="user-box">

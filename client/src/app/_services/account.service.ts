@@ -4,7 +4,6 @@ import { ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../_models/user';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -49,7 +48,14 @@ export class AccountService {
     );
   }
 
-  editUserInfo(model: any){
-    return this.http.put(this.baseUrl+'user/editUsername', model);
+  editUserInfo(model: any) {
+    return this.http.put(this.baseUrl + 'user/editUsername', model);
+  }
+
+  changePassword(model: any) {
+    return this.http.put(
+      this.baseUrl + 'user/changePassword',
+      model
+    );
   }
 }

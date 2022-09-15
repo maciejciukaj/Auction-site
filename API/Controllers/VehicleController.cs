@@ -58,7 +58,7 @@ namespace API.Controllers
       
 
         [HttpPost("addVehicles")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<ActionResult<Vehicle>> AddVehicle(Vehicle vehicle){
             
              var newVehicle = new Vehicle{

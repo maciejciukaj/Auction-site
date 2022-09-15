@@ -32,7 +32,7 @@ namespace API.Data
             return await _context.Users.Include(v => v.Vehicles).Include(a => a.Advertisments).Include(o => o.Offers).Include(x => x.Auctions).AsSplitQuery().SingleOrDefaultAsync(x => x.UserName == username);
         }
 
-        public async Task<bool> SaveAllAsyc()
+        public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
 

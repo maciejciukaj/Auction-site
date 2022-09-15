@@ -1,13 +1,17 @@
-<div class="login-box">
-  <form #editForm="ngForm" autocomplete="off">
-    <div class="user-box" *ngFor="let photo of photos">
-      <img width="200px" height="auto" src="{{ photo }}" />
+<div class="container">
+  <div class="login-box">
+    <div class="row">
+      <span class="user-box column" *ngFor="let photo of photos">
+        <img class="photo mt-5" src="{{ photo }}" />
+      </span>
     </div>
-    <button class="blue-light" (click)="cancel()">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>Back
-    </button>
-  </form>
+    <div class="preview mb-3 ml-4">
+      <button class="blue-light" (click)="cancel()">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>Back
+      </button>
+    </div>
+  </div>
 </div>

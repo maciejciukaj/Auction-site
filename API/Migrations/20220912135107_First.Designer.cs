@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.Migrations
 {
     [DbContext(typeof(AuctionContext))]
-    [Migration("20220911165634_First")]
+    [Migration("20220912135107_First")]
     partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
