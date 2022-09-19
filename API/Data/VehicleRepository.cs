@@ -18,7 +18,7 @@ namespace API.Data
         
             public async Task<Vehicle> GetVehicleByIdAsync(long id)
         {
-             return await _context.Vehicles.FindAsync(id);
+             return await _context.Vehicles.Include(a => a.Advertisments).Include(a => a.Photos).AsSplitQuery().FirstOrDefaultAsync(i => i.VehicleId == id);
         }
 
         public async Task<IEnumerable<Vehicle>> GetVehiclesAsync()

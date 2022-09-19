@@ -16,7 +16,7 @@ export class ImageService {
   imageElement: Image;
 
   dataset: Image = {
-    main: false,
+    isMain: false,
     photoUrl: '',
     vehicleId: 0,
   };
@@ -31,7 +31,7 @@ export class ImageService {
 
   insertImageDetails(imageDetails) {
     this.dataset = {
-      main: imageDetails.main,
+      isMain: imageDetails.isMain,
       photoUrl: imageDetails.photoUrl,
       vehicleId: imageDetails.vehicleId,
     };

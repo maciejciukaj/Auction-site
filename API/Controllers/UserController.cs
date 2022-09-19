@@ -43,10 +43,22 @@ namespace API.Controllers
         }
 
         [HttpPut("changePassword")]
-        [AllowAnonymous ]
+        [Authorize ]
         public async Task <IActionResult> ChangePassword(PasswordSchemeDto userNewPassword){
-           
+
             var user =  await _userRepository.GetUserByUsernameAsync(userNewPassword.UserName);
+
+            using var hmacCheck = new HMACSHA512(user.PasswordSalt);
+            
+            var computedHash = hmacCheck.ComputeHash(Encoding.UTF8.GetBytes(userNewPassword.OldPassword));
+           
+           
+            for (int i =0 ; i<computedHash.Length; i++){
+                if(computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password");
+
+            }
+           
+           
               
            
             using var hmac = new HMACSHA512();
@@ -97,6 +109,8 @@ namespace API.Controllers
             return Ok(toReturn);
            
         }
+
+       
 
 
         

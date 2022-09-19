@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="shell">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4" *ngFor="let adv of advertisments; let i = index">
+          <div class="wsk-cp-product">
+            <div class="wsk-cp-img">
+              <img
+                src="{{ vehicles[i]?.photos[0].photoUrl }}"
+                alt="Product"
+                class="img-responsive"
+              />
+            </div>
+            <div class="wsk-cp-text">
+              <div class="category">
+                <span>{{ vehicles[i]?.type }}</span>
+              </div>
+              <div class="title-product">
+                <h3>{{ vehicles[i]?.brand }} {{ vehicles[i]?.model }}</h3>
+              </div>
+              <div class="description-prod">
+                <p>{{ adv.title }}<br />{{ vehicles[i]?.productionYear }}</p>
+              </div>
+              <div class="card-footer">
+                <div class="wcf-left">
+                  <span class="price">{{ adv.price }} zł</span>
+                </div>
+                <div class="wcf-right">
+                  <a href="#" class="buy-btn"
+                    ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

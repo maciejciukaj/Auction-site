@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../_services/account.service';
 import { PasswordScheme } from '../_models/passwordScheme';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-user-profile',
@@ -49,12 +50,16 @@ export class UserProfileComponent implements OnInit {
       });
   }
 
-  changePassword() {
+  changePassword(form: NgForm) {
     this.newUserPassword.username = this.name.userName;
     console.log(this.newUserPassword);
     this.accountService.changePassword(this.newUserPassword).subscribe({
-      next: (response) => (this.toastr.success('Password changed'),(this.editPasswordMode())),
-      error: (error) => console.log(error),
+      next: (response) => (
+        this.toastr.success('Password changed'),
+        this.editPasswordMode(),
+        form.reset()
+      ),
+      error: (error) => this.toastr.error(error.error),
     });
   }
 

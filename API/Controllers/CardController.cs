@@ -24,6 +24,14 @@ namespace API.Controllers
             
             return await _context.Advertisments.ToListAsync();
         }
+
+        [HttpGet("getCard/{id}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<Advertisment>> GetCardById(long id){
+            
+            
+            return await _context.Advertisments.FirstOrDefaultAsync(i => i.AdvertismentId == id);
+        }
         
 
         [HttpPost("addCard")]
@@ -48,9 +56,7 @@ namespace API.Controllers
             return newAdvert;
 
             
-            
         }
-     
-
+    
     }
 }

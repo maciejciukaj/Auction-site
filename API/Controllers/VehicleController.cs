@@ -42,6 +42,17 @@ namespace API.Controllers
 
         }
 
+        [HttpGet("getVehicle/{id}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<VehicleDto>> getVehicleById(long id){
+            try{
+            var vehicle =  await _vehicleRepository.GetVehicleByIdAsync(id);
+            return _mapper.Map<VehicleDto>(vehicle);
+            }catch{
+                return BadRequest("Vehicle doesn't exist");
+            }
+        }
+
         /*
  [HttpGet("getUsers")]
         [AllowAnonymous]

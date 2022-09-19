@@ -49,7 +49,7 @@ export class AdvertFormComponent implements OnInit {
   };
 
   formTemplate = new FormGroup({
-    main: new FormControl(false),
+    isMain: new FormControl(false),
     photoUrl: new FormControl(''),
     vehicleId: new FormControl(0),
   });
@@ -100,8 +100,10 @@ export class AdvertFormComponent implements OnInit {
       } else {
         this.toastr.error('You reached max 8 photos');
       }
-       console.log(this.previewPhotos);
+      console.log(this.previewPhotos);
+      console.log(this.addedPhotos);
       this.resetForm();
+
       if (this.previewPhotos.length == 1)
         this.toastr.success(
           'To change it enter -Preview photos- page ',
@@ -115,7 +117,7 @@ export class AdvertFormComponent implements OnInit {
     }
   }
 
-  savePhoto(formValue, file: File) {
+  savePhoto(formValue, file: File, main: boolean) {
     this.isSubmitter = true;
     // if (this.formTemplate.valid) {
     var filePath = `images/${file.name
@@ -130,7 +132,7 @@ export class AdvertFormComponent implements OnInit {
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
             formValue['photoUrl'] = url;
-
+            formValue['isMain'] = main;
             console.log(formValue);
             this.service.addPhoto(formValue).subscribe({
               next: (response) => this.toastr.success('dodano zdjecie'),
@@ -153,8 +155,12 @@ export class AdvertFormComponent implements OnInit {
     console.log(this.formTemplate.value);
     if (this.addedPhotos.length > 0) {
       this.addedPhotos.forEach(
-        (elem) => {
-          this.savePhoto(this.formTemplate.value, elem);
+        (elem, ind) => {
+          if (ind == 0) {
+            this.savePhoto(this.formTemplate.value, elem, true);
+          } else {
+            this.savePhoto(this.formTemplate.value, elem, false);
+          }
         },
         this.toastr.success('added'),
         this.nextStep()
@@ -167,7 +173,7 @@ export class AdvertFormComponent implements OnInit {
   resetForm() {
     this.formTemplate.reset();
     this.formTemplate.setValue({
-      main: false,
+      isMain: false,
       photoUrl: '',
       vehicleId: 0,
     });

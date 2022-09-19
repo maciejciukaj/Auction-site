@@ -7,17 +7,17 @@
       <li>
         <span
           >First name:
-          <span class="dataColor">{{ currentUser.firstName }}</span></span
+          <span class="dataColor">{{ currentUser?.firstName }}</span></span
         >
       </li>
       <li>
-        <span>Last name: {{ currentUser.lastName }}</span>
+        <span>Last name: {{ currentUser?.lastName }}</span>
       </li>
       <li>
-        <span>Email: {{ currentUser.email }}</span>
+        <span>Email: {{ currentUser?.email }}</span>
       </li>
       <li>
-        <span>Phone number: {{ currentUser.phoneNumber }}</span>
+        <span>Phone number: {{ currentUser?.phoneNumber }}</span>
       </li>
     </ul>
   </div>
@@ -34,7 +34,20 @@
   ></app-user-info-edit>
 </div>
 <div *ngIf="passwordMode" class="right login-box">
-  <form #loginForm="ngForm" autocomplete="off" (ngSubmit)="changePassword()">
+  <form
+    #passwordChangeForm="ngForm"
+    autocomplete="off"
+    (ngSubmit)="changePassword(passwordChangeForm)"
+  >
+    <div class="user-box">
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="newUserPassword.oldPassword"
+        required=""
+      />
+      <label>Current password</label>
+    </div>
     <div class="user-box">
       <input
         type="password"
@@ -46,7 +59,7 @@
     </div>
     <div class="user-box">
       <input type="password" name="password" required="" />
-      <label>Repeat password</label>
+      <label>Repeat new password</label>
     </div>
     <button class="blue-light" type="submit">
       <span></span>

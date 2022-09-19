@@ -1,6 +1,8 @@
 <div class="container">
   <h1>🚙 My Cars 🚗</h1>
-
+  <div *ngIf="posts.length == 0">
+    You have no active advertisments or auctions
+  </div>
   <div *ngFor="let post of posts | slice: min:max" class="">
     <button class="border-gradient border-gradient-purple elem">
       {{ post.title }}, price: {{ post.price }},
