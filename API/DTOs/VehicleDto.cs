@@ -8,7 +8,7 @@ namespace API.DTOs
 {
     public class VehicleDto
     {
-
+        public long VehicleId {get; set;}
         public string Type {get;set;}
 
         public string Brand {get;set;}

@@ -20,9 +20,23 @@ namespace API.Controllers
         [HttpGet("getCards")]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Advertisment>>> GetCards(){
-            
+            _context.Advertisments.Count();
             
             return await _context.Advertisments.ToListAsync();
+        }
+
+        [HttpGet("getNumberOfCards")]
+        [AllowAnonymous]
+        public async Task<int> GetNumberOfCards(){
+            return await _context.Advertisments.CountAsync();
+        } 
+
+        [HttpGet("getCardsByPage/{page}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<Advertisment>>> getCardsByPage(int page){
+           // int pageNumber = Int32.Parse(page);
+            int startingPoint = ((page - 1 ) * 6);
+            return await _context.Advertisments.Skip(startingPoint).Take(6 * page).ToListAsync();
         }
 
         [HttpGet("getCard/{id}")]

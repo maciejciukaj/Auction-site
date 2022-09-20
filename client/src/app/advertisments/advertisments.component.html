@@ -19,15 +19,14 @@
                 <h3>{{ vehicles[i]?.brand }} {{ vehicles[i]?.model }}</h3>
               </div>
               <div class="description-prod">
-                <p>{{ adv.title }}<br />{{ vehicles[i]?.productionYear }}</p>
+                <p>{{ adv?.title }}<br />{{ vehicles[i]?.productionYear }}</p>
               </div>
               <div class="card-footer">
                 <div class="wcf-left">
-                  <span class="price">{{ adv.price }} zł</span>
+                  <span class="price">{{ adv?.price }} zł</span>
                 </div>
                 <div class="wcf-right">
-                  <a href="#" class="buy-btn"
-                    ></a>
+                  <a href="#" class="buy-btn"></a>
                 </div>
               </div>
             </div>
@@ -35,5 +34,16 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="numbers mt-2">
+    <span
+      ><button class="page less" (click)="previousPage()">
+        <i class="fa-thin fa-arrow-left"></i>
+      </button>
+      <span class="pageNumber">{{ this.currentPage }}</span
+      ><button class="page more" (click)="nextPage()">
+        <i class="fa-thin fa-arrow-right"></i>
+      </button>
+    </span>
   </div>
 </div>

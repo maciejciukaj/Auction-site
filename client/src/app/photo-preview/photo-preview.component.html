@@ -1,11 +1,12 @@
 <div class="container">
   <div class="login-box">
+  
     <div class="row">
-      <span class="user-box column" *ngFor="let photo of photos">
+      <div class="col-md-4" *ngFor="let photo of photos">
         <img class="photo mt-5" src="{{ photo }}" />
-      </span>
+      </div>
     </div>
-    <div class="preview mb-3 ml-4">
+    <div class="mt-3 ml-4">
       <button class="blue-light" (click)="cancel()">
         <span></span>
         <span></span>

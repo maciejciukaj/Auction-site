@@ -1,15 +1,14 @@
 .login-box {
   font-family: "Montserrat", sans-serif;
   font-weight: 200;
-  position: fixed;
-
-  top: 50%;
-  left: 50%;
-  width: 70%;
-  height: 83%;
+  position: relative;
+  margin-top: 5%;
+  min-height: 350px;
+  width: 100%;
+  height: 100%;
   color: white;
-  padding: 20px;
-  transform: translate(-50%, -50%);
+  padding: 4%;
+
   background: rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
@@ -24,7 +23,7 @@
 }
 
 .login-box .user-box {
-  position: relative;
+  position: fixed;
 }
 
 .login-box .user-box input {
@@ -39,7 +38,6 @@
   background: transparent;
 }
 .login-box .user-box label {
-  position: absolute;
   top: 0;
   left: 0;
   padding: 10px 0;
@@ -100,7 +98,7 @@
 }
 .photo {
   margin-right: 2%;
-  width: 50%;
+  width: 80%;
   height: auto;
 }
 

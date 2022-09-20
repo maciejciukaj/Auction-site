@@ -202,3 +202,29 @@ a.buy-btn:focus {
     color: #fff;
   }
 }
+.less {
+  content: "\f359"; /* FontAwesome Unicode */
+  font-family: FontAwesome;
+}
+.more {
+  content: "\f061"; /* FontAwesome Unicode */
+  font-family: FontAwesome;
+}
+.page {
+  background: none;
+  border: none;
+  color: white;
+}
+.page:hover {
+  color: #03e9f4;
+}
+.numbers {
+  text-align: center;
+  justify-content: center;
+  font-size: 28px;
+}
+.pageNumber {
+  color: white;
+  margin-right: 10%;
+  margin-left: 10%;
+}

@@ -12,4 +12,12 @@ export class AdvertismentService {
   getAdvertisments() {
     return this.http.get(this.baseUrl + 'getCards');
   }
+
+  getAdvertismentsByPage(page: any) {
+    return this.http.get(this.baseUrl + 'getCardsByPage/', page);
+  }
+
+  getNumberOfAdvertisments() {
+    return this.http.get(this.baseUrl + 'getNumberOfCards');
+  }
 }
