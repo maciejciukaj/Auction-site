@@ -10,6 +10,7 @@ import { CardService } from '../_services/card.service';
 export class VehicleCardComponent implements OnInit {
   advertId: any;
   card: any = {};
+  vehicle: any = {};
   constructor(
     private activatedRoute: ActivatedRoute,
     private cardService: CardService
@@ -17,7 +18,7 @@ export class VehicleCardComponent implements OnInit {
 
   ngOnInit(): void {
     //this.advertId = this.activatedRoute.snapshot.paramMap.get('id');
-    
+
     this.getCard();
     console.log(this.advertId);
   }
@@ -33,6 +34,11 @@ export class VehicleCardComponent implements OnInit {
     this.cardService.getCardById(this.advertId).subscribe((response) => {
       this.card = response;
       console.log(response);
+      this.cardService
+        .getVehicleById(this.card.advertismentId)
+        .subscribe((response) => {
+          this.vehicle = response;
+        });
     });
   }
 }

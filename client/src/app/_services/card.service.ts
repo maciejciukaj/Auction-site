@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
   providedIn: 'root',
 })
 export class CardService {
-  baseUrl = 'https://localhost:5001/api/card/';
+  baseUrl = 'https://localhost:5001/api/';
 
   constructor(
     private http: HttpClient,
@@ -14,6 +14,10 @@ export class CardService {
   ) {}
 
   getCardById(cardId: any) {
-    return this.http.get(this.baseUrl + 'getCard/' + cardId);
+    return this.http.get(this.baseUrl + 'card/getCard/' + cardId);
+  }
+
+  getVehicleById(vehicleId: any) {
+    return this.http.get(this.baseUrl + 'vehicle/getVehicle/' + vehicleId);
   }
 }

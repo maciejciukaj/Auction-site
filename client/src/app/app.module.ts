@@ -30,6 +30,7 @@ import { PhotoPreviewComponent } from './photo-preview/photo-preview.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { VehicleCardComponent } from './vehicle-card/vehicle-card.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +61,7 @@ import { VehicleCardComponent } from './vehicle-card/vehicle-card.component';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     ReactiveFormsModule,
+ 
   ],
 
   providers: [
