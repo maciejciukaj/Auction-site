@@ -29,7 +29,7 @@ import { environment } from '../environments/environment';
 import { PhotoPreviewComponent } from './photo-preview/photo-preview.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { VehicleCardComponent } from './vehicle-card/vehicle-card.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -53,15 +53,15 @@ import { VehicleCardComponent } from './vehicle-card/vehicle-card.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
     FormsModule,
     ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
-    BsDropdownModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     ReactiveFormsModule,
- 
+    NgbModule,
   ],
 
   providers: [
