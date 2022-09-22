@@ -11,7 +11,7 @@
         <a class="logo" routerLink="/" routerLinkActive="active">CARCLUB</a>
       </li>
       <li *ngIf="accountService.currentUser$ | async" class="main-bar">
-        <a routerLink="/main" routerLinkActive="active">Home</a>
+        <a routerLink="/main" routerLinkActive="active"  >Home</a>
       </li>
       <li *ngIf="accountService.currentUser$ | async" class="main-bar">
         <a routerLink="/auc" routerLinkActive="active">Auctions</a>

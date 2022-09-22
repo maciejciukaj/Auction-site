@@ -28,6 +28,7 @@ import { MyAuctionsComponent } from './my-auctions/my-auctions.component';
 import { environment } from '../environments/environment';
 import { PhotoPreviewComponent } from './photo-preview/photo-preview.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { VehicleCardComponent } from './vehicle-card/vehicle-card.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
     AdvertFormComponent,
     MyAuctionsComponent,
     PhotoPreviewComponent,
+    VehicleCardComponent,
   ],
   imports: [
     BrowserModule,

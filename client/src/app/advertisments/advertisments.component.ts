@@ -43,33 +43,19 @@ export class AdvertismentsComponent implements OnInit {
       .subscribe(
         (response) => {
           this.advertisments = response;
-          /* this.advertisments.forEach((a, idx, arr) => {
-          idx === arr.length - 1
-            ? this.getVehicles(a.advertismentId, false)
-            : this.getVehicles(a.advertismentId, true);
-        }),*/
           for (var i = 0; i < this.advertisments.length; i++) {
-            if (i === this.advertisments.length - 1) {
-              console.log('geee');
-              this.getVehicles(this.advertisments[i].advertismentId, true);
-            } else {
-              this.getVehicles(this.advertisments[i].advertismentId, false);
-            }
+            this.getVehicles(this.advertisments[i].advertismentId);
           }
-          console.log(this.advertisments);
-          console.log(this.vehicles);
         },
         (error) => this.toastr.error("Can't load adverts")
       );
   }
 
-  getVehicles(id: number, isLast: boolean) {
+  getVehicles(id: number) {
     this.http
       .get('https://localhost:5001/api/vehicle/getVehicle/' + id)
       .subscribe((response) => {
-        this.vehicles.push(response),
-          // isLast ? this.sortVehicles() : console.log('w funkcji nie sort');
-          this.sortVehicles();
+        this.vehicles.push(response), this.sortVehicles();
       });
   }
 

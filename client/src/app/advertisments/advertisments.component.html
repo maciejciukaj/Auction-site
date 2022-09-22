@@ -26,7 +26,12 @@
                   <span class="price">{{ adv?.price }} zł</span>
                 </div>
                 <div class="wcf-right">
-                  <a href="#" class="buy-btn"></a>
+                  <a
+                    [routerLink]="['/vehicle', adv?.advertismentId]"
+                    class="buy-btn eye"
+                  >
+                    <i class="fa-sharp fa-solid fa-car"></i
+                  ></a>
                 </div>
               </div>
             </div>

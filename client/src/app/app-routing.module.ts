@@ -9,6 +9,7 @@ import { MainComponent } from './main/main.component';
 import { MyAuctionsComponent } from './my-auctions/my-auctions.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { VehicleCardComponent } from './vehicle-card/vehicle-card.component';
 import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: 'userP', component: UserProfileComponent },
       { path: 'advForm', component: AdvertFormComponent },
       { path: 'myAuc', component: MyAuctionsComponent },
+      {path: 'vehicle/:id', component: VehicleCardComponent},
     ],
   },
   { path: '**', component: HomeComponent, pathMatch: 'full' },

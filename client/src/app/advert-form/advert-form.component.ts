@@ -72,6 +72,8 @@ export class AdvertFormComponent implements OnInit {
     if (this.step == 3) {
       this.router.navigateByUrl('/main');
     }
+    console.log(this.previewPhotos);
+    console.log(this.addedPhotos);
   }
 
   previousStep() {
