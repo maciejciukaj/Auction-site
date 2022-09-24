@@ -36,7 +36,7 @@ export class MyAuctionsComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.posts = response;
-          console.log(this.posts);
+
           this.getPages();
         },
         error: (error) => console.log(error),
@@ -45,25 +45,23 @@ export class MyAuctionsComponent implements OnInit {
 
   getPages() {
     var number = (this.posts.length % 5) + 1;
-
     for (var i = 1; i <= number; i++) {
-      console.log(i);
       this.pages[i - 1] = i;
     }
-    console.log(number);
+    console.log(this.posts.length);
   }
   more() {
-    console.log();
-    if (this.max + 5 <= this.posts.length + (5 - (this.posts.length % 5))) {
+    console.log(this.max, this.min);
+    if (this.posts.length >= this.min + 5) {
       this.min = this.min + 5;
       this.max = this.max + 5;
     }
   }
   less() {
+    console.log(this.max, this.min);
     if (this.min - 5 >= 0) {
       this.min = this.min - 5;
       this.max = this.max - 5;
     }
   }
- 
 }

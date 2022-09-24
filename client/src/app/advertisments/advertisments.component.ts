@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { timeStamp } from 'console';
 import { ToastrService } from 'ngx-toastr';
 import { AdvertismentService } from '../_services/advertisment.service';
 
@@ -21,6 +22,8 @@ export class AdvertismentsComponent implements OnInit {
     private advertService: AdvertismentService,
     private toastr: ToastrService
   ) {}
+
+ 
 
   ngOnInit(): void {
     this.getNumberOfAllAdvertisments();
@@ -70,6 +73,7 @@ export class AdvertismentsComponent implements OnInit {
       this.vehicles = [];
       console.log(this.currentPage);
       this.getAdvertisments();
+     
     }
   }
   previousPage() {
@@ -78,6 +82,7 @@ export class AdvertismentsComponent implements OnInit {
       this.vehicles = [];
       console.log(this.currentPage);
       this.getAdvertisments();
+      
     }
   }
 }

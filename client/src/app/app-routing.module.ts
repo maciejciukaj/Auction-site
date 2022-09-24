@@ -27,13 +27,15 @@ const routes: Routes = [
       { path: 'userP', component: UserProfileComponent },
       { path: 'advForm', component: AdvertFormComponent },
       { path: 'myAuc', component: MyAuctionsComponent },
-      {path: 'vehicle/:id', component: VehicleCardComponent},
+      { path: 'vehicle/:id', component: VehicleCardComponent },
     ],
   },
   { path: '**', component: HomeComponent, pathMatch: 'full' },
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

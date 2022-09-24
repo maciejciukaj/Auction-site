@@ -30,6 +30,7 @@ import { PhotoPreviewComponent } from './photo-preview/photo-preview.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { VehicleCardComponent } from './vehicle-card/vehicle-card.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LightboxModule } from 'ngx-lightbox';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AngularFireDatabaseModule,
     ReactiveFormsModule,
     NgbModule,
+    LightboxModule,
   ],
 
   providers: [
