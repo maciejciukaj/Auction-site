@@ -52,7 +52,7 @@ export class MyAuctionsComponent implements OnInit {
   }
   more() {
     console.log(this.max, this.min);
-    if (this.posts.length >= this.min + 5) {
+    if (this.posts.length > this.min + 5) {
       this.min = this.min + 5;
       this.max = this.max + 5;
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Interfaces;
 using API.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
@@ -41,6 +42,16 @@ namespace API.Data
 
         }
 
-    
+        public  async Task<Vehicle> DeleteVehicle(Vehicle vehicle)
+        {
+            _context.Remove(vehicle);
+            await _context.SaveChangesAsync();
+            return vehicle;
+            
+            
+            
+
+          
+        }
     }
 }

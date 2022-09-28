@@ -6,7 +6,7 @@
           <div class="wsk-cp-product">
             <div class="wsk-cp-img">
               <img
-                src="{{ vehicles[i]?.photos[0].photoUrl }}"
+                src="{{ imageService.searchForMain(vehicles[i]?.photos) }}"
                 alt="Product"
                 class="img-responsive"
               />
@@ -19,7 +19,12 @@
                 <h3>{{ vehicles[i]?.brand }} {{ vehicles[i]?.model }}</h3>
               </div>
               <div class="description-prod">
-                <p>{{ adv?.title }}<br />{{ vehicles[i]?.productionYear }}</p>
+                <p>
+                  {{ vehicles[i]?.engine }} cm3&nbsp;
+                  {{ vehicles[i]?.mileage }} km<br />{{
+                    vehicles[i]?.productionYear
+                  }}
+                </p>
               </div>
               <div class="card-footer">
                 <div class="wcf-left">
@@ -42,14 +47,13 @@
   </div>
   <div class="numbers mt-2">
     <span
-      ><button class="page less" (click)="previousPage()">
+      ><button class="page less" (click)="subPageNumber()">
         <i class="fa-thin fa-arrow-left"></i>
       </button>
-      <span class="pageNumber">{{ this.currentPage }}</span
-      ><button class="page more" (click)="nextPage()">
+      <span class="pageNumber">{{ this.pageId }}</span
+      ><button class="page more" (click)="addPageNumber()">
         <i class="fa-thin fa-arrow-right"></i>
       </button>
-      
     </span>
   </div>
 </div>

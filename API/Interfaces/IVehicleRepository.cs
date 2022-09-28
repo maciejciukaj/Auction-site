@@ -16,6 +16,7 @@ namespace API.Interfaces
         Task<Vehicle> GetVehicleByIdAsync(long id);
 
         void AddVehicle(Vehicle vehicle);
+        Task<Vehicle> DeleteVehicle(Vehicle vehicle);
 
     }
 }

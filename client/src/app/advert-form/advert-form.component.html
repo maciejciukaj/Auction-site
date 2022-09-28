@@ -161,6 +161,7 @@
       <div class="user-box">
         <input
           [(ngModel)]="vehicle.engine"
+          placeholder="input engine capacity in cm3"
           type="text"
           name="engine"
           required=""
@@ -168,12 +169,11 @@
         <label>Engine</label>
       </div>
       <div class="user-box">
-        <input
-          [(ngModel)]="vehicle.isCrashed"
-          type="text"
-          name="isCrashed"
-          required=""
-        />
+        <select [(ngModel)]="vehicle.isCrashed" name="isCrashed" required="">
+          <option [ngValue]="false">false</option>
+          <option [ngValue]="true">true</option>
+        </select>
+
         <label>Crashed</label>
       </div>
 

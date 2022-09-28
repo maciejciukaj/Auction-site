@@ -56,25 +56,30 @@ export class UserInfoEditComponent implements OnInit {
   cancel() {
     this.cancelEdit.emit(false);
   }
-  checkValidity() {}
 
   editUserInfo() {
     // if (this.editForm.valid) {
-    this.checkValidity();
-    this.model = this.editForm.value;
-    this.accountService.currentUser$.subscribe((val) => (this.name = val));
-    this.model.username = this.name.userName;
-    console.log(this.model);
-    this.accountService.editUserInfo(this.model).subscribe(
-      (response) => {
+    if (
+      this.editForm.get('firstname').valid ||
+      this.editForm.get('lastname').valid ||
+      this.editForm.get('email').valid ||
+      this.editForm.get('phonenumber').valid
+    ) {
+      this.model = this.editForm.value;
+      this.accountService.currentUser$.subscribe((val) => (this.name = val));
+      this.model.username = this.name.userName;
+      console.log(this.model);
+      this.accountService.editUserInfo(this.model).subscribe(
+        (response) => {
           window.location.reload();
-      },
-      (error) => {
-        console.log(error.error);
+        },
+        (error) => {
+          console.log(error.error);
 
-        this.toastr.error(error.error);
-      }
-    );
+          this.toastr.error(error.error);
+        }
+      );
+    }
     // } else {
     //   this.toastr.error('Correct your data');
     // }

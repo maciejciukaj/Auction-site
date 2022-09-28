@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Lightbox, LightboxConfig } from 'ngx-lightbox';
+import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-dialog.service';
 import { PhotoLightbox } from '../_models/lightbox';
 
 import { CardService } from '../_services/card.service';
@@ -21,9 +22,11 @@ export class VehicleCardComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private cardService: CardService,
+    private confirmationDialogService: ConfirmationDialogService,
     config: NgbCarouselConfig,
     private _lightbox: Lightbox,
-    private _lightboxConfig: LightboxConfig
+    private _lightboxConfig: LightboxConfig,
+    private router: Router
   ) {
     config.interval = 5000;
     config.keyboard = true;
@@ -70,5 +73,24 @@ export class VehicleCardComponent implements OnInit {
           this.saveLightboxPhotos();
         });
     });
+  }
+
+  public openConfirmationDialog() {
+    this.confirmationDialogService
+      .confirm('Please confirm', 'Do you really want to delete advertisment ?')
+      .then((confirmed) =>
+        this.cardService.deleteCard(this.advertId).subscribe(
+          (response) => {
+            this.router.navigateByUrl('/myAuc');
+          },
+          (error) => console.log(error)
+        )
+      )
+
+      .catch(() =>
+        console.log(
+          'User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'
+        )
+      );
   }
 }

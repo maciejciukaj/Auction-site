@@ -41,4 +41,11 @@ export class ImageService {
   addPhoto(model: any) {
     return this.http.post(this.baseUrl + 'addPhoto/', model);
   }
+  searchForMain(photos: any) {
+    for (let i = 0; i < photos?.length; i++) {
+      if (photos[i].isMain) {
+        return photos[i].photoUrl;
+      }
+    }
+  }
 }

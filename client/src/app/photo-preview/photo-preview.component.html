@@ -1,6 +1,6 @@
 <div class="container">
   <div class="login-box">
-    <div class="row">
+    <div class="row" *ngIf="photos.length != 0">
       <div class="col-md-4" *ngFor="let photo of photos; let i = index">
         <div class="icons mt-4">
           <button class="star-icon" (click)="replaceImages(i)">
@@ -13,6 +13,7 @@
         </div>
       </div>
     </div>
+    <div class="banner" *ngIf="photos.length == 0">No photos added</div>
     <div class="mt-3 ml-4">
       <button class="blue-light" (click)="cancel()">
         <span></span>

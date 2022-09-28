@@ -66,6 +66,19 @@ namespace API.Controllers
         }
         */
 
+        [HttpDelete("deleteVehicle/{id}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<Vehicle>> DeleteVehicleById(long id){
+            try{
+             var vehicle =  await _vehicleRepository.GetVehicleByIdAsync(id);
+            await _vehicleRepository.DeleteVehicle(vehicle);
+                 return Ok(vehicle);
+            }catch{
+                return BadRequest("Error during deleting vehicle");
+            }
+      
+        }
+
       
 
         [HttpPost("addVehicles")]

@@ -26,7 +26,8 @@
   position: relative;
 }
 
-.login-box .user-box input {
+.login-box .user-box input,
+select {
   width: 40%;
   padding: 10px 0;
   font-size: 16px;
@@ -200,4 +201,8 @@ textarea {
 }
 .photoPreview {
   border: 1px solid #03e9f4;
+}
+option {
+  background-color: rgba(0, 0, 0, 0.6);
+ 
 }

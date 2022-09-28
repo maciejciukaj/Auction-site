@@ -31,6 +31,8 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { VehicleCardComponent } from './vehicle-card/vehicle-card.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LightboxModule } from 'ngx-lightbox';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogService } from './confirmation-dialog/confirmation-dialog.service';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { LightboxModule } from 'ngx-lightbox';
     MyAuctionsComponent,
     PhotoPreviewComponent,
     VehicleCardComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,12 +70,15 @@ import { LightboxModule } from 'ngx-lightbox';
   ],
 
   providers: [
+    ConfirmationDialogService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true,
+    
     },
   ],
+  entryComponents: [ ConfirmationDialogComponent ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

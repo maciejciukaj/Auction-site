@@ -11,13 +11,13 @@
         <a class="logo" routerLink="/" routerLinkActive="active">CARCLUB</a>
       </li>
       <li *ngIf="accountService.currentUser$ | async" class="main-bar">
-        <a routerLink="/main" routerLinkActive="active"  >Home</a>
+        <a routerLink="/main" routerLinkActive="active">Home</a>
       </li>
       <li *ngIf="accountService.currentUser$ | async" class="main-bar">
         <a routerLink="/auc" routerLinkActive="active">Auctions</a>
       </li>
       <li *ngIf="accountService.currentUser$ | async" class="main-bar">
-        <a routerLink="/adv" routerLinkActive="active">Advertisments</a>
+        <a routerLink="/adv/1" routerLinkActive="active">Advertisments</a>
       </li>
 
       <li
@@ -31,7 +31,7 @@
         <div class="dropdown-menu mt-3" *dropdownMenu>
           <a class="dropdown-item" routerLink="/userP">My profile</a>
 
-          <a class="dropdown-item" routerLink="/myAuc">My cars</a>
+          <a class="dropdown-item" routerLink="/myAuc">My garage</a>
 
           <a class="dropdown-item">My offers</a>
           <div class="dropdown-divider"></div>

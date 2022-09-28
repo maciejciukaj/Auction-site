@@ -23,7 +23,7 @@ const routes: Routes = [
     children: [
       { path: 'main', component: MainComponent },
       { path: 'auc', component: AuctionsComponent },
-      { path: 'adv', component: AdvertismentsComponent },
+      { path: 'adv/:page', component: AdvertismentsComponent },
       { path: 'userP', component: UserProfileComponent },
       { path: 'advForm', component: AdvertFormComponent },
       { path: 'myAuc', component: MyAuctionsComponent },
@@ -34,7 +34,10 @@ const routes: Routes = [
 ];
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+      onSameUrlNavigation: 'reload',
+    }),
   ],
   exports: [RouterModule],
 })

@@ -20,4 +20,8 @@ export class CardService {
   getVehicleById(vehicleId: any) {
     return this.http.get(this.baseUrl + 'vehicle/getVehicle/' + vehicleId);
   }
+
+  deleteCard(id: any) {
+    return this.http.delete(this.baseUrl + 'vehicle/deleteVehicle/' + id);
+  }
 }
