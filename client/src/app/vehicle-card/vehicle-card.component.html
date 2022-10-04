@@ -49,12 +49,26 @@
           <th class="details">{{ vehicle?.model }}</th>
         </tr>
         <tr>
+          <th>Production year:</th>
+          <th class="details">
+            {{ vehicle?.productionYear }}
+          </th>
+        </tr>
+        <tr>
+          <th style="width: 20%">Mileage:</th>
+          <th class="details" style="width: 8440%">
+            {{ vehicle?.mileage }} km
+          </th>
+        </tr>
+        <tr>
           <th>Power:</th>
           <th class="details">{{ vehicle?.power }} hp</th>
         </tr>
         <tr>
           <th>Engine capacity:</th>
-          <th class="details">{{ vehicle?.engine }} cm3</th>
+          <th class="details" style="width: 150px">
+            {{ vehicle?.engine }} cm3
+          </th>
         </tr>
         <tr>
           <th>Color:</th>
@@ -69,19 +83,19 @@
   <div class="description mt-3">
     {{ card.description }}
   </div>
-  <div class="owner">Owner Name</div>
+  <div class="owner">{{ card}}</div>
 </div>
 <div class="toolbar">
-  <button [routerLink]="'/myAuc'" class="button-19 mr-2">
+  <button [routerLink]="'/myAuc'" class="button-19 mr-5">
     Back to my garage
   </button>
-  <button [routerLink]="'/adv/1'" class="button-19 mr-2">
+  <button [routerLink]="'/adv/1'" class="button-19 mr-5">
     Back to advertisments
   </button>
-  <button [routerLink]="'/adv/1'" class="button-19 mr-2">
+  <button [routerLink]="'/adv/1'" class="button-19 mr-5">
     Edit advertisment
   </button>
-  <button (click)="openConfirmationDialog()" class="button-19 mr-2">
+  <button (click)="openConfirmationDialog()" class="button-19">
     Delete advertisment ❌
   </button>
 </div>

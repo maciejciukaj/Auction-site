@@ -70,7 +70,6 @@ ngb-carousel .wrapper > img {
   -webkit-user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-
 }
 
 .button-19:after {
@@ -106,6 +105,7 @@ ngb-carousel .wrapper > img {
   white-space: pre-line;
   color: antiquewhite;
   min-height: 150px;
+  margin-bottom: 5%;
 }
 .card {
   background-color: transparent;
@@ -155,14 +155,18 @@ h2 {
 }
 th {
   font-weight: 400;
+  padding-right: 30px;
 }
 tr {
   height: 50px;
 }
 .title {
   margin-bottom: 3%;
+  text-align: center;
+  border-bottom: solid;
+  border-bottom-color: hsla(33, 78%, 91%, 0.226);
 }
 
 table {
-  width: 40%;
+  width: 45%;
 }

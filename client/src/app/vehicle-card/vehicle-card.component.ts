@@ -19,6 +19,8 @@ export class VehicleCardComponent implements OnInit {
   vehicle: any = {};
   photo: PhotoLightbox = { src: '' };
   album: any = [];
+  owner: any;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private cardService: CardService,
@@ -36,10 +38,11 @@ export class VehicleCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.advertId = this.activatedRoute.snapshot.paramMap.get('id');
+   
 
     this.getCard();
-    console.log(this.advertId);
+   
+    
   }
   open(index: number): void {
     // open lightbox
@@ -52,7 +55,7 @@ export class VehicleCardComponent implements OnInit {
       this.album.push(this.photo);
       this.photo = { src: '' };
     }
-    console.log(this.album);
+    
   }
 
   getId() {
@@ -71,6 +74,7 @@ export class VehicleCardComponent implements OnInit {
         .subscribe((response) => {
           this.vehicle = response;
           this.saveLightboxPhotos();
+          
         });
     });
   }
@@ -78,14 +82,18 @@ export class VehicleCardComponent implements OnInit {
   public openConfirmationDialog() {
     this.confirmationDialogService
       .confirm('Please confirm', 'Do you really want to delete advertisment ?')
-      .then((confirmed) =>
-        this.cardService.deleteCard(this.advertId).subscribe(
-          (response) => {
-            this.router.navigateByUrl('/myAuc');
-          },
-          (error) => console.log(error)
-        )
-      )
+      .then((confirmed) => {
+        if (confirmed) {
+          this.cardService
+            .deleteCard(this.advertId, this.vehicle.photos)
+            .subscribe(
+              (response) => {
+                this.router.navigateByUrl('/myAuc');
+              },
+              (error) => console.log(error)
+            );
+        }
+      })
 
       .catch(() =>
         console.log(

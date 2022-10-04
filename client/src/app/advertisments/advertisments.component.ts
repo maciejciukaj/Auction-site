@@ -60,12 +60,7 @@ export class AdvertismentsComponent implements OnInit {
   getNumberOfAllAdvertisments() {
     this.advertService
       .getNumberOfAdvertisments()
-      .subscribe(
-        (response) => (
-          (this.numberOfAllCards = response),
-          console.log(this.numberOfAllCards + ' wszystkie karty')
-        )
-      );
+      .subscribe((response) => (this.numberOfAllCards = response));
   }
 
   getAdvertisments() {
@@ -76,7 +71,6 @@ export class AdvertismentsComponent implements OnInit {
       .subscribe(
         (response) => {
           this.advertisments = response;
-          
 
           for (var i = 0; i < this.advertisments.length; i++) {
             this.getVehicles(this.advertisments[i].advertismentId);
@@ -90,9 +84,8 @@ export class AdvertismentsComponent implements OnInit {
     this.http
       .get('https://localhost:5001/api/vehicle/getVehicle/' + id)
       .subscribe((response) => {
-        this.vehicles.push(response),
-          this.sortVehicles()
-         
+        this.vehicles.push(response), this.sortVehicles();
+
         /*  if (this.vehicles.length == 5) {
           this.sortVehicles();
         }*/
@@ -124,5 +117,12 @@ export class AdvertismentsComponent implements OnInit {
       let ps = p.toString();
       this.router.navigateByUrl('/adv/' + ps);
     }
+  }
+
+  checkPreviousPage() {
+    return this.pageId - 1 > 0 ?  true :  false;
+  }
+  checkNextPage() {
+    return this.pageId * 6 + 1 <= this.numberOfAllCards ? true : false;
   }
 }

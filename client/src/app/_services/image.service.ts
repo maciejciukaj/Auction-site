@@ -4,6 +4,7 @@ import {
   AngularFireDatabase,
   AngularFireList,
 } from '@angular/fire/compat/database';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 import { Image } from '../_models/image';
 
@@ -21,7 +22,7 @@ export class ImageService {
     vehicleId: 0,
   };
 
-  constructor(private firebase: AngularFireDatabase, private http: HttpClient) {
+  constructor(private firebase: AngularFireDatabase, private http: HttpClient, private storage: AngularFireStorage) {
     this.getImageDetailList();
   }
 
@@ -48,4 +49,9 @@ export class ImageService {
       }
     }
   }
+  delete(downloadUrl) {
+    return this.storage.storage.refFromURL(downloadUrl).delete();
+  }
+  
+  
 }

@@ -1,56 +1,124 @@
 <div class="login-box">
   <h2>Register</h2>
-  <form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
+  
+  <form [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off">
     <div class="user-box">
       <input
-        [(ngModel)]="model.username"
         type="text"
         name="username"
+        formControlName="username"
         required=""
       />
       <label>Username</label>
     </div>
+    <div *ngIf="f.username.errors" class="error">
+      <div
+        *ngIf="
+          f.username.errors.pattern ||
+          f.username.errors.maxlength ||
+          f.username.errors.minlength
+        "
+      >
+        Username 3-15, no special characters at beginning or end !
+      </div>
+    </div>
     <div class="user-box">
       <input
-        [(ngModel)]="model.password"
+        formControlName="password"
         type="password"
         name="password"
         required=""
       />
       <label>Password</label>
     </div>
+    <div *ngIf="f.password.errors" class="error">
+      <div
+        *ngIf="
+          f.password.errors.maxlength ||
+          f.password.errors.minlength ||
+          f.password.errors.pattern
+        "
+      >
+        Wrong password !
+      </div>
+    </div>
     <div class="user-box">
       <input
-        [(ngModel)]="model.firstname"
+        formControlName="firstname"
         type="text"
         name="firstname"
         required=""
       />
       <label>First name</label>
     </div>
+    <div *ngIf="f.firstname.errors" class="error">
+      <div
+        *ngIf="
+          f.firstname.errors.maxlength ||
+          f.firstname.errors.minlength ||
+          f.firstname.errors.pattern
+        "
+      >
+        Wrong firstname !
+      </div>
+    </div>
     <div class="user-box">
       <input
-        [(ngModel)]="model.lastname"
+        formControlName="lastname"
         type="text"
         name="lastname"
         required=""
       />
       <label>Last name</label>
     </div>
+    <div *ngIf="f.lastname.errors" class="error">
+      <div
+        *ngIf="
+          f.lastname.errors.pattern ||
+          f.lastname.errors.maxlength ||
+          f.lastname.errors.minlength
+        "
+      >
+        Wrong lastname !
+      </div>
+    </div>
     <div class="user-box">
-      <input [(ngModel)]="model.email" type="email" name="email" required="" />
+      <input formControlName="email" type="text" name="email" required="" />
       <label>Email</label>
+    </div>
+    <div *ngIf="f.email.errors" class="error">
+      <div
+        *ngIf="
+          f.email.errors.pattern ||
+          f.email.errors.maxlength ||
+          f.email.errors.minlength
+        "
+      >
+        Wrong email address !
+      </div>
     </div>
     <div class="user-box">
       <input
-        [(ngModel)]="model.phonenumber"
+        (keypress)="keyPressNumber($event)"
+        formControlName="phonenumber"
         type="text"
         name="phonenumber"
         required=""
       />
       <label>Phone number</label>
-      <div class="capslock" *ngIf="capslockOn">Caps lock on</div>
     </div>
+    <div *ngIf="f.phonenumber.errors" class="error">
+      <div
+        *ngIf="
+          f.phonenumber.errors.pattern ||
+          f.phonenumber.errors.maxlength ||
+          f.phonenumber.errors.minlength
+        "
+      >
+        Wrong number! 9 - 12 characters
+      </div>
+    </div>
+    <div class="capslock" *ngIf="capslockOn">Caps lock on</div>
     <button class="blue-light" type="submit">
       <span></span>
       <span></span>

@@ -47,12 +47,16 @@
   </div>
   <div class="numbers mt-2">
     <span
-      ><button class="page less" (click)="subPageNumber()">
-        <i class="fa-thin fa-arrow-left"></i>
+      ><button
+        
+        class="page less"
+        (click)="subPageNumber()"
+      >
+        <i *ngIf="checkPreviousPage()" class="fa-thin fa-arrow-left"></i>
       </button>
       <span class="pageNumber">{{ this.pageId }}</span
-      ><button class="page more" (click)="addPageNumber()">
-        <i class="fa-thin fa-arrow-right"></i>
+      ><button  class="page more" (click)="addPageNumber()">
+        <i *ngIf="checkNextPage()" class="fa-thin fa-arrow-right"></i>
       </button>
     </span>
   </div>

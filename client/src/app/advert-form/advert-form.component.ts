@@ -5,8 +5,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs/operators';
-import { Advertisment } from '../_models/advertisment';
-import { Vehicle } from '../_models/vehicle';
+import { Advertisment, AdvertismentClass } from '../_models/advertisment';
+import {
+  BrandClass,
+  ColorClass,
+  TypeClass,
+  Vehicle,
+  VehicleClass,
+} from '../_models/vehicle';
 import { AccountService } from '../_services/account.service';
 import { ImageService } from '../_services/image.service';
 
@@ -27,26 +33,12 @@ export class AdvertFormComponent implements OnInit {
   isSubmitter: boolean;
   editMode = false;
 
-  vehicle: Vehicle = {
-    type: '',
-    brand: '',
-    model: '',
-    color: '',
-    power: null,
-    engine: null,
-    isCrashed: false,
-    mileage: null,
-    productionYear: null,
-    userId: null,
-  };
+  vehicle = new VehicleClass();
+  types = new TypeClass();
+  brands = new BrandClass();
+  colors = new ColorClass();
 
-  advertisment: Advertisment = {
-    title: '',
-    description: '',
-    price: '',
-    userId: null,
-    vehicleId: null,
-  };
+  advertisment = new AdvertismentClass();
 
   formTemplate = new FormGroup({
     isMain: new FormControl(false),
@@ -65,6 +57,8 @@ export class AdvertFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetForm();
+    this.brands.brandList.sort();
+    console.log(this.types);
   }
 
   nextStep() {
@@ -108,7 +102,7 @@ export class AdvertFormComponent implements OnInit {
 
       if (this.previewPhotos.length == 1)
         this.toastr.success(
-          'To change it enter -Preview photos- page ',
+          "To change it enter 'Preview photos' page ",
           'Main photo added',
           {
             timeOut: 4000,
@@ -137,7 +131,7 @@ export class AdvertFormComponent implements OnInit {
             formValue['isMain'] = main;
             console.log(formValue);
             this.service.addPhoto(formValue).subscribe({
-              next: (response) => this.toastr.success('dodano zdjecie'),
+              next: (response) => console.log('dodano zdjecie'),
               error: (error) => console.log(error),
             });
             this.service.insertImageDetails(formValue);

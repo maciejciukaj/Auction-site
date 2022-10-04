@@ -1,17 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using API.Data;
 using API.DTOs;
 using API.Interfaces;
-using API.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -84,11 +77,7 @@ namespace API.Controllers
         }
 
         
-        // [HttpGet("getUsersById/{id}")]
-        // public async Task<ActionResult<User>> GetUser(long id){
-        //     return await _userRepository.GetUserByIdAsync(id);
-           
-        // }
+        
 
         [HttpGet("getUsers/{name}")]
         [Authorize]
@@ -108,6 +97,13 @@ namespace API.Controllers
             var toReturn =  _mapper.Map<IEnumerable<AdvertismentDto>>(adverts);
             return Ok(toReturn);
            
+        }
+
+
+        [HttpGet("getUserById/{id}")]
+        public async Task<ActionResult<MemberDto>> GetUserById(long id){
+             var user =  await _userRepository.GetUserByIdAsync(id);
+             return _mapper.Map<MemberDto>(user);
         }
 
        

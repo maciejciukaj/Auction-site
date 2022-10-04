@@ -1,202 +1,209 @@
-<div *ngIf="!editMode" class="login-box mt-5 container">
-  <form [formGroup]="formTemplate" autocomplete="on" (ngSubmit)="nextStep()">
-    <div class="step0" *ngIf="step == 0">
-      <h2>Step 1 - Add vehicle photos</h2>
-      <div class="user-box">
-        <input
-          formControlName="photoUrl"
-          (change)="showPreview($event)"
-          #fileUploader
-          type="file"
-          id="avatar"
-          accept="image/png,image/jpg,image/jpeg"
-          required=""
-        />
-        <div class="text-center">
-          <img
-            class="photoPreview"
-            [src]="imgSrc"
-            width="260px"
-            height="auto"
-            (click)="fileUploader.click()"
+<div class="advForm">
+  <div *ngIf="!editMode" class="login-box mt-5">
+    <form [formGroup]="formTemplate" autocomplete="on" (ngSubmit)="nextStep()">
+      <div class="step0" *ngIf="step == 0">
+        <h2>Step 1 - Add vehicle photos</h2>
+        <div class="user-box">
+          <input
+            formControlName="photoUrl"
+            (change)="showPreview($event)"
+            #fileUploader
+            type="file"
+            id="avatar"
+            accept="image/png,image/jpg,image/jpeg"
+            required=""
           />
+          <div class="text-center">
+            <img
+              class="photoPreview"
+              [src]="imgSrc"
+              width="260px"
+              height="auto"
+              (click)="fileUploader.click()"
+            />
+          </div>
+          <label>Your photos</label>
         </div>
-        <label>Your photos</label>
+        <button
+          type="button"
+          class="blue-light float-left mt-5"
+          (click)="addPhotoToPreview()"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>Add photo
+        </button>
+        <button
+          type="button"
+          class="blue-light center mt-5 mr-5"
+          (click)="editToggle()"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>Preview photos
+        </button>
+        <button class="blue-light float-right mt-5" type="submit">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>Save
+        </button>
       </div>
-      <button
-        type="button"
-        class="blue-light float-left mt-5"
-        (click)="addPhotoToPreview()"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>Add photo
-      </button>
-      <button
-        type="button"
-        class="blue-light center mt-5 mr-5"
-        (click)="editToggle()"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>Preview photos
-      </button>
-      <button class="blue-light float-right mt-5" type="submit">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>Save
-      </button>
-    </div>
-  </form>
+    </form>
 
-  <form autocomplete="off" #advertForm="ngForm" (ngSubmit)="nextStep()">
-    <div class="step1 mb-1" *ngIf="step == 1">
-      <h2>Step 2</h2>
-      <div class="user-box">
-        <input
-          [(ngModel)]="advertisment.title"
-          type="text"
-          name="title"
-          required=""
-        />
-        <label>Title</label>
-      </div>
-      <div class="user-box">
-        <input [(ngModel)]="vehicle.type" type="text" name="type" required="" />
-        <label>Type</label>
-      </div>
-      <div class="user-box">
-        <input
-          [(ngModel)]="vehicle.brand"
-          type="text"
-          name="brand"
-          required=""
-        />
-        <label>Brand</label>
-      </div>
-      <div class="user-box">
-        <input
-          [(ngModel)]="vehicle.model"
-          type="text"
-          name="firstname"
-          required=""
-        />
-        <label>Model</label>
-      </div>
-      <div class="user-box">
-        <input
-          [(ngModel)]="advertisment.price"
-          type="text"
-          name="price"
-          required=""
-        />
-        <label>Price</label>
-      </div>
-      <div class="user-box">
-        <textarea [(ngModel)]="advertisment.description" name="description">
-        </textarea>
-        <label>Description</label>
-      </div>
+    <form autocomplete="off" #advertForm="ngForm" (ngSubmit)="nextStep()">
+      <div class="step1 mb-1" *ngIf="step == 1">
+        <h2>Step 2</h2>
+        <div class="user-box">
+          <input
+            [(ngModel)]="advertisment.title"
+            type="text"
+            name="title"
+            required=""
+          />
+          <label>Title</label>
+        </div>
+        <div class="user-box">
+          <select [(ngModel)]="vehicle.type" name="type" required="">
+            <option *ngFor="let elem of types.typeList" [ngValue]="elem">
+              {{ elem }}
+            </option>
+          </select>
+          <label>Type</label>
+        </div>
 
-      <button class="blue-light mt-3 prev" (click)="previousStep()">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>Previous
-      </button>
-      <button class="blue-light mt-3 next" type="submit">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>Next
-      </button>
-    </div>
-  </form>
-  <form
-    autocomplete="off"
-    #advertForm="ngForm"
-    (ngSubmit)="createAdvertisment()"
-  >
-    <div class="step2" *ngIf="step == 2">
-      <h2>Step 3</h2>
-      <div class="user-box">
-        <input
-          [(ngModel)]="vehicle.productionYear"
-          type="text"
-          name="productionYear"
-          required=""
-        />
-        <label>Production year</label>
+        <div class="user-box">
+          <select [(ngModel)]="vehicle.brand" name="brand" required="">
+            <option *ngFor="let elem of brands.brandList" [ngValue]="elem">
+              {{ elem }}
+            </option>
+          </select>
+          <label>Brand</label>
+        </div>
+        <div class="user-box">
+          <input
+            [(ngModel)]="vehicle.model"
+            type="text"
+            name="firstname"
+            required=""
+          />
+          <label>Model</label>
+        </div>
+        <div class="user-box">
+          <input
+            [(ngModel)]="advertisment.price"
+            type="text"
+            name="price"
+            required=""
+          />
+          <label>Price</label>
+        </div>
+        <div class="user-box">
+          <textarea [(ngModel)]="advertisment.description" name="description">
+          </textarea>
+          <label>Description</label>
+        </div>
+        <div class="buttons">
+          <button class="blue-light mt-3 prev" (click)="previousStep()">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>Previous
+          </button>
+          <button class="blue-light mt-3 next" type="submit">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>Next
+          </button>
+        </div>
       </div>
-      <div class="user-box">
-        <input
-          [(ngModel)]="vehicle.color"
-          type="text"
-          name="color"
-          required=""
-        />
-        <label>Color</label>
-      </div>
-      <div class="user-box">
-        <input
-          [(ngModel)]="vehicle.mileage"
-          type="text"
-          name="mileage"
-          required=""
-        />
-        <label>Mileage</label>
-      </div>
-      <div class="user-box">
-        <input
-          [(ngModel)]="vehicle.power"
-          type="text"
-          name="power"
-          required=""
-        />
-        <label>Power</label>
-      </div>
-      <div class="user-box">
-        <input
-          [(ngModel)]="vehicle.engine"
-          placeholder="input engine capacity in cm3"
-          type="text"
-          name="engine"
-          required=""
-        />
-        <label>Engine</label>
-      </div>
-      <div class="user-box">
-        <select [(ngModel)]="vehicle.isCrashed" name="isCrashed" required="">
-          <option [ngValue]="false">false</option>
-          <option [ngValue]="true">true</option>
-        </select>
+    </form>
+    <form
+      autocomplete="off"
+      #advertForm="ngForm"
+      (ngSubmit)="createAdvertisment()"
+    >
+      <div class="step2" *ngIf="step == 2">
+        <h2>Step 3</h2>
+        <div class="user-box">
+          <input
+            [(ngModel)]="vehicle.productionYear"
+            type="text"
+            name="productionYear"
+            required=""
+          />
+          <label>Production year</label>
+        </div>
+        <div class="user-box">
+          <select [(ngModel)]="vehicle.color" name="color" required="">
+            <option *ngFor="let elem of colors.colorList" [ngValue]="elem">
+              {{ elem }}
+            </option>
+          </select>
+          <label>Color</label>
+        </div>
+        <div class="user-box">
+          <input
+            [(ngModel)]="vehicle.mileage"
+            type="text"
+            name="mileage"
+            required=""
+          />
+          <label>Mileage</label>
+        </div>
+        <div class="user-box">
+          <input
+            [(ngModel)]="vehicle.power"
+            type="text"
+            name="power"
+            required=""
+          />
+          <label>Power</label>
+        </div>
+        <div class="user-box">
+          <input
+            [(ngModel)]="vehicle.engine"
+            placeholder="input engine capacity in cm3"
+            type="text"
+            name="engine"
+            required=""
+          />
+          <label>Engine</label>
+        </div>
+        <div class="user-box">
+          <select [(ngModel)]="vehicle.isCrashed" name="isCrashed" required="">
+            <option [ngValue]="false">false</option>
+            <option [ngValue]="true">true</option>
+          </select>
 
-        <label>Crashed</label>
+          <label>Crashed</label>
+        </div>
+        <div class="buttons">
+          <button class="blue-light mt-3 prev" (click)="previousStep()">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>Previous
+          </button>
+
+          <button class="blue-light mt-3 next" type="submit">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>Create
+          </button>
+        </div>
       </div>
-
-      <button class="blue-light mt-3 prev" (click)="previousStep()">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>Previous
-      </button>
-
-      <button class="blue-light mt-3 next" type="submit">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>Create
-      </button>
-    </div>
-  </form>
-</div>
-<div *ngIf="editMode">
-  <app-photo-preview
-    (cancelEdit)="cancelEditMode($event)"
-    [photos]="previewPhotos"
-    [addedPhotos]="addedPhotos"
-  ></app-photo-preview>
+    </form>
+  </div>
+  <div *ngIf="editMode">
+    <app-photo-preview
+      (cancelEdit)="cancelEditMode($event)"
+      [photos]="previewPhotos"
+      [addedPhotos]="addedPhotos"
+    ></app-photo-preview>
+  </div>
 </div>
