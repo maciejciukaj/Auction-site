@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { timeStamp } from 'console';
 import { ToastrService } from 'ngx-toastr';
 import { AdvertismentService } from '../_services/advertisment.service';
+import { CardService } from '../_services/card.service';
 import { ImageService } from '../_services/image.service';
 
 @Component({
@@ -29,7 +30,8 @@ export class AdvertismentsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private element: ElementRef,
-    private imageService: ImageService
+    private imageService: ImageService,
+    public cardService: CardService
   ) {
     this.scrollUp = this.router.events.subscribe((path) => {
       element.nativeElement.scrollIntoView();

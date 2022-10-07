@@ -34,6 +34,9 @@ export class CardService {
       this.imageService.delete(element.photoUrl);
     });
   }
+  numberWithSpaces(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  }
 
   getUserById(userId: any) {
     return this.http.get(this.baseUrl + 'user/getUserById/' + userId);

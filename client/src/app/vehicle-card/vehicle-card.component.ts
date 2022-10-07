@@ -23,7 +23,7 @@ export class VehicleCardComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private cardService: CardService,
+    public cardService: CardService,
     private confirmationDialogService: ConfirmationDialogService,
     config: NgbCarouselConfig,
     private _lightbox: Lightbox,
@@ -62,6 +62,7 @@ export class VehicleCardComponent implements OnInit {
       this.advertId = params.get('id');
     });
   }
+  
 
   getCard() {
     this.getId();

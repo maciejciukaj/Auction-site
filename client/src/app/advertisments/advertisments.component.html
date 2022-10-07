@@ -28,7 +28,9 @@
               </div>
               <div class="card-footer">
                 <div class="wcf-left">
-                  <span class="price">{{ adv?.price }} zł</span>
+                  <span class="price"
+                    >{{ cardService.numberWithSpaces(adv?.price) }} zł</span
+                  >
                 </div>
                 <div class="wcf-right">
                   <a
@@ -47,15 +49,11 @@
   </div>
   <div class="numbers mt-2">
     <span
-      ><button
-        
-        class="page less"
-        (click)="subPageNumber()"
-      >
+      ><button class="page less" (click)="subPageNumber()">
         <i *ngIf="checkPreviousPage()" class="fa-thin fa-arrow-left"></i>
       </button>
       <span class="pageNumber">{{ this.pageId }}</span
-      ><button  class="page more" (click)="addPageNumber()">
+      ><button class="page more" (click)="addPageNumber()">
         <i *ngIf="checkNextPage()" class="fa-thin fa-arrow-right"></i>
       </button>
     </span>
