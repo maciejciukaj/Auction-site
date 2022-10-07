@@ -80,19 +80,16 @@ namespace API.Migrations
                     b.Property<bool>("IsFinished")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("Owner")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("Start")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<long?>("UserId")
+                    b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("VehicleId")
+                    b.Property<long>("VehicleId")
                         .HasColumnType("bigint");
 
                     b.HasKey("AuctionId");
@@ -143,6 +140,9 @@ namespace API.Migrations
 
                     b.Property<string>("PhotoUrl")
                         .HasColumnType("text");
+
+                    b.Property<int>("Position")
+                        .HasColumnType("integer");
 
                     b.Property<long>("VehicleId")
                         .HasColumnType("bigint");
@@ -208,6 +208,12 @@ namespace API.Migrations
                     b.Property<float>("Engine")
                         .HasColumnType("real");
 
+                    b.Property<string>("Fuel")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Gearbox")
+                        .HasColumnType("text");
+
                     b.Property<bool>("IsCrashed")
                         .HasColumnType("boolean");
 
@@ -259,11 +265,15 @@ namespace API.Migrations
                 {
                     b.HasOne("API.Models.User", "User")
                         .WithMany("Auctions")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("API.Models.Vehicle", "Vehicle")
                         .WithMany("Auctions")
-                        .HasForeignKey("VehicleId");
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
 

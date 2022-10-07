@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API.Models
+
+namespace API.DTOs
 {
-    public class Auction
+    public class AuctionDto
     {
         public long AuctionId { get; set; }
 
@@ -25,14 +26,6 @@ namespace API.Models
 
         public string AuctionWinner{get;set;}
 
-        public ICollection<Offer> Offers {get; set;}
-
-       
-        public long UserId {get; set;}
-        public User User {get; set;}
-
-        
-        public long VehicleId {get; set;}
-        public Vehicle Vehicle {get; set;}
+        public ICollection<OfferDto> Offers {get; set;}
     }
 }

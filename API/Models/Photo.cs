@@ -11,6 +11,8 @@ namespace API.Models
 
         public string PhotoUrl {get;set;}
 
+        public int Position {get; set;}
+
         public Boolean IsMain {get; set; }
 
         public long VehicleId {get; set;}

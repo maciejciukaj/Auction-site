@@ -19,6 +19,7 @@ export class ImageService {
   dataset: Image = {
     isMain: false,
     photoUrl: '',
+    position: 0,
     vehicleId: 0,
   };
 
@@ -34,6 +35,7 @@ export class ImageService {
     this.dataset = {
       isMain: imageDetails.isMain,
       photoUrl: imageDetails.photoUrl,
+      position: imageDetails.position,
       vehicleId: imageDetails.vehicleId,
     };
     this.imageDetailList.push(this.dataset);

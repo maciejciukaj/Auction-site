@@ -19,6 +19,7 @@ namespace API.Controllers
             var newPhoto = new Photo{
                 PhotoUrl = photo.PhotoUrl,
                 IsMain = photo.IsMain,
+                Position = photo.Position,
                 VehicleId = photo.VehicleId
 
 

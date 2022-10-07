@@ -73,9 +73,9 @@
 .addButtons {
   display: flex;
   justify-content: space-evenly;
-  padding-top: 13%;
+  padding-top: 22vh;
 }
-
+/*
 .photo-container {
   width: 100%;
   display: flex;
@@ -83,11 +83,11 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
-}
+}*/
 
 .photo {
   width: 100%;
-  min-height: 90%;
+  min-height: 65vh; //was 80%
   background: url("/assets/mainPage/third.jpg") no-repeat;
   background-size: 100%;
 }
@@ -162,19 +162,23 @@ h2 {
 
   width: 80%;
   color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: flex-start;
+  text-align: center;
   height: auto;
   font-size: 30px;
   font-weight: 600;
   min-height: 220px;
 }
-.border {
-  width: 80%;
-  margin: auto;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border: solid 2px green;
+
+.elemDescTitle {
+  font-size: 35px;
+  font-weight: 700;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.elemDescRest {
+  font-size: 20px;
+  font-weight: 400;
 }

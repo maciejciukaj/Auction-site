@@ -164,6 +164,23 @@
           <label>Power</label>
         </div>
         <div class="user-box">
+          <select [(ngModel)]="vehicle.gearbox" name="gearbox" required="">
+            <option [ngValue]="automatic">Automatic</option>
+            <option [ngValue]="manual">Manual</option>
+          </select>
+
+          <label>Gearbox</label>
+        </div>
+        <div class="user-box">
+          <select [(ngModel)]="vehicle.fuel" name="fuel" required="">
+            <option *ngFor="let elem of fuel.fuelList" [ngValue]="elem">
+              {{ elem }}
+            </option>
+          </select>
+
+          <label>Fuel</label>
+        </div>
+        <div class="user-box">
           <input
             [(ngModel)]="vehicle.engine"
             placeholder="input engine capacity in cm3"

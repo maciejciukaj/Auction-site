@@ -86,7 +86,7 @@ select {
   display: block;
 }
 
-.login-box .blue-light span:nth-child(1) {
+.login-box .blue-light span:nth-child(1) .anim {
   top: 0;
   left: -100%;
   width: 100%;
@@ -105,7 +105,7 @@ select {
   }
 }
 
-.login-box .blue-light span:nth-child(2) {
+.login-box .blue-light span:nth-child(2).anim {
   top: -100%;
   right: 0;
   width: 2px;
@@ -125,7 +125,7 @@ select {
   }
 }
 
-.login-box .blue-light span:nth-child(3) {
+.login-box .blue-light span:nth-child(3) .anim {
   bottom: 0;
   right: -100%;
   width: 100%;
@@ -145,7 +145,7 @@ select {
   }
 }
 
-.login-box .blue-light span:nth-child(4) {
+.login-box .blue-light span:nth-child(4) .anim {
   bottom: -100%;
   left: 0;
   width: 2px;

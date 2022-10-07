@@ -12,16 +12,13 @@
   <div class="card">
     <div class="carousel mt-3">
       <ngb-carousel class="mt-2">
-        <ng-template
-          ngbSlide
-          *ngFor="let image of vehicle.photos; let i = index"
-        >
+        <ng-template ngbSlide *ngFor="let image of album; let i = index">
           <div class="wrapper">
             <img
-              src="{{ image.photoUrl }}"
-              alt="{{ i }}"
+              src="{{ image.src }}"
+              alt="{{ image.position }}"
               style="width: 100%; height: 66vh"
-              (click)="open(i)"
+              (click)="open(image.position)"
             />
           </div>
           <!-- <div class="carousel-caption">
@@ -56,9 +53,7 @@
         </tr>
         <tr>
           <th style="width: 20%">Mileage:</th>
-          <th class="details" style="width: 8440%">
-            {{ vehicle?.mileage }} km
-          </th>
+          <th class="details">{{ vehicle?.mileage }} km</th>
         </tr>
         <tr>
           <th>Power:</th>
@@ -83,7 +78,7 @@
   <div class="description mt-3">
     {{ card.description }}
   </div>
-  <div class="owner">{{ card}}</div>
+  <div class="owner">{{ card }}</div>
 </div>
 <div class="toolbar">
   <button [routerLink]="'/myAuc'" class="button-19 mr-5">
@@ -92,10 +87,18 @@
   <button [routerLink]="'/adv/1'" class="button-19 mr-5">
     Back to advertisments
   </button>
-  <button [routerLink]="'/adv/1'" class="button-19 mr-5">
+  <button
+    [routerLink]="'/adv/1'"
+    class="button-19 mr-5"
+    style="background-color: yellow"
+  >
     Edit advertisment
   </button>
-  <button (click)="openConfirmationDialog()" class="button-19">
-    Delete advertisment ❌
+  <button
+    (click)="openConfirmationDialog()"
+    class="button-19"
+    style="background-color: red"
+  >
+    Delete advertisment
   </button>
 </div>

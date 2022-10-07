@@ -2,7 +2,8 @@ export interface Vehicle {
   type: string;
   brand: string;
   model: string;
-
+  fuel: string;
+  gearbox: string;
   color: string;
   power: number;
   engine: number;
@@ -16,6 +17,8 @@ export class VehicleClass implements Vehicle {
   brand: string = '';
   model: string = '';
   color: string = '';
+  fuel: string = '';
+  gearbox: string = '';
   power: number = null;
   engine: number = null;
   isCrashed: boolean = false;
@@ -94,4 +97,8 @@ export class ColorClass {
     'purple',
     'pink',
   ];
+}
+
+export class FuelClass {
+  fuelList: any = ['Petrol', 'Diesel', 'Gas'];
 }

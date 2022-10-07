@@ -3,5 +3,7 @@ export interface Image {
 
   photoUrl: string;
 
+  position: number;
+
   vehicleId: number;
 }

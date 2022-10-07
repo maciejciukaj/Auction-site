@@ -9,6 +9,7 @@ import { Advertisment, AdvertismentClass } from '../_models/advertisment';
 import {
   BrandClass,
   ColorClass,
+  FuelClass,
   TypeClass,
   Vehicle,
   VehicleClass,
@@ -37,12 +38,14 @@ export class AdvertFormComponent implements OnInit {
   types = new TypeClass();
   brands = new BrandClass();
   colors = new ColorClass();
+  fuel = new FuelClass();
 
   advertisment = new AdvertismentClass();
 
   formTemplate = new FormGroup({
     isMain: new FormControl(false),
     photoUrl: new FormControl(''),
+    position: new FormControl(0),
     vehicleId: new FormControl(0),
   });
 
@@ -113,7 +116,7 @@ export class AdvertFormComponent implements OnInit {
     }
   }
 
-  savePhoto(formValue, file: File, main: boolean) {
+  savePhoto(formValue, file: File, main: boolean, position: number) {
     this.isSubmitter = true;
     // if (this.formTemplate.valid) {
     var filePath = `images/${file.name
@@ -129,6 +132,7 @@ export class AdvertFormComponent implements OnInit {
           fileRef.getDownloadURL().subscribe((url) => {
             formValue['photoUrl'] = url;
             formValue['isMain'] = main;
+            formValue['position'] = position;
             console.log(formValue);
             this.service.addPhoto(formValue).subscribe({
               next: (response) => console.log('dodano zdjecie'),
@@ -153,9 +157,9 @@ export class AdvertFormComponent implements OnInit {
       this.addedPhotos.forEach(
         (elem, ind) => {
           if (ind == 0) {
-            this.savePhoto(this.formTemplate.value, elem, true);
+            this.savePhoto(this.formTemplate.value, elem, true, ind);
           } else {
-            this.savePhoto(this.formTemplate.value, elem, false);
+            this.savePhoto(this.formTemplate.value, elem, false, ind);
           }
         },
         this.toastr.success('added'),
@@ -171,6 +175,7 @@ export class AdvertFormComponent implements OnInit {
     this.formTemplate.setValue({
       isMain: false,
       photoUrl: '',
+      position: 0,
       vehicleId: 0,
     });
     this.imgSrc = '/assets/img_placeholder/img_placeholder.png';

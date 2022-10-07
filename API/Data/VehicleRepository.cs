@@ -47,11 +47,7 @@ namespace API.Data
             _context.Remove(vehicle);
             await _context.SaveChangesAsync();
             return vehicle;
-            
-            
-            
 
-          
         }
     }
 }

@@ -86,6 +86,8 @@ namespace API.Controllers
                 Model = vehicle.Model,
                 Color = vehicle.Color,
                 Power = vehicle.Power,
+                Fuel = vehicle.Fuel,
+                Gearbox = vehicle.Gearbox,
                 Engine = vehicle.Engine,
                 IsCrashed = vehicle.IsCrashed,
                 Mileage = vehicle.Mileage,

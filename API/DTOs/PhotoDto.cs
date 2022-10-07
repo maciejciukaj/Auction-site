@@ -11,6 +11,8 @@ namespace API.DTOs
 
         public string PhotoUrl {get; set;}
 
+        public int Position {get; set;}
+
         public Boolean IsMain {get; set;}
     }
 }

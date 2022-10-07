@@ -17,7 +17,7 @@ export class VehicleCardComponent implements OnInit {
   advertId: any;
   card: any = {};
   vehicle: any = {};
-  photo: PhotoLightbox = { src: '' };
+  photo: PhotoLightbox = { src: '', position: 0 };
   album: any = [];
   owner: any;
 
@@ -38,11 +38,7 @@ export class VehicleCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   
-
     this.getCard();
-   
-    
   }
   open(index: number): void {
     // open lightbox
@@ -52,10 +48,13 @@ export class VehicleCardComponent implements OnInit {
   saveLightboxPhotos() {
     for (let i = 0; i < this.vehicle.photos.length; i++) {
       this.photo.src = this.vehicle.photos[i].photoUrl;
+      this.photo.position = this.vehicle.photos[i].position;
       this.album.push(this.photo);
-      this.photo = { src: '' };
+      this.photo = { src: '', position: 0 };
     }
-    
+
+    this.album.sort((a, b) => a.position - b.position);
+    console.log(this.album);
   }
 
   getId() {
@@ -74,7 +73,6 @@ export class VehicleCardComponent implements OnInit {
         .subscribe((response) => {
           this.vehicle = response;
           this.saveLightboxPhotos();
-          
         });
     });
   }
