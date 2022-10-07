@@ -62,7 +62,7 @@ namespace API.Controllers
         */
 
         [HttpDelete("deleteVehicle/{id}")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<ActionResult<Vehicle>> DeleteVehicleById(long id){
             try{
              var vehicle =  await _vehicleRepository.GetVehicleByIdAsync(id);
@@ -74,7 +74,22 @@ namespace API.Controllers
       
         }
 
-      
+        [HttpGet("getMainPhoto/{id}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<PhotoDto>> GetMainPhoto(long id){
+           
+            var vehicle =  await _vehicleRepository.GetVehicleByIdAsync(id);
+            var mappedVehicle =  _mapper.Map<VehicleDto>(vehicle);
+            foreach(var photo in mappedVehicle.Photos){
+                if(photo.IsMain){
+                    return Ok(photo);
+                }
+            }
+            return BadRequest("Can't find photos");
+            
+             
+        }
+
 
         [HttpPost("addVehicles")]
         [Authorize]

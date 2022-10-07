@@ -12,7 +12,7 @@ import { Image } from '../_models/image';
   providedIn: 'root',
 })
 export class ImageService {
-  baseUrl = 'https://localhost:5001/api/photo/';
+  baseUrl = 'https://localhost:5001/api/';
   imageDetailList: AngularFireList<any>;
   imageElement: Image;
 
@@ -23,7 +23,11 @@ export class ImageService {
     vehicleId: 0,
   };
 
-  constructor(private firebase: AngularFireDatabase, private http: HttpClient, private storage: AngularFireStorage) {
+  constructor(
+    private firebase: AngularFireDatabase,
+    private http: HttpClient,
+    private storage: AngularFireStorage
+  ) {
     this.getImageDetailList();
   }
 
@@ -42,7 +46,7 @@ export class ImageService {
   }
 
   addPhoto(model: any) {
-    return this.http.post(this.baseUrl + 'addPhoto/', model);
+    return this.http.post(this.baseUrl + 'photo/addPhoto/', model);
   }
   searchForMain(photos: any) {
     for (let i = 0; i < photos?.length; i++) {
@@ -54,6 +58,7 @@ export class ImageService {
   delete(downloadUrl) {
     return this.storage.storage.refFromURL(downloadUrl).delete();
   }
-  
-  
+  getPhotoByVehicleId(id: any) {
+    return this.http.get(this.baseUrl + 'vehicle/getMainPhoto/' + id);
+  }
 }

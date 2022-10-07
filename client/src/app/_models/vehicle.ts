@@ -81,6 +81,14 @@ export class BrandClass {
     'Dacia',
     'Mitsubishi',
     'Lancia',
+    'Sherp',
+    'Scania',
+    'Isuzu',
+    'Daihatsu',
+    'Bugatti',
+    'Toyota',
+    'Jeep',
+    'Jaguar',
   ];
 }
 export class ColorClass {
@@ -101,4 +109,7 @@ export class ColorClass {
 
 export class FuelClass {
   fuelList: any = ['Petrol', 'Diesel', 'Gas'];
+}
+export class GearboxClass {
+  gearboxList: any = ['Automatic', 'Manual'];
 }

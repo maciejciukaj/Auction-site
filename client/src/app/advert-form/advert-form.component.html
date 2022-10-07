@@ -165,8 +165,9 @@
         </div>
         <div class="user-box">
           <select [(ngModel)]="vehicle.gearbox" name="gearbox" required="">
-            <option [ngValue]="automatic">Automatic</option>
-            <option [ngValue]="manual">Manual</option>
+            <option *ngFor="let elem of gearbox.gearboxList" [ngValue]="elem">
+              {{ elem }}
+            </option>
           </select>
 
           <label>Gearbox</label>

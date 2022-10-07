@@ -10,6 +10,7 @@ import {
   BrandClass,
   ColorClass,
   FuelClass,
+  GearboxClass,
   TypeClass,
   Vehicle,
   VehicleClass,
@@ -39,6 +40,7 @@ export class AdvertFormComponent implements OnInit {
   brands = new BrandClass();
   colors = new ColorClass();
   fuel = new FuelClass();
+  gearbox = new GearboxClass();
 
   advertisment = new AdvertismentClass();
 
