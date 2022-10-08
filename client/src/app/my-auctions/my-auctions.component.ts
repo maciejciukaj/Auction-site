@@ -41,7 +41,7 @@ export class MyAuctionsComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.posts = response;
-          console.log(this.posts);
+          
           this.getMainPhotos(this.posts);
           this.getPages();
         },
@@ -62,7 +62,7 @@ export class MyAuctionsComponent implements OnInit {
         .getPhotoByVehicleId(post.vehicleId)
         .subscribe((response) => {
           var photo: any = response;
-          console.log(photo.photoUrl);
+         
 
           this.photos.push(response);
           this.sortPhotos();

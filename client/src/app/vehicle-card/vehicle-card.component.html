@@ -80,7 +80,25 @@
   <div class="description mt-3">
     {{ card.description }}
   </div>
-  <div class="owner">{{ card }}</div>
+  <div class="owner">
+    <div type="button" class="ownerTitle collapsible" (click)="collapse()">
+      Owner
+      <img style="width: 50px" src="./assets/gif/dbGif.gif" />
+    </div>
+    <div class="info content">
+      <img
+        style="width: 35px"
+        class="mr-3"
+        src="./assets/user_icon/user_icon.svg"
+      />{{ owner.firstName }}
+      <img
+        style="width: 35px"
+        class="ml-5"
+        src="./assets/user_icon/phone_icon.jpg"
+      />
+      {{ owner.phoneNumber }}
+    </div>
+  </div>
 </div>
 <div class="toolbar">
   <button [routerLink]="'/myAuc'" class="button-19 mr-5">

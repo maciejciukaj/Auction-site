@@ -4,15 +4,20 @@
     You have no active advertisments or auctions
   </div>
   <div *ngFor="let post of posts | slice: min:max; let i = index" class="">
-    <button
-      class="border-gradient border-gradient-purple elem"
-      [routerLink]="['/vehicle', post?.advertismentId]"
-    >
+    <button class="elem" [routerLink]="['/vehicle', post?.advertismentId]">
       <div class="photo">
-        <img src="{{ photos[i + min]?.photoUrl }}" alt="Product" />
-        
+        <img
+          class="border-gradient border-gradient-purple mr-5"
+          src="{{ photos[i + min]?.photoUrl }}"
+          alt="Product"
+        />
+        <span class="mr-3 title">{{ post.title }}</span>
       </div>
-      {{ post.title }}, price: {{ cardService.numberWithSpaces(post.price) }} zł
+      <div class="details mt-4">
+        <span class="price">
+          {{ cardService.numberWithSpaces(post.price) }} zł</span
+        >
+      </div>
     </button>
   </div>
   <div *ngIf="posts?.length > 5" class="numbers mt-2">

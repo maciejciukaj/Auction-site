@@ -35,7 +35,7 @@ export class CardService {
     });
   }
   numberWithSpaces(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   }
 
   getUserById(userId: any) {

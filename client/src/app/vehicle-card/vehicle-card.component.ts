@@ -19,7 +19,7 @@ export class VehicleCardComponent implements OnInit {
   vehicle: any = {};
   photo: PhotoLightbox = { src: '', position: 0 };
   album: any = [];
-  owner: any;
+  owner: any = {};
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -62,17 +62,21 @@ export class VehicleCardComponent implements OnInit {
       this.advertId = params.get('id');
     });
   }
-  
 
   getCard() {
     this.getId();
     this.cardService.getCardById(this.advertId).subscribe((response) => {
       this.card = response;
-      console.log(response);
+      this.cardService.getUserById(this.card.userId).subscribe((response) => {
+        this.owner = response;
+        console.log(this.owner);
+      });
       this.cardService
         .getVehicleById(this.card.advertismentId)
         .subscribe((response) => {
           this.vehicle = response;
+          //this.cardService.getVehicleById
+
           this.saveLightboxPhotos();
         });
     });
@@ -99,5 +103,21 @@ export class VehicleCardComponent implements OnInit {
           'User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'
         )
       );
+  }
+
+  collapse() {
+    var coll = document.getElementsByClassName('collapsible');
+
+    for (var i = 0; i < coll.length; i++) {
+      coll[i].addEventListener('click', function () {
+        this.classList.toggle('active');
+        var content = this.nextElementSibling;
+        if (content.style.display === 'block') {
+          content.style.display = 'none';
+        } else {
+          content.style.display = 'block';
+        }
+      });
+    }
   }
 }
