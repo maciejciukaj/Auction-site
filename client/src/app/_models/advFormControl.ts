@@ -1,7 +1,7 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 export class advFormControl {
-  editForm = new FormGroup({
+  advDetails = new FormGroup({
     title: new FormControl(null, [
       Validators.minLength(10),
       Validators.maxLength(40),
@@ -21,23 +21,24 @@ export class advFormControl {
       Validators.maxLength(5000),
     ]),
     productionYear: new FormControl(null, [
-      Validators.minLength(50),
-      Validators.maxLength(5000),
+      Validators.pattern(/(?:(?:19|20)[0-9]{2})/),
     ]),
     color: new FormControl(null, [Validators.required]),
     mileage: new FormControl(null, [
-      Validators.minLength(50),
-      Validators.maxLength(5000),
+      Validators.minLength(1),
+      Validators.maxLength(6),
     ]),
     power: new FormControl(null, [
-      Validators.minLength(50),
-      Validators.maxLength(5000),
+      Validators.minLength(2),
+      Validators.maxLength(4),
     ]),
     gearbox: new FormControl(null, [Validators.required]),
     fuel: new FormControl(null, [Validators.required]),
     engine: new FormControl(null, [
-      Validators.minLength(50),
-      Validators.maxLength(5000),
+      Validators.minLength(3),
+      Validators.maxLength(4),
     ]),
+    isCrashed: new FormControl(false, [Validators.required]),
   });
 }
+// (/[2]{1}[])

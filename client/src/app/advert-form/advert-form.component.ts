@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { finalize } from 'rxjs/operators';
 import { Advertisment, AdvertismentClass } from '../_models/advertisment';
+import { advFormControl } from '../_models/advFormControl';
 import {
   BrandClass,
   ColorClass,
@@ -44,6 +45,9 @@ export class AdvertFormComponent implements OnInit {
 
   advertisment = new AdvertismentClass();
 
+  advDetails = new advFormControl();
+  advControl = this.advDetails.advDetails;
+
   formTemplate = new FormGroup({
     isMain: new FormControl(false),
     photoUrl: new FormControl(''),
@@ -63,7 +67,6 @@ export class AdvertFormComponent implements OnInit {
   ngOnInit(): void {
     this.resetForm();
     this.brands.brandList.sort();
-    console.log(this.types);
   }
 
   nextStep() {
@@ -71,8 +74,8 @@ export class AdvertFormComponent implements OnInit {
     if (this.step == 3) {
       this.router.navigateByUrl('/main');
     }
-    console.log(this.previewPhotos);
-    console.log(this.addedPhotos);
+    // console.log(this.previewPhotos);
+    // console.log(this.addedPhotos);
   }
 
   previousStep() {
@@ -186,16 +189,21 @@ export class AdvertFormComponent implements OnInit {
   }
 
   createAdvertisment() {
-    this.accountService.currentUser$.subscribe((val) => (this.name = val));
-    this.http
-      .get('https://localhost:5001/api/user/getUsers/' + this.name.userName)
-      .subscribe({
-        next: (response) => (
-          (this.pass = response),
-          ((this.vehicle.userId = this.pass.userId), this.addVehicle()) //tu ma byc jeszcze wywolanie funkcji add Vehicle, ogarnac cascade i walidacje hasla
-        ),
-        error: (error) => console.log(error),
-      });
+    if (this.advControl.valid) {
+      this.splitValues();
+      this.accountService.currentUser$.subscribe((val) => (this.name = val));
+      this.http
+        .get('https://localhost:5001/api/user/getUsers/' + this.name.userName)
+        .subscribe({
+          next: (response) => (
+            (this.pass = response),
+            ((this.vehicle.userId = this.pass.userId), this.addVehicle()) //tu ma byc jeszcze wywolanie funkcji add Vehicle, ogarnac cascade i walidacje hasla
+          ),
+          error: (error) => console.log(error),
+        });
+    } else {
+      this.toastr.error('All fields are required');
+    }
   }
 
   addVehicle() {
@@ -215,6 +223,13 @@ export class AdvertFormComponent implements OnInit {
         error: (error) => console.log(error),
       });
   }
+  checkPhotos() {
+    if (this.addedPhotos.length > 0) {
+      this.nextStep();
+    } else {
+      this.toastr.warning('Add at least one photo');
+    }
+  }
 
   addAdvertisment() {
     this.http
@@ -229,8 +244,10 @@ export class AdvertFormComponent implements OnInit {
       });
   }
   showLog() {
+    this.splitValues();
     console.log(this.advertisment);
     console.log(this.vehicle);
+    //console.log(this.advControl.value);
   }
 
   editToggle() {
@@ -241,8 +258,27 @@ export class AdvertFormComponent implements OnInit {
   cancelEditMode(event: boolean) {
     this.editMode = event;
   }
+  get f() {
+    return this.advControl.controls;
+  }
 
   formControls() {
     return this.formTemplate['controls'];
+  }
+  splitValues() {
+    this.advertisment.title = this.advControl.get('title').value;
+    this.advertisment.price = this.advControl.get('price').value;
+    this.advertisment.description = this.advControl.get('description').value;
+    this.vehicle.brand = this.advControl.get('brand').value;
+    this.vehicle.model = this.advControl.get('model').value;
+    this.vehicle.type = this.advControl.get('type').value;
+    this.vehicle.productionYear = this.advControl.get('productionYear').value;
+    this.vehicle.engine = this.advControl.get('engine').value;
+    this.vehicle.mileage = this.advControl.get('mileage').value;
+    this.vehicle.gearbox = this.advControl.get('gearbox').value;
+    this.vehicle.color = this.advControl.get('color').value;
+    this.vehicle.isCrashed = this.advControl.get('isCrashed').value;
+    this.vehicle.power = this.advControl.get('power').value;
+    this.vehicle.fuel = this.advControl.get('fuel').value;
   }
 }

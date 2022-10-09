@@ -18,6 +18,7 @@ export class MyAuctionsComponent implements OnInit {
   min: number = 0;
   photos: any = [];
   capslockOn: boolean;
+  
   constructor(
     private http: HttpClient,
     public accountService: AccountService,
@@ -41,7 +42,7 @@ export class MyAuctionsComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.posts = response;
-          
+
           this.getMainPhotos(this.posts);
           this.getPages();
         },
@@ -62,7 +63,6 @@ export class MyAuctionsComponent implements OnInit {
         .getPhotoByVehicleId(post.vehicleId)
         .subscribe((response) => {
           var photo: any = response;
-         
 
           this.photos.push(response);
           this.sortPhotos();
