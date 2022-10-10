@@ -4,38 +4,43 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Interfaces;
 using API.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public class AuctionRepository : IAuctionService
-    {
+    public class AuctionRepository : IAuctionRepository
+    { 
+       
+
+
 
         private readonly AuctionContext _context;
 
         public AuctionRepository(AuctionContext context){
             _context = context;
         }
-        public void AddVehicle(Auction auction)
+
+        public void AddAuction(Auction auction)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Auction> DeleteVehicle(Auction auction)
+        public Task<Auction> DeleteAuction(Auction auction)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Auction> GetVehicleByIdAsync(long id)
+        public async Task<Auction> GetAuctionByIdAsync(long id)
         {
-            throw new NotImplementedException();
+            return await _context.Auctions.Include(o => o.Offers).FirstOrDefaultAsync(a => a.AuctionId == id);
         }
 
-        public Task<IEnumerable<Auction>> GetVehiclesAsync()
+        public async Task<IEnumerable<Auction>> GetAuctionsAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Auctions.Include(o => o.Offers).ToListAsync();
         }
 
-        public Task<bool> SaveAllAsyc()
+        public Task<bool> SaveAllAsync()
         {
             throw new NotImplementedException();
         }
