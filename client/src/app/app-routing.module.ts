@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdvertFormComponent } from './advert-form/advert-form.component';
 import { AdvertismentsComponent } from './advertisments/advertisments.component';
+import { AuctionFormComponent } from './auction-form/auction-form.component';
 import { AuctionsComponent } from './auctions/auctions.component';
 import { HomeComponent } from './home/home.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: 'advForm', component: AdvertFormComponent },
       { path: 'myAuc', component: MyAuctionsComponent },
       { path: 'vehicle/:id', component: VehicleCardComponent },
+      { path: 'aucForm', component: AuctionFormComponent },
     ],
   },
   { path: '**', component: HomeComponent, pathMatch: 'full' },

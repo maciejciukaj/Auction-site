@@ -1,0 +1,254 @@
+<div class="advForm">
+  <div *ngIf="!editMode" class="login-box mt-5">
+    <form
+      autocomplete="on"
+      [formGroup]="formTemplate"
+      (ngSubmit)="checkPhotos()"
+    >
+      <div class="step0" *ngIf="step == 0">
+        <h2>Step 1 - Add vehicle photos</h2>
+        <div class="user-box">
+          <input
+            formControlName="photoUrl"
+            (change)="showPreview($event)"
+            #fileUploader
+            type="file"
+            id="avatar"
+            accept="image/png,image/jpg,image/jpeg"
+            required=""
+          />
+          <div class="text-center">
+            <img
+              class="photoPreview"
+              [src]="imgSrc"
+              width="260px"
+              height="auto"
+              (click)="fileUploader.click()"
+            />
+          </div>
+          <label>Your photos</label>
+        </div>
+        <button
+          type="button"
+          class="blue-light float-left mt-5"
+          (click)="addPhotoToPreview()"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>Add photo
+        </button>
+        <button
+          type="button"
+          class="blue-light center mt-5 mr-5"
+          (click)="editToggle()"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>Preview photos
+        </button>
+        <button class="blue-light float-right mt-5" type="submit">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>Save
+        </button>
+      </div>
+    </form>
+
+    <form autocomplete="off" [formGroup]="aucControl" (ngSubmit)="nextStep()">
+      <div class="step1 mb-1" *ngIf="step == 1">
+        <h2>Step 2</h2>
+        <div class="user-box">
+          <input formControlName="title" type="text" name="title" required="" />
+          <label>Title</label>
+        </div>
+        <div *ngIf="f.title.errors" class="error">
+          <div *ngIf="f.title.errors.maxlength || f.title.errors.minlength">
+            Wrong title !
+          </div>
+        </div>
+        <div class="user-box">
+          <select formControlName="type" name="type" required="">
+            <option *ngFor="let elem of types.typeList" [ngValue]="elem">
+              {{ elem }}
+            </option>
+          </select>
+          <label>Type</label>
+        </div>
+
+        <div class="user-box">
+          <select formControlName="brand" name="brand" required="">
+            <option *ngFor="let elem of brands.brandList" [ngValue]="elem">
+              {{ elem }}
+            </option>
+          </select>
+          <label>Brand</label>
+        </div>
+
+        <div class="user-box">
+          <input formControlName="model" type="text" name="model" required="" />
+          <label>Model</label>
+        </div>
+        <div *ngIf="f.model.errors" class="error">
+          <div *ngIf="f.model.errors.maxlength || f.model.errors.minlength">
+            1 - 15 characters !
+          </div>
+        </div>
+        <div class="user-box">
+          <select formControlName="duration" name="duration" required="">
+            <option *ngFor="let elem of duration.durationList" [ngValue]="elem">
+              {{ elem }} day(s)
+            </option>
+          </select>
+          <label>Duration</label>
+        </div>
+        <div class="user-box">
+          <input formControlName="price" type="text" name="price" required="" />
+          <label>Price</label>
+        </div>
+        <div *ngIf="f.price.errors" class="error">
+          <div *ngIf="f.price.errors.minlength">Min. price 100</div>
+          <div *ngIf="f.price.errors.maxlength">Price to high</div>
+        </div>
+        <div class="user-box mt-3">
+          <textarea formControlName="description" name="description">
+          </textarea>
+          <label>Description</label>
+        </div>
+        <div *ngIf="f.description.errors" class="error">
+          <div *ngIf="f.description.errors.minlength">Min. 50 characters !</div>
+          <div *ngIf="f.description.errors.maxlength">
+            Max. 5000 characters !
+          </div>
+        </div>
+        <div class="buttons">
+          <button class="blue-light mt-3 prev" (click)="previousStep()">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>Previous
+          </button>
+          <button class="blue-light mt-3 next" type="submit">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>Next
+          </button>
+        </div>
+      </div>
+    </form>
+    <form
+      autocomplete="off"
+      [formGroup]="aucControl"
+      (ngSubmit)="createAuction()"
+    >
+      <div class="step2" *ngIf="step == 2">
+        <h2>Step 3</h2>
+
+        <div class="user-box">
+          <input
+            formControlName="productionYear"
+            type="text"
+            name="productionYear"
+            required=""
+          />
+          <label>Production year</label>
+        </div>
+        <div *ngIf="f.productionYear.errors" class="error">
+          <div *ngIf="f.productionYear.errors.pattern">Wrong date !</div>
+        </div>
+        <div class="user-box">
+          <select formControlName="color" name="color" required="">
+            <option *ngFor="let elem of colors.colorList" [ngValue]="elem">
+              {{ elem }}
+            </option>
+          </select>
+          <label>Color</label>
+        </div>
+        <div class="user-box">
+          <input
+            formControlName="mileage"
+            type="text"
+            name="mileage"
+            required=""
+          />
+          <label>Mileage</label>
+        </div>
+        <div *ngIf="f.mileage.errors" class="error">
+          <div *ngIf="f.mileage.errors.maxlength || f.mileage.errors.minlength">
+            Invalid mileage !
+          </div>
+        </div>
+        <div class="user-box">
+          <input formControlName="power" type="text" name="power" required="" />
+          <label>Power</label>
+        </div>
+        <div *ngIf="f.power.errors" class="error">
+          <div *ngIf="f.power.errors.maxlength || f.power.errors.minlength">
+            Invalid engine power !
+          </div>
+        </div>
+        <div class="user-box">
+          <select formControlName="gearbox" name="gearbox" required="">
+            <option *ngFor="let elem of gearbox.gearboxList" [ngValue]="elem">
+              {{ elem }}
+            </option>
+          </select>
+
+          <label>Gearbox</label>
+        </div>
+        <div class="user-box">
+          <select formControlName="fuel" name="fuel" required="">
+            <option *ngFor="let elem of fuel.fuelList" [ngValue]="elem">
+              {{ elem }}
+            </option>
+          </select>
+
+          <label>Fuel</label>
+        </div>
+        <div class="user-box">
+          <input
+            formControlName="engine"
+            placeholder="input engine capacity in cm3"
+            type="text"
+            name="engine"
+            required=""
+          />
+          <label>Engine</label>
+        </div>
+        <div class="user-box">
+          <select formControlName="isCrashed" name="isCrashed" required="">
+            <option [ngValue]="false">false</option>
+            <option [ngValue]="true">true</option>
+          </select>
+
+          <label>Crashed</label>
+        </div>
+        <div class="buttons">
+          <button class="blue-light mt-3 prev" (click)="previousStep()">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>Previous
+          </button>
+
+          <button class="blue-light mt-3 next" type="submit">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>Create
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="editMode">
+    <app-photo-preview
+      (cancelEdit)="cancelEditMode($event)"
+      [photos]="previewPhotos"
+      [addedPhotos]="addedPhotos"
+    ></app-photo-preview>
+  </div>
+</div>

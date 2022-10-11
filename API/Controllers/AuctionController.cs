@@ -29,7 +29,7 @@ namespace API.Controllers
         var auctions = await _auctionRepository.GetAuctionsAsync();
 
         var auctionsToReturn =  _mapper.Map<IEnumerable<AuctionDto>>(auctions);
-
+        
         return  Ok(auctionsToReturn);
         
     
@@ -49,18 +49,18 @@ namespace API.Controllers
 
 
         [HttpPost("addAuction")]
-        [Authorize]
-        public async Task<ActionResult<Auction>> AddAuction(Auction auction){
+        [AllowAnonymous]
+        public async Task<ActionResult<Auction>> AddAuction(AuctionFormDto auction){
             
              var newAuction = new Auction{
                Title = auction.Title,
                Description = auction.Description,
-               CurrentPrice = auction.CurrentPrice,
-               CurrentBidder = auction.CurrentBidder,
-               Start = auction.Start,
-               End = auction.End,
-               IsFinished = auction.IsFinished,
-               AuctionWinner = auction.AuctionWinner,
+               CurrentPrice =auction.CurrentPrice,
+               CurrentBidder = null,
+               Start = DateTime.Now,
+               End = DateTime.Now.AddDays(auction.Duration),
+               IsFinished = false,
+               AuctionWinner = null,
                UserId = auction.UserId,
                VehicleId = auction.VehicleId
             };

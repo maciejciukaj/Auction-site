@@ -22,7 +22,7 @@ namespace API.Data
 
         public void AddAuction(Auction auction)
         {
-            throw new NotImplementedException();
+            _context.Auctions.Add(auction);
         }
 
         public Task<Auction> DeleteAuction(Auction auction)
@@ -40,14 +40,14 @@ namespace API.Data
             return await _context.Auctions.Include(o => o.Offers).ToListAsync();
         }
 
-        public Task<bool> SaveAllAsync()
+        public async Task<bool> SaveAllAsync()
         {
-            throw new NotImplementedException();
+           return await _context.SaveChangesAsync() > 0;
         }
 
         public void Update(Auction auction)
         {
-            throw new NotImplementedException();
+            _context.Entry(auction).State = EntityState.Modified;
         }
     }
 }

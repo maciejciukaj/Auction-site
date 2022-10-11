@@ -24,7 +24,7 @@ namespace API.Data
 
         public async Task<User> GetUserByIdAsync(long id)
         {
-            return await _context.Users.Include(a => a.Advertisments).Include(a => a.Vehicles).AsSplitQuery().FirstOrDefaultAsync(i => i.UserId == id);
+            return await _context.Users.Include(a => a.Advertisments).Include(a => a.Vehicles).Include(a =>a.Auctions).AsSplitQuery().FirstOrDefaultAsync(i => i.UserId == id);
         }
 
         public async Task<User> GetUserByUsernameAsync(string username)

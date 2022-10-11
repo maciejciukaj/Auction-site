@@ -22,9 +22,9 @@ namespace API.DTOs
         public string PhoneNumber {get; set;}
 
 
-        public  ICollection<Offer> Offers {get; set;}
+        public  ICollection<OfferDto> Offers {get; set;}
 
-        public ICollection<Auction> Auctions {get; set;}
+        public ICollection<AuctionDto> Auctions {get; set;}
 
         public ICollection<VehicleDto> Vehicles {get; set;}
 

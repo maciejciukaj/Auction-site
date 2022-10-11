@@ -33,6 +33,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LightboxModule } from 'ngx-lightbox';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogService } from './confirmation-dialog/confirmation-dialog.service';
+import { AuctionFormComponent } from './auction-form/auction-form.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ConfirmationDialogService } from './confirmation-dialog/confirmation-di
     PhotoPreviewComponent,
     VehicleCardComponent,
     ConfirmationDialogComponent,
+    AuctionFormComponent,
   ],
   imports: [
     BrowserModule,

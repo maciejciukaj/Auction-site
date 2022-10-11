@@ -19,12 +19,12 @@ namespace API.Data
         
             public async Task<Vehicle> GetVehicleByIdAsync(long id)
         {
-             return await _context.Vehicles.Include(a => a.Advertisments).Include(a => a.Photos).AsSplitQuery().FirstOrDefaultAsync(i => i.VehicleId == id);
+             return await _context.Vehicles.Include(a => a.Advertisments).Include(a => a.Photos).Include(a => a.Auctions).AsSplitQuery().FirstOrDefaultAsync(i => i.VehicleId == id);
         }
 
         public async Task<IEnumerable<Vehicle>> GetVehiclesAsync()
         {
-            return await _context.Vehicles.Include(a => a.Advertisments).Include(a => a.Photos).AsSplitQuery().ToListAsync();
+            return await _context.Vehicles.Include(a => a.Advertisments).Include(a => a.Photos).Include(a => a.Auctions).AsSplitQuery().ToListAsync();
         }
 
         public async Task<bool> SaveAllAsyc()

@@ -80,7 +80,7 @@ namespace API.Controllers
         
 
         [HttpGet("getUsers/{name}")]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<ActionResult<MemberDto>> GetUser(string name){
             
             var user =  await _userRepository.GetUserByUsernameAsync(name);
