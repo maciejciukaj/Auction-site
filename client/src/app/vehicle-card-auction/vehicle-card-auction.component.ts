@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Lightbox, LightboxConfig } from 'ngx-lightbox';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-dialog.service';
 import { PhotoLightbox } from '../_models/lightbox';
-
+import { AuctionService } from '../_services/auction.service';
 import { CardService } from '../_services/card.service';
+import { LightboxOverlayComponent } from 'ngx-lightbox/lightbox-overlay.component';
 
 @Component({
-  selector: 'app-vehicle-card',
-  templateUrl: './vehicle-card.component.html',
-  styleUrls: ['./vehicle-card.component.scss'],
+  selector: 'app-vehicle-card-auction',
+  templateUrl: './vehicle-card-auction.component.html',
+  styleUrls: ['./vehicle-card-auction.component.scss'],
   providers: [NgbCarouselConfig],
 })
-export class VehicleCardComponent implements OnInit {
-  advertId: any;
+export class VehicleCardAuctionComponent implements OnInit {
+  auctionId: any;
   card: any = {};
   vehicle: any = {};
   photo: PhotoLightbox = { src: '', position: 0 };
@@ -23,11 +24,13 @@ export class VehicleCardComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    public cardService: CardService,
+
     private confirmationDialogService: ConfirmationDialogService,
     config: NgbCarouselConfig,
     private _lightbox: Lightbox,
+    private auctionService: AuctionService,
     private _lightboxConfig: LightboxConfig,
+    public cardService: CardService,
     private router: Router
   ) {
     config.interval = 5000;
@@ -59,21 +62,23 @@ export class VehicleCardComponent implements OnInit {
 
   getId() {
     this.activatedRoute.paramMap.subscribe((params) => {
-      this.advertId = params.get('id');
+      this.auctionId = params.get('id');
     });
-    console.log(this.advertId);
+   
   }
 
   getCard() {
     this.getId();
-    this.cardService.getCardById(this.advertId).subscribe((response) => {
+    this.cardService.getAuctionById(this.auctionId).subscribe((response) => {
       this.card = response;
+     
+
       this.cardService.getUserById(this.card.userId).subscribe((response) => {
         this.owner = response;
         console.log(this.owner);
       });
       this.cardService
-        .getVehicleById(this.card.advertismentId)
+        .getVehicleById(this.card.vehicleId)
         .subscribe((response) => {
           this.vehicle = response;
           //this.cardService.getVehicleById
@@ -89,7 +94,7 @@ export class VehicleCardComponent implements OnInit {
       .then((confirmed) => {
         if (confirmed) {
           this.cardService
-            .deleteCard(this.advertId, this.vehicle.photos)
+            .deleteCard(this.auctionId, this.vehicle.photos)
             .subscribe(
               (response) => {
                 this.router.navigateByUrl('/myAuc');

@@ -47,6 +47,29 @@ namespace API.Controllers
         }
 
 
+        [HttpGet("getAuctionAlt/{id}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<Auction>> getAuctionyByIdAlt(long id){
+           
+            return  await _auctionRepository.GetAuctionByIdAsync(id);
+           
+        }
+
+
+        [HttpGet("getNumberOfAuctions")]
+        [AllowAnonymous]
+        public async Task<int> GetNumberOfAuctions(){
+            return await _auctionRepository.GetNumberOfAuctions();
+        } 
+
+        [HttpGet("getAuctionsByPage/{page}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<Auction>>> getCardsByPage(int page){
+           // int pageNumber = Int32.Parse(page);
+            return await _auctionRepository.getAuctionsByPage(page);
+        }
+
+
 
         [HttpPost("addAuction")]
         [AllowAnonymous]

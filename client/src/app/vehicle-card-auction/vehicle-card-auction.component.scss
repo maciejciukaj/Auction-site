@@ -1,0 +1,191 @@
+ngb-carousel .wrapper {
+    position: relative;
+    height: auto;
+  
+    text-align: center;
+  }
+  .carousel {
+    width: 100%;
+    -webkit-filter: drop-shadow(5px 5px 5px #666666);
+    filter: drop-shadow(5px 5px 5px #666666);
+  }
+  
+  #lbImage {
+    width: 320px;
+    height: 240px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    -moz-background-size: cover;
+  }
+  
+  ngb-carousel .wrapper > img {
+    position: relative;
+  
+    // width: 1100px;
+    // height: 600px;
+  }
+  
+  .container {
+    color: antiquewhite;
+  }
+  
+  .carousel-inner .sr-only {
+    display: none;
+  }
+  .back {
+    background: transparent;
+    color: white;
+    font-size: 18px;
+    border-color: #03e9f4;
+  }
+  
+  /* CSS */
+  .button-19 {
+    appearance: button;
+    background-color: #1899d6;
+    border: solid transparent;
+    border-radius: 16px;
+    border-width: 0 0 4px;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: din-round, sans-serif;
+    font-size: auto;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    line-height: 20px;
+    margin: 0;
+    outline: none;
+    overflow: visible;
+    padding: 13px 16px;
+    text-align: center;
+    text-transform: uppercase;
+    touch-action: manipulation;
+    transform: translateZ(0);
+    transition: filter 0.2s;
+  
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  
+  .button-19:after {
+    background-clip: padding-box;
+    background-color: #1cb0f6;
+    border: solid transparent;
+    border-radius: 16px;
+    border-width: 0 0 4px;
+    bottom: -4px;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+  }
+  
+  .button-19:main,
+  .button-19:focus {
+    user-select: auto;
+  }
+  
+  .button-19:hover:not(:disabled) {
+    filter: brightness(1.1);
+    -webkit-filter: brightness(1.1);
+  }
+  
+  .button-19:disabled {
+    cursor: auto;
+  }
+  .description {
+    font-size: 18px;
+    white-space: pre-line;
+    color: antiquewhite;
+    min-height: 150px;
+    margin-bottom: 5%;
+  }
+  .card {
+    background-color: transparent;
+  
+    margin-left: 5%;
+    width: 50%;
+  }
+  
+  .rest {
+    width: 80%;
+    margin: auto;
+  }
+  .element {
+    width: 35%;
+    float: right;
+    margin-right: 5%;
+    margin-top: 2%;
+    color: antiquewhite;
+  }
+  .owner {
+    color: antiquewhite;
+  
+    width: 45%;
+    margin-bottom: 5%;
+    min-height: 40px;
+  }
+  
+  .info {
+    font-size: 30px;
+  }
+  .content {
+    display: none;
+    overflow: hidden;
+  }
+  .ownerTitle {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .element,
+  .card {
+    display: inline-block;
+  }
+  .toolbar {
+    color: white;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    padding-top: 20px;
+    border-top: solid;
+    border-top-color: hsla(33, 78%, 91%, 0.226);
+  }
+  .vehicle {
+    margin-bottom: 2%;
+  }
+  h1 {
+    color: antiquewhite;
+    padding-bottom: 20px;
+    border-bottom: solid;
+    border-bottom-color: hsla(33, 78%, 91%, 0.226);
+  }
+  h2 {
+    font-size: 40px;
+  }
+  th {
+    font-weight: 400;
+    padding-right: 50px;
+  }
+  
+  tr {
+    height: 50px;
+  }
+  .title {
+    margin-bottom: 3%;
+    text-align: center;
+    border-bottom: solid;
+    border-bottom-color: hsla(33, 78%, 91%, 0.226);
+  }
+  
+  table {
+    width: 100%;
+  }
+  

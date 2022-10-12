@@ -34,6 +34,7 @@ import { LightboxModule } from 'ngx-lightbox';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogService } from './confirmation-dialog/confirmation-dialog.service';
 import { AuctionFormComponent } from './auction-form/auction-form.component';
+import { VehicleCardAuctionComponent } from './vehicle-card-auction/vehicle-card-auction.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { AuctionFormComponent } from './auction-form/auction-form.component';
     VehicleCardComponent,
     ConfirmationDialogComponent,
     AuctionFormComponent,
+    VehicleCardAuctionComponent,
   ],
   imports: [
     BrowserModule,

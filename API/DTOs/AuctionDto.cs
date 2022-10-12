@@ -27,5 +27,8 @@ namespace API.DTOs
         public string AuctionWinner{get;set;}
 
         public ICollection<OfferDto> Offers {get; set;}
+
+      
+
     }
 }

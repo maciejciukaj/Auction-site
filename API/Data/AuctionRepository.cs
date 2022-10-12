@@ -2,18 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.DTOs;
 using API.Interfaces;
 using API.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
     public class AuctionRepository : IAuctionRepository
     { 
-       
-
-
-
         private readonly AuctionContext _context;
 
         public AuctionRepository(AuctionContext context){
@@ -38,6 +36,26 @@ namespace API.Data
         public async Task<IEnumerable<Auction>> GetAuctionsAsync()
         {
             return await _context.Auctions.Include(o => o.Offers).ToListAsync();
+        }
+
+
+        public async Task<Auction> GetAuctionByIdAsyncAlternate(long id)
+        {
+             return await _context.Auctions.Include(o => o.Offers).FirstOrDefaultAsync(i => i.AuctionId == id);
+        }
+
+       
+
+        public async Task<ActionResult<IEnumerable<Auction>>> getAuctionsByPage(int page)
+        {
+            int startingPoint = ((page - 1 ) * 6);
+           
+            return await _context.Auctions.OrderBy(i => i.AuctionId).Skip(startingPoint).Take(6).ToListAsync();
+        }
+
+        public async Task<int> GetNumberOfAuctions()
+        {
+           return await _context.Auctions.CountAsync();
         }
 
         public async Task<bool> SaveAllAsync()

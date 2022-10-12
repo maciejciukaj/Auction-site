@@ -1,0 +1,125 @@
+<!-- <div class="container">
+  {{ card.title }}
+  {{ card.description }}
+  {{ card.price }}
+  {{ vehicle.brand }}
+  {{ vehicle.model }}
+  {{ vehicle.productionYear }}
+  {{ vehicle.photos[0].photoUrl }}
+</div> -->
+
+<div class="vehicle">
+    <div class="card">
+      <div class="carousel mt-3">
+        <ngb-carousel class="mt-2">
+          <ng-template ngbSlide *ngFor="let image of album; let i = index">
+            <div class="wrapper">
+              <img
+                src="{{ image.src }}"
+                alt="{{ image.position }}"
+                style="width: 100%; height: 66vh"
+                (click)="open(image.position)"
+              />
+            </div>
+            <!-- <div class="carousel-caption">
+          <h3>{{ image.title }}</h3>
+          <p>{{ image.short }}</p>
+        </div> -->
+          </ng-template>
+        </ngb-carousel>
+      </div>
+    </div>
+  
+    <div class="element">
+      <div class="title">
+        <h2 class="mt-3 mb-3">{{ card?.title }}</h2>
+        <h2>{{ cardService.numberWithSpaces(card?.price) }} zł</h2>
+      </div>
+      <div class="spec">
+        <table>
+          <tr>
+            <th>Brand:</th>
+            <th class="details">{{ vehicle?.brand }}</th>
+            <th>Power:</th>
+            <th class="details">{{ vehicle?.power }} hp</th>
+          </tr>
+          <tr>
+            <th>Model:</th>
+            <th class="details">{{ vehicle?.model }}</th>
+            <th>Engine capacity:</th>
+            <th class="details" style="width: 150px">
+              {{ vehicle?.engine }} cm3
+            </th>
+          </tr>
+          <tr>
+            <th>Production year:</th>
+            <th class="details">
+              {{ vehicle?.productionYear }}
+            </th>
+            <th>Color:</th>
+            <th class="details">{{ vehicle?.color }}</th>
+          </tr>
+          <tr>
+            <th>Mileage:</th>
+            <th class="details">{{ vehicle?.mileage }} km</th>
+          </tr>
+          <tr>
+            <th>Fuel:</th>
+            <th class="details">{{ vehicle?.fuel }}</th>
+          </tr>
+          <tr>
+            <th>Gearbox:</th>
+            <th class="details">{{ vehicle?.gearbox }}</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="rest">
+    <h1 class="mt-2">Description</h1>
+    <div class="description mt-3 ">
+      {{ card?.description }}
+    </div>
+    <div class="owner">
+      <div type="button" class="ownerTitle collapsible" (click)="collapse()">
+        Owner
+        <img style="width: 50px" src="./assets/gif/dbGif.gif" />
+      </div>
+      <div class="info content">
+        <img
+          style="width: 35px"
+          class="mr-3"
+          src="./assets/user_icon/user_icon.svg"
+        />{{ owner.firstName }}
+        <img
+          style="width: 35px"
+          class="ml-5"
+          src="./assets/user_icon/phone_icon.jpg"
+        />
+        {{ owner.phoneNumber }}
+      </div>
+    </div>
+  </div>
+  <div class="toolbar">
+    <button [routerLink]="'/myAuc'" class="button-19 mr-5">
+      Back to my garage
+    </button>
+    <button [routerLink]="'/adv/1'" class="button-19 mr-5">
+      Back to advertisments
+    </button>
+    <button
+      [routerLink]="'/adv/1'"
+      class="button-19 mr-5"
+      style="background-color: rgb(190, 190, 86)"
+    >
+      Edit advertisment
+    </button>
+    <button
+      (click)="openConfirmationDialog()"
+      class="button-19"
+      style="background-color: rgb(150, 60, 60)"
+    >
+      Delete advertisment
+    </button>
+  </div>
+  

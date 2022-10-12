@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { typeWithParameters } from '@angular/compiler/src/render3/util';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AccountService } from '../_services/account.service';
 import { CardService } from '../_services/card.service';
 import { ImageService } from '../_services/image.service';
@@ -17,18 +18,26 @@ export class MyAuctionsComponent implements OnInit {
   max: number = 5;
   min: number = 0;
   photos: any = [];
+  scrollUp: any;
   capslockOn: boolean;
-  
+
   constructor(
     private http: HttpClient,
     public accountService: AccountService,
     private imageService: ImageService,
-    public cardService: CardService
-  ) {}
+    public cardService: CardService,
+    private router: Router,
+    private element: ElementRef
+  ) {
+    this.scrollUp = this.router.events.subscribe((path) => {
+      element.nativeElement.scrollIntoView();
+    });
+  }
 
   ngOnInit(): void {
     this.getPosts();
   }
+
 
   getPosts() {
     this.accountService.currentUser$.subscribe(
@@ -77,12 +86,14 @@ export class MyAuctionsComponent implements OnInit {
 
   more() {
     if (this.posts.length > this.min + 5) {
+     
       this.min = this.min + 5;
       this.max = this.max + 5;
     }
   }
   less() {
     if (this.min - 5 >= 0) {
+     
       this.min = this.min - 5;
       this.max = this.max - 5;
     }

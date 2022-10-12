@@ -20,6 +20,10 @@ export class CardService {
     return this.http.get(this.baseUrl + 'card/getCard/' + cardId);
   }
 
+  getAuctionById(cardId: any) {
+    return this.http.get(this.baseUrl + 'auction/getAuctionAlt/' + cardId);
+  }
+
   getVehicleById(vehicleId: any) {
     return this.http.get(this.baseUrl + 'vehicle/getVehicle/' + vehicleId);
   }
