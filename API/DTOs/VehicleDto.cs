@@ -36,6 +36,7 @@ namespace API.DTOs
         public ICollection<AdvertismentDto> Advertisments {get; set;}
 
         public ICollection<PhotoDto> Photos {get; set;}
+        public ICollection<AuctionDto> Auctions {get; set;}
 
 
 

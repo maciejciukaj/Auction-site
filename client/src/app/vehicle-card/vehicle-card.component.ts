@@ -89,7 +89,7 @@ export class VehicleCardComponent implements OnInit {
       .then((confirmed) => {
         if (confirmed) {
           this.cardService
-            .deleteCard(this.advertId, this.vehicle.photos)
+            .deleteCard(this.card.vehicleId, this.vehicle.photos)
             .subscribe(
               (response) => {
                 this.router.navigateByUrl('/myAuc');

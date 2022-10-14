@@ -94,7 +94,7 @@ export class VehicleCardAuctionComponent implements OnInit {
       .then((confirmed) => {
         if (confirmed) {
           this.cardService
-            .deleteCard(this.auctionId, this.vehicle.photos)
+            .deleteCard(this.card.vehicleId, this.vehicle.photos)
             .subscribe(
               (response) => {
                 this.router.navigateByUrl('/myAuc');
