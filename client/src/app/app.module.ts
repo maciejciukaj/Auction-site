@@ -35,6 +35,9 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 import { ConfirmationDialogService } from './confirmation-dialog/confirmation-dialog.service';
 import { AuctionFormComponent } from './auction-form/auction-form.component';
 import { VehicleCardAuctionComponent } from './vehicle-card-auction/vehicle-card-auction.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { MyOffersComponent } from './my-offers/my-offers.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +59,9 @@ import { VehicleCardAuctionComponent } from './vehicle-card-auction/vehicle-card
     ConfirmationDialogComponent,
     AuctionFormComponent,
     VehicleCardAuctionComponent,
+    AboutComponent,
+    ContactComponent,
+    MyOffersComponent,
   ],
   imports: [
     BrowserModule,

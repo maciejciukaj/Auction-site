@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
 import { AdvertFormComponent } from './advert-form/advert-form.component';
 import { AdvertismentsComponent } from './advertisments/advertisments.component';
 import { AuctionFormComponent } from './auction-form/auction-form.component';
 import { AuctionsComponent } from './auctions/auctions.component';
+import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { MainComponent } from './main/main.component';
 import { MyAuctionsComponent } from './my-auctions/my-auctions.component';
+import { MyOffersComponent } from './my-offers/my-offers.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { VehicleCardAuctionComponent } from './vehicle-card-auction/vehicle-card-auction.component';
@@ -18,6 +21,8 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'log', component: LoginPageComponent },
   { path: 'reg', component: RegisterPageComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'about', component: AboutComponent },
   {
     path: '',
     runGuardsAndResolvers: 'always',
@@ -32,6 +37,7 @@ const routes: Routes = [
       { path: 'vehicle/:id', component: VehicleCardComponent },
       { path: 'vehicleA/:id', component: VehicleCardAuctionComponent },
       { path: 'aucForm', component: AuctionFormComponent },
+      { path: 'myOffers', component: MyOffersComponent },
     ],
   },
   { path: '**', component: HomeComponent, pathMatch: 'full' },

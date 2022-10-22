@@ -2,6 +2,7 @@ using System.Security.Cryptography;
 using System.Text;
 using API.DTOs;
 using API.Interfaces;
+using API.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -49,11 +50,7 @@ namespace API.Controllers
             for (int i =0 ; i<computedHash.Length; i++){
                 if(computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid password");
 
-            }
-           
-           
-              
-           
+            } 
             using var hmac = new HMACSHA512();
             user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(userNewPassword.NewPassword));
             user.PasswordSalt = hmac.Key;
@@ -98,6 +95,46 @@ namespace API.Controllers
             return Ok(toReturn);
            
         }
+
+        [HttpGet("getUserAuctions/{name}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<AuctionDto>>> GetUserAuctions(string name){
+            
+            var user =  await _userRepository.GetUserByUsernameAsync(name);
+            var auctions = user.Auctions.ToList();
+            var toReturn =  _mapper.Map<IEnumerable<AuctionDto>>(auctions);
+            return Ok(toReturn);
+           
+        }
+
+        [HttpGet("getUserOffers/{name}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<OfferDto>>> GetUserOffers(string name){
+            
+            var user =  await _userRepository.GetUserByUsernameAsync(name);
+            var offers = user.Offers.ToList();
+            var toReturn =  _mapper.Map<IEnumerable<OfferDto>>(offers);
+            return Ok(toReturn);
+           
+        }
+
+        [HttpGet("getUserHighestOffers/{name}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<OfferDto>>> GetUserHighestOffers(string name){
+            
+            var user =  await _userRepository.GetUserByUsernameAsync(name);
+            var offers = user.Offers.ToList();
+            foreach(var offer in offers){
+                
+            }
+            var toReturn =  _mapper.Map<IEnumerable<OfferDto>>(offers);
+            return Ok(toReturn);
+           
+        }
+
+
+
+
 
 
         [HttpGet("getUserById/{id}")]

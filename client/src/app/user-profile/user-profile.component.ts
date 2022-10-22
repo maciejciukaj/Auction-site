@@ -66,6 +66,7 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {}
 
   editToggle() {
+    this.passwordMode = false;
     this.editMode = !this.editMode;
   }
 

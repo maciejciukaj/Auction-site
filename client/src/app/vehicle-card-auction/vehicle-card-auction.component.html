@@ -74,15 +74,20 @@
     </div>
   </div>
 </div>
-<div class="auction">
+<div class="auction mb-3">
   <div class="row">
-    <div class="currentPrice col-sm-3">
+    <div class="currentPrice col-md">
       Current price: {{ card.currentPrice }} $
     </div>
 
-    <div class="bid">
+    <div class="currentBidder col-md">
+      Current bidder: {{ card.currentBidder }}
+    </div>
+
+    <div class="bid col-md" *ngIf="!checkIfOwner()">
       Your offer:
       <input
+        #bid
         class="userOffer"
         type="number"
         value="{{ card.currentPrice + 0.5 }}"
@@ -93,7 +98,7 @@
       />
     </div>
 
-    <a href="#" class="btn">
+    <a *ngIf="!checkIfOwner()" (click)="addBid(bid.value)" class="btn">
       <span class="text">Text</span>
       <span class="flip-front">Bid</span>
       <span class="flip-back">Win 🏆</span>
@@ -130,20 +135,14 @@
     Back to my garage
   </button>
   <button [routerLink]="'/auc/1'" class="button-19 mr-5">
-    Back to advertisments
+    Back to auctions
   </button>
   <button
-    [routerLink]="'/auc/1'"
-    class="button-19 mr-5"
-    style="background-color: rgb(190, 190, 86)"
-  >
-    Edit advertisment
-  </button>
-  <button
+    *ngIf="checkIfOwner()"
     (click)="openConfirmationDialog()"
     class="button-19"
     style="background-color: rgb(150, 60, 60)"
   >
-    Delete advertisment
+    Delete auction
   </button>
 </div>

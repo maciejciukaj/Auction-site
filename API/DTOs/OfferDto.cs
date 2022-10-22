@@ -11,5 +11,7 @@ namespace API.DTOs
 
          public float OfferAmount {get;set;}
 
+         public long AuctionId {get; set;}
+
     }
 }

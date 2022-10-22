@@ -7,6 +7,11 @@ import { PhotoLightbox } from '../_models/lightbox';
 import { AuctionService } from '../_services/auction.service';
 import { CardService } from '../_services/card.service';
 import { LightboxOverlayComponent } from 'ngx-lightbox/lightbox-overlay.component';
+import { OfferService } from '../_services/offer.service';
+import { AccountService } from '../_services/account.service';
+import { HttpClient } from '@microsoft/signalr';
+import { identifierModuleUrl } from '@angular/compiler';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-vehicle-card-auction',
@@ -21,6 +26,10 @@ export class VehicleCardAuctionComponent implements OnInit {
   photo: PhotoLightbox = { src: '', position: 0 };
   album: any = [];
   owner: any = {};
+  bid: any = {};
+  name: any;
+  newPrice: any = {};
+  pass: any = {};
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -31,7 +40,10 @@ export class VehicleCardAuctionComponent implements OnInit {
     private auctionService: AuctionService,
     private _lightboxConfig: LightboxConfig,
     public cardService: CardService,
-    private router: Router
+    private router: Router,
+    private offerService: OfferService,
+    private accountService: AccountService,
+    private toastr: ToastrService
   ) {
     config.interval = 5000;
     config.keyboard = true;
@@ -41,6 +53,8 @@ export class VehicleCardAuctionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.accountService.currentUser$.subscribe((val) => (this.name = val));
+
     this.getCard();
   }
   open(index: number): void {
@@ -57,21 +71,19 @@ export class VehicleCardAuctionComponent implements OnInit {
     }
 
     this.album.sort((a, b) => a.position - b.position);
-    console.log(this.album);
+    // console.log(this.album);
   }
 
   getId() {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.auctionId = params.get('id');
     });
-   
   }
 
   getCard() {
     this.getId();
     this.cardService.getAuctionById(this.auctionId).subscribe((response) => {
       this.card = response;
-     
 
       this.cardService.getUserById(this.card.userId).subscribe((response) => {
         this.owner = response;
@@ -82,6 +94,8 @@ export class VehicleCardAuctionComponent implements OnInit {
         .subscribe((response) => {
           this.vehicle = response;
           //this.cardService.getVehicleById
+          console.log(this.card);
+          console.log(this.vehicle);
 
           this.saveLightboxPhotos();
         });
@@ -111,6 +125,34 @@ export class VehicleCardAuctionComponent implements OnInit {
       );
   }
 
+  addBid(offer: number) {
+    this.offerService.getUserId(this.name.userName).subscribe((response) => {
+      this.pass = response;
+      this.bid.userId = this.pass.userId;
+      this.bid.auctionId = this.auctionId;
+      this.bid.offerAmount = offer;
+      console.log(offer);
+      this.offerService.addOffer(this.bid).subscribe((response) => {
+        this.newPrice.auctionId = this.auctionId;
+        this.newPrice.userOffer = this.bid.offerAmount;
+        this.toastr.success('Offer accepted');
+        console.log(this.newPrice);
+
+        this.offerService.updateCurrentPrice(this.newPrice).subscribe(
+          (response) => {
+            this.toastr.success('Offer accepted');
+            this.album = [];
+            this.getCard();
+          },
+          (error) => {
+            this.toastr.error(error.error);
+            this.getCard();
+          }
+        );
+      });
+    });
+  }
+
   collapse() {
     var coll = document.getElementsByClassName('collapsible');
 
@@ -125,5 +167,11 @@ export class VehicleCardAuctionComponent implements OnInit {
         }
       });
     }
+  }
+
+  checkIfOwner() {
+    if (this.owner.username == this.name.userName) {
+      return true;
+    } else return false;
   }
 }

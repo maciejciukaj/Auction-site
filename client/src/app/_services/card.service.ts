@@ -21,7 +21,7 @@ export class CardService {
   }
 
   getAuctionById(cardId: any) {
-    return this.http.get(this.baseUrl + 'auction/getAuctionAlt/' + cardId);
+    return this.http.get(this.baseUrl + 'auction/getAuction/' + cardId);
   }
 
   getVehicleById(vehicleId: any) {
@@ -44,5 +44,9 @@ export class CardService {
 
   getUserById(userId: any) {
     return this.http.get(this.baseUrl + 'user/getUserById/' + userId);
+  }
+
+  getCurrentPrice(auctionId: number) {
+    return this.http.get(this.baseUrl + 'auction/getCurrentPrice/' + auctionId);
   }
 }

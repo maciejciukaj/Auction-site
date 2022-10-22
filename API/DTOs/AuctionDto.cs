@@ -28,6 +28,11 @@ namespace API.DTOs
 
         public ICollection<OfferDto> Offers {get; set;}
 
+        public long VehicleId {get; set;}
+
+        public long UserId {get; set;}
+
+
       
 
     }

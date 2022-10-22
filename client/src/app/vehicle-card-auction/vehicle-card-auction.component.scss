@@ -194,11 +194,14 @@ tr {
   border-radius: 25px;
 }
 
-
 .currentPrice {
-  
   margin-left: 40px;
 
+  color: white;
+  font-size: 30px;
+  font-weight: 500;
+}
+.currentBidder {
   color: white;
   font-size: 30px;
   font-weight: 500;
@@ -211,10 +214,10 @@ tr {
   font-weight: 500;
 }
 .userOffer {
-
   background: none;
   width: 40%;
   color: white;
+  text-align: center;
 }
 
 table {
@@ -226,7 +229,6 @@ a {
 }
 
 .btn {
-  
   height: 50px;
   line-height: 50px;
   text-align: center;

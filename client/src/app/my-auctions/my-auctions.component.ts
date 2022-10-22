@@ -14,12 +14,15 @@ import { ImageService } from '../_services/image.service';
 export class MyAuctionsComponent implements OnInit {
   currentUser: any = {};
   posts: any = [];
+  auctions: any = [];
   pages: any = [];
   max: number = 5;
   min: number = 0;
-  photos: any = [];
+  photosPosts: any = [];
+  photosAuctions: any = [];
   scrollUp: any;
   capslockOn: boolean;
+  isAuction: boolean;
 
   constructor(
     private http: HttpClient,
@@ -36,8 +39,8 @@ export class MyAuctionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPosts();
+    this.getAuctions();
   }
-
 
   getPosts() {
     this.accountService.currentUser$.subscribe(
@@ -52,50 +55,77 @@ export class MyAuctionsComponent implements OnInit {
         next: (response) => {
           this.posts = response;
 
-          this.getMainPhotos(this.posts);
-          this.getPages();
+          this.getMainPhotos(this.posts, false);
+          this.getPages(this.posts);
         },
         error: (error) => console.log(error),
       });
   }
 
-  getPages() {
-    var number = (this.posts.length % 5) + 1;
+  getAuctions() {
+    this.accountService.currentUser$.subscribe(
+      (val) => (this.currentUser = val)
+    );
+    this.http
+      .get(
+        'https://localhost:5001/api/user/getUserAuctions/' +
+          this.currentUser.userName
+      )
+      .subscribe({
+        next: (response) => {
+          this.auctions = response;
+          console.log(this.auctions);
+
+          this.getMainPhotos(this.auctions, true);
+          this.getPages(this.auctions);
+        },
+        error: (error) => console.log(error),
+      });
+  }
+
+  getPages(list: any) {
+    var number = (list.length % 5) + 1;
     for (var i = 1; i <= number; i++) {
       this.pages[i - 1] = i;
     }
   }
 
-  getMainPhotos(postList) {
+  getMainPhotos(postList: any, isAuction: boolean) {
     for (var post of postList) {
       this.imageService
         .getPhotoByVehicleId(post.vehicleId)
         .subscribe((response) => {
           var photo: any = response;
-
-          this.photos.push(response);
+          isAuction
+            ? this.photosAuctions.push(response)
+            : this.photosPosts.push(response);
           this.sortPhotos();
         });
     }
 
-    console.log(this.photos);
+    console.log(this.photosPosts);
   }
   sortPhotos() {
-    this.photos.sort((a, b) => a.photoId - b.photoId);
+    this.photosPosts.sort((a, b) => a.photoId - b.photoId);
+    this.photosAuctions.sort((a, b) => a.photoId - b.photoId);
   }
 
-  more() {
-    if (this.posts.length > this.min + 5) {
-     
+  more(list: any) {
+    if (list.length > this.min + 5) {
       this.min = this.min + 5;
       this.max = this.max + 5;
     }
   }
   less() {
     if (this.min - 5 >= 0) {
-     
       this.min = this.min - 5;
       this.max = this.max - 5;
     }
+  }
+
+  toggleAuction() {
+    this.isAuction = !this.isAuction;
+    this.min = 0;
+    this.max = 5;
   }
 }

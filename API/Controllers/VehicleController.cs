@@ -48,18 +48,8 @@ namespace API.Controllers
             }
         }
 
-        /*
- [HttpGet("getUsers")]
-        [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers(){
-            
-            
-           var users = await _userRepository.GetUsersAsync();
 
-           var usersToReturn = _mapper.Map<IEnumerable<MemberDto>>(users);
-           return Ok(usersToReturn);
-        }
-        */
+
 
         [HttpDelete("deleteVehicle/{id}")]
         [Authorize]

@@ -17,6 +17,7 @@ namespace API.Interfaces
 
         Task<Auction> GetAuctionByIdAsync(long id);
 
+    
         void AddAuction(Auction auction);
         Task<Auction> DeleteAuction(Auction auction);
 

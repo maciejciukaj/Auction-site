@@ -4,6 +4,7 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Lightbox, LightboxConfig } from 'ngx-lightbox';
 import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-dialog.service';
 import { PhotoLightbox } from '../_models/lightbox';
+import { AccountService } from '../_services/account.service';
 
 import { CardService } from '../_services/card.service';
 
@@ -20,6 +21,7 @@ export class VehicleCardComponent implements OnInit {
   photo: PhotoLightbox = { src: '', position: 0 };
   album: any = [];
   owner: any = {};
+  name: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -28,7 +30,8 @@ export class VehicleCardComponent implements OnInit {
     config: NgbCarouselConfig,
     private _lightbox: Lightbox,
     private _lightboxConfig: LightboxConfig,
-    private router: Router
+    private router: Router,
+    private accountService: AccountService
   ) {
     config.interval = 5000;
     config.keyboard = true;
@@ -38,6 +41,8 @@ export class VehicleCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.accountService.currentUser$.subscribe((val) => (this.name = val));
+
     this.getCard();
   }
   open(index: number): void {
@@ -120,5 +125,10 @@ export class VehicleCardComponent implements OnInit {
         }
       });
     }
+  }
+  checkIfOwner() {
+    if (this.owner.username == this.name.userName) {
+      return true;
+    } else return false;
   }
 }

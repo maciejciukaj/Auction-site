@@ -197,7 +197,7 @@ export class AdvertFormComponent implements OnInit {
         .subscribe({
           next: (response) => (
             (this.pass = response),
-            ((this.vehicle.userId = this.pass.userId), this.addVehicle()) //tu ma byc jeszcze wywolanie funkcji add Vehicle, ogarnac cascade i walidacje hasla
+            ((this.vehicle.userId = this.pass.userId), this.addVehicle())
           ),
           error: (error) => console.log(error),
         });
