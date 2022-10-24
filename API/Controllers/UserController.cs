@@ -120,15 +120,22 @@ namespace API.Controllers
 
         [HttpGet("getUserHighestOffers/{name}")]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<OfferDto>>> GetUserHighestOffers(string name){
+        public async Task<ActionResult<Dictionary<long,float>>> GetUserHighestOffers(string name){
             
             var user =  await _userRepository.GetUserByUsernameAsync(name);
             var offers = user.Offers.ToList();
+            Dictionary<long, float> highestOffers = new Dictionary<long, float>();
             foreach(var offer in offers){
-                
+               if(!highestOffers.ContainsKey(offer.AuctionId)){
+                    highestOffers.Add(offer.AuctionId, offer.OfferAmount);
+               }else{
+                    if(highestOffers[offer.AuctionId] < offer.OfferAmount){
+                        highestOffers[offer.AuctionId] = offer.OfferAmount;
+                    }
+               }
             }
-            var toReturn =  _mapper.Map<IEnumerable<OfferDto>>(offers);
-            return Ok(toReturn);
+           
+            return Ok(highestOffers.ToList());
            
         }
 

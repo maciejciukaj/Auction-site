@@ -44,7 +44,7 @@ namespace API.Data
              return await _context.Auctions.Include(o => o.Offers).FirstOrDefaultAsync(i => i.AuctionId == id);
         }
 
-        public async Task<ActionResult<IEnumerable<Auction>>> getAuctionsByPage(int page)
+        public async Task<ActionResult<IEnumerable<Auction>>> GetAuctionsByPage(int page)
         {
             int startingPoint = ((page - 1 ) * 6);
            
@@ -66,6 +66,9 @@ namespace API.Data
             _context.Entry(auction).State = EntityState.Modified;
         }
 
-       
+/*        public async Task<ActionResult<IEnumerable<Auction>>> GetAuctionsByIdList(List<long> auctionIdList)
+        {
+           return await _context.Auctions.Where(t => auctionIdList.Contains(t.AuctionId)).ToListAsync();
+        }*/
     }
 }

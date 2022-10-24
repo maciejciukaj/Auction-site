@@ -74,8 +74,6 @@ export class AdvertFormComponent implements OnInit {
     if (this.step == 3) {
       this.router.navigateByUrl('/main');
     }
-    // console.log(this.previewPhotos);
-    // console.log(this.addedPhotos);
   }
 
   previousStep() {
@@ -123,7 +121,6 @@ export class AdvertFormComponent implements OnInit {
 
   savePhoto(formValue, file: File, main: boolean, position: number) {
     this.isSubmitter = true;
-    // if (this.formTemplate.valid) {
     var filePath = `images/${file.name
       .split('.')
       .slice(0, -1)
@@ -149,11 +146,6 @@ export class AdvertFormComponent implements OnInit {
         })
       )
       .subscribe();
-
-    // this.nextStep();
-    // } else {
-    // this.toastr.error('Add at least one photo');
-    //}
   }
 
   saveList() {
@@ -217,7 +209,7 @@ export class AdvertFormComponent implements OnInit {
           (this.formTemplate.value.vehicleId = this.pass.vehicleId),
           (this.advertisment.userId = this.pass.userId),
           console.log(this.advertisment),
-          this.toastr.success('super'),
+          //this.toastr.success('super'),
           this.addAdvertisment()
         ),
         error: (error) => console.log(error),
@@ -237,7 +229,7 @@ export class AdvertFormComponent implements OnInit {
       .subscribe({
         next: (response) => (
           this.saveList(),
-          this.toastr.success('dodano ogloszenie'),
+          this.toastr.success('Advertisment added'),
           this.router.navigateByUrl('/main')
         ),
         error: (error) => console.log(error),
@@ -247,7 +239,6 @@ export class AdvertFormComponent implements OnInit {
     this.splitValues();
     console.log(this.advertisment);
     console.log(this.vehicle);
-    //console.log(this.advControl.value);
   }
 
   editToggle() {

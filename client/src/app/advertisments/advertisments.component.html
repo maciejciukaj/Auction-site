@@ -21,7 +21,7 @@
               <div class="description-prod">
                 <p>
                   {{ vehicles[i]?.engine }} cm3&nbsp;
-                  {{ vehicles[i]?.mileage }} km<br />{{
+                  {{ cardService.numberWithSpaces(vehicles[i]?.mileage) }} km<br />{{
                     vehicles[i]?.productionYear
                   }}
                 </p>

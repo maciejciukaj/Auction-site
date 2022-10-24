@@ -214,7 +214,7 @@ export class AuctionFormComponent implements OnInit {
           (this.formTemplate.value.vehicleId = this.pass.vehicleId),
           (this.auction.userId = this.pass.userId),
           console.log(this.auction),
-          this.toastr.success('super'),
+          // this.toastr.success('super'),
           this.addAuction()
         ),
         error: (error) => console.log(error),
@@ -234,7 +234,7 @@ export class AuctionFormComponent implements OnInit {
       .subscribe({
         next: (response) => (
           this.saveList(),
-          this.toastr.success('dodano aukcje'),
+          this.toastr.success('Auction added'),
           this.router.navigateByUrl('/main')
         ),
         error: (error) => console.log(error),
@@ -244,7 +244,6 @@ export class AuctionFormComponent implements OnInit {
     this.splitValues();
     console.log(this.auction);
     console.log(this.vehicle);
-    //console.log(this.advControl.value);
   }
 
   editToggle() {

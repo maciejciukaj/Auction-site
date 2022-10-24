@@ -26,4 +26,7 @@ export class AuctionService {
   numberWithSpaces(x) {
     return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   }
+  getAuctionById(cardId: any) {
+    return this.http.get(this.baseUrl + 'getAuction/' + cardId);
+  }
 }

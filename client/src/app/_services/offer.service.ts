@@ -12,10 +12,19 @@ export class OfferService {
   addOffer(model: any) {
     return this.http.post(this.baseUrl + 'offer/addOffer/', model);
   }
-  getUserId(userName: string) {
-    return this.http.get(this.baseUrl + 'user/getUsers/' + userName);
+  getUserId(username: string) {
+    return this.http.get(this.baseUrl + 'user/getUsers/' + username);
   }
   updateCurrentPrice(newPrice: any) {
     return this.http.post(this.baseUrl + 'auction/editCurrentPrice', newPrice);
+  }
+
+  getHighestOffers(username: string) {
+    return this.http.get(
+      this.baseUrl + 'user/getUserHighestOffers/' + username
+    );
+  }
+  numberWithSpaces(x) {
+    return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   }
 }

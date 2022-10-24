@@ -21,8 +21,10 @@ namespace API.Interfaces
         void AddAuction(Auction auction);
         Task<Auction> DeleteAuction(Auction auction);
 
-         Task<ActionResult<IEnumerable<Auction>>> getAuctionsByPage(int page);
+         Task<ActionResult<IEnumerable<Auction>>> GetAuctionsByPage(int page);
 
           public Task<int> GetNumberOfAuctions();
+
+          //public Task<ActionResult<IEnumerable<Auction>>> GetAuctionsByIdList(List<long> auctionIdList);
     }
 }

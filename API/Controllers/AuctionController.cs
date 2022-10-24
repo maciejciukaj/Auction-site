@@ -62,6 +62,7 @@ namespace API.Controllers
             Console.WriteLine(auction.CurrentPrice+"asfnasdfa"+priceEdit.UserOffer);
            if(priceEdit.UserOffer > auction.CurrentPrice){
                 auction.CurrentPrice = priceEdit.UserOffer;
+                auction.CurrentBidder = priceEdit.Username;
            }else{
             return Unauthorized("Your offer is to low");
            }
@@ -94,8 +95,10 @@ namespace API.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Auction>>> GetCardsByPage(int page){
            // int pageNumber = Int32.Parse(page);
-            return await _auctionRepository.getAuctionsByPage(page);
+            return await _auctionRepository.GetAuctionsByPage(page);
         }
+
+      
 
 
 

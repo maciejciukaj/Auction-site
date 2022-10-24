@@ -81,28 +81,38 @@
     </div>
 
     <div class="currentBidder col-md">
-      Current bidder: {{ card.currentBidder }}
+      Current winner: {{ card.currentBidder }}
     </div>
+    <form
+      [formGroup]="offer"
+      (ngSubmit)="addBid(offer.value.price)"
+      autocomplete="off"
+    >
+      <div class="bid col-md" *ngIf="!checkIfOwner() && !checkIfHighestBidder()">
+        Your offer:
+        <input
+          formControlName="price"
+          class="userOffer"
+          name="offer"
+          type="number"
+          placeholder="{{ card.currentPrice + 1 }}"
+          pattern="[0-9]+([\.,][0-9]+)?"
+          step="1"
+          min="{{ card.currentPrice + 0.5 }}"
+          max="99999999"
+        />
+      </div>
 
-    <div class="bid col-md" *ngIf="!checkIfOwner()">
-      Your offer:
-      <input
-        #bid
-        class="userOffer"
-        type="number"
-        value="{{ card.currentPrice + 0.5 }}"
-        pattern="[0-9]+([\.,][0-9]+)?"
-        step="0.5"
-        min="{{ card.currentPrice + 0.5 }}"
-        max="99999999"
-      />
-    </div>
-
-    <a *ngIf="!checkIfOwner()" (click)="addBid(bid.value)" class="btn">
-      <span class="text">Text</span>
-      <span class="flip-front">Bid</span>
-      <span class="flip-back">Win 🏆</span>
-    </a>
+      <button
+        *ngIf="!checkIfOwner() && !checkIfHighestBidder()"
+        class="btn col-sm mt-5"
+        type="submit"
+      >
+        <span class="text">Text</span>
+        <span class="flip-front">Bid</span>
+        <span class="flip-back">Win 🏆</span>
+      </button>
+    </form>
   </div>
 </div>
 <div class="rest">

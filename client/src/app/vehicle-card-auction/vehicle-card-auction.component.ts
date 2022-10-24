@@ -12,6 +12,7 @@ import { AccountService } from '../_services/account.service';
 import { HttpClient } from '@microsoft/signalr';
 import { identifierModuleUrl } from '@angular/compiler';
 import { ToastrService } from 'ngx-toastr';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-vehicle-card-auction',
@@ -30,6 +31,10 @@ export class VehicleCardAuctionComponent implements OnInit {
   name: any;
   newPrice: any = {};
   pass: any = {};
+
+  offer = new FormGroup({
+    price: new FormControl(null),
+  });
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -56,6 +61,7 @@ export class VehicleCardAuctionComponent implements OnInit {
     this.accountService.currentUser$.subscribe((val) => (this.name = val));
 
     this.getCard();
+    console.log(this.checkIfHighestBidder());
   }
   open(index: number): void {
     // open lightbox
@@ -94,8 +100,8 @@ export class VehicleCardAuctionComponent implements OnInit {
         .subscribe((response) => {
           this.vehicle = response;
           //this.cardService.getVehicleById
-          console.log(this.card);
-          console.log(this.vehicle);
+          // console.log(this.card);
+          //console.log(this.vehicle);
 
           this.saveLightboxPhotos();
         });
@@ -135,7 +141,8 @@ export class VehicleCardAuctionComponent implements OnInit {
       this.offerService.addOffer(this.bid).subscribe((response) => {
         this.newPrice.auctionId = this.auctionId;
         this.newPrice.userOffer = this.bid.offerAmount;
-        this.toastr.success('Offer accepted');
+        this.newPrice.username = this.name.userName;
+        //  this.toastr.success('Offer accepted');
         console.log(this.newPrice);
 
         this.offerService.updateCurrentPrice(this.newPrice).subscribe(
@@ -151,6 +158,10 @@ export class VehicleCardAuctionComponent implements OnInit {
         );
       });
     });
+  }
+
+  checkOffer(info: any) {
+    console.log(info.value.price);
   }
 
   collapse() {
@@ -173,5 +184,16 @@ export class VehicleCardAuctionComponent implements OnInit {
     if (this.owner.username == this.name.userName) {
       return true;
     } else return false;
+  }
+  checkIfHighestBidder() {
+    if (this.name.userName === this.card.currentBidder) {
+    
+
+      return true;
+    } else {
+      
+
+      return false;
+    }
   }
 }

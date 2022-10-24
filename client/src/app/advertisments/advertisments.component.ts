@@ -43,7 +43,6 @@ export class AdvertismentsComponent implements OnInit {
       this.vehicles = [];
       this.advertisments = [];
       this.pageId = params.get('page');
-
       this.getNumberOfAllAdvertisments();
       this.getAdvertisments();
     });
@@ -87,10 +86,6 @@ export class AdvertismentsComponent implements OnInit {
       .get('https://localhost:5001/api/vehicle/getVehicle/' + id)
       .subscribe((response) => {
         this.vehicles.push(response), this.sortVehicles();
-
-        /*  if (this.vehicles.length == 5) {
-          this.sortVehicles();
-        }*/
       });
   }
 
@@ -122,7 +117,7 @@ export class AdvertismentsComponent implements OnInit {
   }
 
   checkPreviousPage() {
-    return this.pageId - 1 > 0 ?  true :  false;
+    return this.pageId - 1 > 0 ? true : false;
   }
   checkNextPage() {
     return this.pageId * 6 + 1 <= this.numberOfAllCards ? true : false;
