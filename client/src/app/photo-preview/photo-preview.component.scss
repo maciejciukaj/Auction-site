@@ -110,12 +110,7 @@
 .row {
   margin-left: 10%;
 }
-/* Clear floats after image containers */
-.row::after {
-  content: "";
-  clear: both;
-  display: table;
-}
+
 @media screen and (max-width: 1200px) {
   .column {
     width: 50%;

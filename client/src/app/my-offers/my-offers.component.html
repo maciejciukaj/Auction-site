@@ -1,18 +1,26 @@
 <div class="container">
   <h1>My offers</h1>
-</div>
-<div class="offers" *ngFor="let auc of auctions; let i = index">
   <div class="row">
-    <button class="elem col-lg" [routerLink]="['/vehicleA', auc?.auctionId]">
-      <div class="photo">
-        <span class="mr-3 title">{{ auc.title }}</span>
-      </div>
-      <div class="details mt-4">
-        <div class="price">Your offer: {{offerService.numberWithSpaces(highestOffers[i].value)}} $</div>
-        <div class="price">
-          Current price: {{ offerService.numberWithSpaces(auc.currentPrice) }} $
+    <div
+      class="offers col-lg-4 mt-5"
+      *ngFor="let auc of auctions; let i = index"
+    >
+      <div class="ifWinner" *ngIf="checkIfUserIsWinning(auc, i)"></div>
+      <button class="elem" [routerLink]="['/vehicleA', auc?.auctionId]">
+        <div class="photo">
+          <span class="mr-3 title">{{ auc.title }}</span>
         </div>
-      </div>
-    </button>
+        <div class="details mt-4">
+          <div class="price">
+            Your offer:
+            {{ offerService.numberWithSpaces(highestOffers[i].value) }} $
+          </div>
+          <div class="price">
+            Current price:
+            {{ offerService.numberWithSpaces(auc.currentPrice) }} $
+          </div>
+        </div>
+      </button>
+    </div>
   </div>
 </div>

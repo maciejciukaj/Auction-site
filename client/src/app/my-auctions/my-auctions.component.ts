@@ -54,7 +54,8 @@ export class MyAuctionsComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.posts = response;
-
+          console.log(this.posts);
+          this.posts.sort((a, b) => a.advertismentId - b.advertismentId);
           this.getMainPhotos(this.posts, false);
           this.getPages(this.posts);
         },

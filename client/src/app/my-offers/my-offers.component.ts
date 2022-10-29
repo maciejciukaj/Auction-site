@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { log } from 'console';
 import { AccountService } from '../_services/account.service';
 import { AuctionService } from '../_services/auction.service';
 import { OfferService } from '../_services/offer.service';
@@ -35,6 +36,7 @@ export class MyOffersComponent implements OnInit {
         .getAuctionById(this.highestOffers[i].key)
         .subscribe((response) => {
           this.auctions.push(response);
+          this.auctions.sort((a, b) => a.auctionId - b.auctionId);
           console.log(this.auctions);
         });
     }
@@ -45,13 +47,17 @@ export class MyOffersComponent implements OnInit {
       .getHighestOffers(this.currentUser.userName)
       .subscribe((response) => {
         this.highestOffers = response;
-        console.log(this.highestOffers[0].value);
-
-        // console.log(Object.keys(this.highestOffers)[0]);
-        //console.log(this.highestOffers[Object.keys(this.getHighestOffers)[0]]);
-
-        // console.log(this.highestOffers[0].key);
+        console.log(this.highestOffers);
         this.getOffersDetails();
       });
+  }
+  checkIfUserIsWinning(auction: any, i: number) {
+    //console.log(auction.currentPrice + ' - ' + this.highestOffers[i].value);
+
+    if (auction.currentPrice == this.highestOffers[i].value) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
