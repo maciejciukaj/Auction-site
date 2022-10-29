@@ -12,6 +12,8 @@ declare function next(): any;
 })
 export class LoginPageComponent implements OnInit {
   model: any = {};
+  email: any = {};
+  resetMode: boolean = false;
   capslockOn: boolean;
   constructor(
     private accountService: AccountService,
@@ -39,6 +41,13 @@ export class LoginPageComponent implements OnInit {
     } else {
       this.capslockOn = false;
     }
+  }
+  showEmail() {
+    console.log(this.email);
+  }
+
+  toggleReset() {
+    this.resetMode = !this.resetMode;
   }
 
   @HostListener('window:keydown', ['$event'])

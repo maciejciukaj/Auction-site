@@ -1,0 +1,128 @@
+.container {
+  color: white;
+}
+.ipt {
+  background: none;
+  color: white;
+  border-radius: 10px;
+}
+label {
+  font-weight: 500;
+  font-size: 18px;
+}
+select {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+td {
+  padding-bottom: 1em;
+  padding-right: 2em;
+}
+td.space {
+  padding-right: 15vw;
+}
+textarea {
+  background: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+
+  color: #fff;
+  width: 45%;
+  height: 120px;
+  resize: none;
+
+  border-radius: 10px;
+}
+option {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.vehicle {
+  padding-bottom: 5%;
+  border-bottom: solid 1px hsla(33, 78%, 91%, 0.226);
+}
+.desc {
+  width: 100%;
+  color: white;
+  /*
+  background: none;
+  color: white;
+  border-radius: 10px;*/
+  min-height: 200px;
+}
+.button-19 {
+  appearance: button;
+  background-color: #1b92c9;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round, sans-serif;
+  font-size: auto;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter 0.2s;
+
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.button-19:after {
+  background-clip: padding-box;
+  background-color: #1cb0f6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.button-19:main,
+.button-19:focus {
+  user-select: auto;
+}
+
+.button-19:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
+
+.button-19:disabled {
+  cursor: auto;
+}
+
+.toolbar {
+  color: white;
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  padding-top: 20px;
+  border-top: solid;
+  border-top-color: hsla(33, 78%, 91%, 0.226);
+}

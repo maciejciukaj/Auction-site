@@ -49,4 +49,12 @@ export class CardService {
   getCurrentPrice(auctionId: number) {
     return this.http.get(this.baseUrl + 'auction/getCurrentPrice/' + auctionId);
   }
+
+  editVehicleInfo(model: any) {
+    return this.http.put(this.baseUrl + 'vehicle/editVehicle', model);
+  }
+
+  editAdvertismentInfo(model: any) {
+    return this.http.put(this.baseUrl + 'card/editCard', model);
+  }
 }

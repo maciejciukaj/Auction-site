@@ -1,13 +1,3 @@
-<!-- <div class="container">
-  {{ card.title }}
-  {{ card.description }}
-  {{ card.price }}
-  {{ vehicle.brand }}
-  {{ vehicle.model }}
-  {{ vehicle.productionYear }}
-  {{ vehicle.photos[0].photoUrl }}
-</div> -->
-
 <div class="vehicle">
   <div class="card">
     <div class="carousel mt-3">
@@ -21,10 +11,6 @@
               (click)="open(image.position)"
             />
           </div>
-          <!-- <div class="carousel-caption">
-          <h3>{{ image.title }}</h3>
-          <p>{{ image.short }}</p>
-        </div> -->
         </ng-template>
       </ngb-carousel>
     </div>
@@ -88,7 +74,10 @@
       (ngSubmit)="addBid(offer.value.price)"
       autocomplete="off"
     >
-      <div class="bid col-md" *ngIf="!checkIfOwner() && !checkIfHighestBidder()">
+      <div
+        class="bid col-md"
+        *ngIf="!checkIfOwner() && !checkIfHighestBidder()"
+      >
         Your offer:
         <input
           formControlName="price"

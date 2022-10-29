@@ -109,6 +109,29 @@ namespace API.Controllers
         
         }
 
+        [HttpPut("editVehicle")]
+        [AllowAnonymous]
+        public async Task<IActionResult> EditVehicle(VehicleEditDto vehicleEdit){
+            var vehicle = await _vehicleRepository.GetVehicleByIdAsync(vehicleEdit.VehicleId);
+            vehicle.Type = vehicleEdit.Type ?? vehicle.Type;
+            vehicle.Brand = vehicleEdit.Brand ?? vehicle.Brand;
+            vehicle.Model = vehicleEdit.Model ?? vehicle.Model;
+            vehicle.ProductionYear = vehicleEdit.ProductionYear ?? vehicle.ProductionYear;
+            vehicle.Mileage = vehicleEdit.Mileage ?? vehicle.Mileage;
+            vehicle.Fuel = vehicleEdit.Fuel ?? vehicle.Fuel;
+            vehicle.Gearbox = vehicleEdit.Gearbox ?? vehicle.Gearbox;
+            vehicle.Power = vehicleEdit.Power ?? vehicle.Power;
+            vehicle.Engine = vehicleEdit.Engine ?? vehicle.Engine;
+            vehicle.Color = vehicleEdit.Color ?? vehicle.Color;
+             vehicle.IsCrashed = vehicleEdit.IsCrashed;
+             try{
+                 await _vehicleRepository.SaveAllAsyc();
+             return Ok(vehicleEdit);
+            }catch{
+                 return BadRequest("Advertisment was not updated");
+            }
+        }
+
 
 
     }

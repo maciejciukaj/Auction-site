@@ -1,14 +1,4 @@
-<!-- <div class="container">
-  {{ card.title }}
-  {{ card.description }}
-  {{ card.price }}
-  {{ vehicle.brand }}
-  {{ vehicle.model }}
-  {{ vehicle.productionYear }}
-  {{ vehicle.photos[0].photoUrl }}
-</div> -->
-
-<div class="vehicle">
+<div class="vehicle" *ngIf="!editMode">
   <div class="card">
     <div class="carousel mt-3">
       <ngb-carousel class="mt-2">
@@ -21,10 +11,6 @@
               (click)="open(image.position)"
             />
           </div>
-          <!-- <div class="carousel-caption">
-        <h3>{{ image.title }}</h3>
-        <p>{{ image.short }}</p>
-      </div> -->
         </ng-template>
       </ngb-carousel>
     </div>
@@ -75,7 +61,7 @@
     </div>
   </div>
 </div>
-<div class="rest">
+<div class="rest" *ngIf="!editMode">
   <h1 class="mt-2">Description</h1>
   <div class="description mt-3">
     {{ card.description }}
@@ -100,7 +86,15 @@
     </div>
   </div>
 </div>
-<div class="toolbar">
+<div class="edit" *ngIf="editMode">
+  <app-vehicle-edit
+    (cancelEdit)="cancelEditMode($event)"
+    [vehicle]="vehicle"
+    [advertisment]="card"
+  ></app-vehicle-edit>
+</div>
+
+<div class="toolbar" *ngIf="!editMode">
   <button [routerLink]="'/myAuc'" class="button-19 mr-5">
     Back to my garage
   </button>
@@ -109,7 +103,7 @@
   </button>
   <button
     *ngIf="checkIfOwner()"
-    [routerLink]="'/adv/1'"
+    (click)="editToggle()"
     class="button-19 mr-5"
     style="background-color: rgb(190, 190, 86)"
   >
@@ -124,3 +118,4 @@
     Delete advertisment
   </button>
 </div>
+

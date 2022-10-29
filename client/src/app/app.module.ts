@@ -38,6 +38,7 @@ import { VehicleCardAuctionComponent } from './vehicle-card-auction/vehicle-card
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { MyOffersComponent } from './my-offers/my-offers.component';
+import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { MyOffersComponent } from './my-offers/my-offers.component';
     AboutComponent,
     ContactComponent,
     MyOffersComponent,
+    VehicleEditComponent,
   ],
   imports: [
     BrowserModule,

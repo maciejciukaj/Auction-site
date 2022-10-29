@@ -1,13 +1,13 @@
 .login-box {
   font-family: "Montserrat", sans-serif;
   font-weight: 200;
-  position: relative;
-  margin: auto;
-
+  position: fixed;
+  top: 50%;
+  left: 50%;
   width: 70%;
-
   padding: 40px;
-
+  max-width: 1200px;
+  transform: translate(-50%, -50%);
   background: rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);

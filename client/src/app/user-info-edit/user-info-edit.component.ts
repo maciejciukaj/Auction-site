@@ -58,7 +58,6 @@ export class UserInfoEditComponent implements OnInit {
   }
 
   editUserInfo() {
-    // if (this.editForm.valid) {
     if (
       this.editForm.get('firstname').valid ||
       this.editForm.get('lastname').valid ||
@@ -80,9 +79,6 @@ export class UserInfoEditComponent implements OnInit {
         }
       );
     }
-    // } else {
-    //   this.toastr.error('Correct your data');
-    // }
   }
 
   get f() {

@@ -1,4 +1,4 @@
-<div *ngIf="!editMode" class="container">
+<div *ngIf="!editMode" class="container data">
   <div *ngIf="accountService.currentUser$ | async as user">
     <h1>{{ welcome }},&nbsp; {{ user.userName | uppercase }} !</h1>
   </div>
@@ -11,7 +11,7 @@
         >
       </li>
       <li>
-        <span >Last name: {{ currentUser?.lastName }}</span>
+        <span>Last name: {{ currentUser?.lastName }}</span>
       </li>
       <li>
         <span>Email: {{ currentUser?.email }}</span>
@@ -27,45 +27,41 @@
   <button (click)="editPasswordMode()" class="btn btn-warning">
     Change password
   </button>
+  <div *ngIf="passwordMode" class="right login-box password">
+    <form
+      #passwordChangeForm="ngForm"
+      autocomplete="off"
+      (ngSubmit)="changePassword(passwordChangeForm)"
+    >
+      <div class="user-box">
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="newUserPassword.oldPassword"
+          required=""
+        />
+        <label>Current password</label>
+      </div>
+      <div class="user-box">
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="newUserPassword.newPassword"
+          required=""
+        />
+        <label>New password</label>
+      </div>
+      <button class="blue-light" type="submit">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>Change
+      </button>
+    </form>
+  </div>
 </div>
 <div *ngIf="editMode">
   <app-user-info-edit
     (cancelEdit)="cancelEditMode($event)"
   ></app-user-info-edit>
-</div>
-<div *ngIf="passwordMode" class="right login-box">
-  <form
-    #passwordChangeForm="ngForm"
-    autocomplete="off"
-    (ngSubmit)="changePassword(passwordChangeForm)"
-  >
-    <div class="user-box">
-      <input
-        type="password"
-        name="password"
-        [(ngModel)]="newUserPassword.oldPassword"
-        required=""
-      />
-      <label>Current password</label>
-    </div>
-    <div class="user-box">
-      <input
-        type="password"
-        name="password"
-        [(ngModel)]="newUserPassword.newPassword"
-        required=""
-      />
-      <label>New password</label>
-    </div>
-    <div class="user-box">
-      <input type="password" name="password" required="" />
-      <label>Repeat new password</label>
-    </div>
-    <button class="blue-light" type="submit">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>Change
-    </button>
-  </form>
 </div>

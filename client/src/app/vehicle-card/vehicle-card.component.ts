@@ -22,6 +22,7 @@ export class VehicleCardComponent implements OnInit {
   album: any = [];
   owner: any = {};
   name: any;
+  editMode: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -61,6 +62,11 @@ export class VehicleCardComponent implements OnInit {
     this.album.sort((a, b) => a.position - b.position);
     console.log(this.album);
   }
+  cancelEditMode(event: boolean) {
+    this.editMode = event;
+    this.album = [];
+    this.getCard();
+  }
 
   getId() {
     this.activatedRoute.paramMap.subscribe((params) => {
@@ -81,8 +87,6 @@ export class VehicleCardComponent implements OnInit {
         .getVehicleById(this.card.advertismentId)
         .subscribe((response) => {
           this.vehicle = response;
-          //this.cardService.getVehicleById
-
           this.saveLightboxPhotos();
         });
     });
@@ -130,5 +134,9 @@ export class VehicleCardComponent implements OnInit {
     if (this.owner.username == this.name.userName) {
       return true;
     } else return false;
+  }
+
+  editToggle() {
+    this.editMode = !this.editMode;
   }
 }

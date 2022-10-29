@@ -20,4 +20,5 @@ export class AdvertismentService {
   getNumberOfAdvertisments() {
     return this.http.get(this.baseUrl + 'getNumberOfCards');
   }
+  
 }

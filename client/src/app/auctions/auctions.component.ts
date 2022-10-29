@@ -88,10 +88,6 @@ export class AuctionsComponent implements OnInit {
       .get('https://localhost:5001/api/vehicle/getVehicle/' + id)
       .subscribe((response) => {
         this.vehicles.push(response), this.sortVehicles();
-
-        /*  if (this.vehicles.length == 5) {
-          this.sortVehicles();
-        }*/
       });
   }
 

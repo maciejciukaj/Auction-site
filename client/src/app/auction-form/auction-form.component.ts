@@ -5,8 +5,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
-import { AdvertismentClass } from '../_models/advertisment';
-import { advFormControl } from '../_models/advFormControl';
 import {
   BrandClass,
   ColorClass,
@@ -76,8 +74,6 @@ export class AuctionFormComponent implements OnInit {
     if (this.step == 3) {
       this.router.navigateByUrl('/main');
     }
-    // console.log(this.previewPhotos);
-    // console.log(this.addedPhotos);
   }
 
   previousStep() {
@@ -106,8 +102,6 @@ export class AuctionFormComponent implements OnInit {
       } else {
         this.toastr.error('You reached max 8 photos');
       }
-      // console.log(this.previewPhotos);
-      //console.log(this.addedPhotos);
       this.resetForm();
 
       if (this.previewPhotos.length == 1)
@@ -124,7 +118,6 @@ export class AuctionFormComponent implements OnInit {
   }
 
   savePhoto(formValue, file: File, main: boolean, position: number) {
-    // if (this.formTemplate.valid) {
     var filePath = `images/${file.name
       .split('.')
       .slice(0, -1)
@@ -150,11 +143,6 @@ export class AuctionFormComponent implements OnInit {
         })
       )
       .subscribe();
-
-    // this.nextStep();
-    // } else {
-    // this.toastr.error('Add at least one photo');
-    //}
   }
 
   saveList() {
@@ -197,7 +185,7 @@ export class AuctionFormComponent implements OnInit {
       .subscribe({
         next: (response) => (
           (this.pass = response),
-          ((this.vehicle.userId = this.pass.userId), this.addVehicle()) //tu ma byc jeszcze wywolanie funkcji add Vehicle, ogarnac cascade i walidacje hasla
+          ((this.vehicle.userId = this.pass.userId), this.addVehicle())
         ),
         error: (error) => console.log(error),
       });

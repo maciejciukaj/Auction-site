@@ -21,8 +21,6 @@ namespace API.Controllers
                 IsMain = photo.IsMain,
                 Position = photo.Position,
                 VehicleId = photo.VehicleId
-
-
             };
             _context.Photos.Add(newPhoto);
             await _context.SaveChangesAsync();

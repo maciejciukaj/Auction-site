@@ -1,0 +1,149 @@
+<div class="container mt-4">
+  <h1 class="mb-4">Vehicle:</h1>
+  <form
+    [formGroup]="vehicleDetailsControl"
+    (ngSubmit)="editVehicle()"
+    autocomplete="off"
+    class="vehicle"
+  >
+    <table>
+      <tr>
+        <th><label>Type</label></th>
+        <td class="space">
+          <select formControlName="type" name="type" required="">
+            <option *ngFor="let elem of types.typeList" [ngValue]="elem">
+              {{ elem }}
+            </option>
+          </select>
+        </td>
+        <td><label>Gearbox</label></td>
+        <td>
+          <select formControlName="gearbox" name="gearbox" required="">
+            <option *ngFor="let elem of gearbox.gearboxList" [ngValue]="elem">
+              {{ elem }}
+            </option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label>Brand</label></td>
+        <td class="space">
+          <select formControlName="brand" name="brand" required="">
+            <option *ngFor="let elem of brands.brandList" [ngValue]="elem">
+              {{ elem }}
+            </option>
+          </select>
+        </td>
+        <td><label>Color</label></td>
+        <td>
+          <select formControlName="color" name="color" required="">
+            <option *ngFor="let elem of colors.colorList" [ngValue]="elem">
+              {{ elem }}
+            </option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label>Model</label></td>
+        <td class="space">
+          <input
+            formControlName="model"
+            class="ipt space"
+            type="text"
+            placeholder="{{ vehicle.model }}"
+          />
+        </td>
+        <td><label>Engine</label></td>
+        <td>
+          <input
+            formControlName="engine"
+            class="ipt space"
+            type="text"
+            placeholder="{{ vehicle.engine }} cm3"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td><label>Production year</label></td>
+        <td class="space">
+          <input
+            formControlName="productionYear"
+            class="ipt space"
+            type="text"
+            placeholder="{{ vehicle.productionYear }}"
+          />
+        </td>
+        <td><label>Mileage</label></td>
+        <td>
+          <input
+            formControlName="mileage"
+            class="ipt"
+            type="text"
+            placeholder="{{ vehicle.mileage }} km"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td><label>Fuel</label></td>
+        <td class="space">
+          <select formControlName="fuel" name="fuel" required="">
+            <option *ngFor="let elem of fuel.fuelList" [ngValue]="elem">
+              {{ elem }}
+            </option>
+          </select>
+        </td>
+        <td><label>Is crashed</label></td>
+        <td>
+          <select formControlName="isCrashed" name="isCrashed" required="">
+            <option [ngValue]="false">false</option>
+            <option [ngValue]="true">true</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+    <button type="submit" class="button-19 mt-4">Save changes</button>
+  </form>
+
+  <h1 class="mb-4 mt-5">Advertisment:</h1>
+  <form
+    [formGroup]="advertismentDetailsControl"
+    (ngSubmit)="editAdvertisment()"
+  >
+    <table>
+      <tr>
+        <td><label>Title</label></td>
+        <td>
+          <input
+            formControlName="title"
+            class="ipt"
+            type="text"
+            placeholder="{{ advertisment.title }}"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td><label>Price</label></td>
+        <td>
+          <input
+            formControlName="price"
+            class="ipt"
+            type="text"
+            placeholder="{{ advertisment.price }}"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td><label>Description</label></td>
+      </tr>
+    </table>
+
+    <textarea formControlName="description" class="mb-4 desc"></textarea>
+    <br />
+    <button type="submit" class="button-19 mb-4">Save changes</button>
+  </form>
+</div>
+<div class="toolbar">
+  <button (click)="cancel()" class="button-19">
+    Back to advertisment
+  </button>
+</div>

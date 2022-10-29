@@ -3,6 +3,7 @@ using API.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using API.DTOs;
 
 namespace API.Controllers
 {
@@ -68,6 +69,23 @@ namespace API.Controllers
 
             
         }
+
+        [HttpPut("editCard")]
+        [AllowAnonymous]
+        public async Task<IActionResult> EditAdvertisment(AdvertismentEditDto advertismentEdit){
+            var advertisment = await _context.Advertisments.FirstOrDefaultAsync(i => i.AdvertismentId == advertismentEdit.AdvertismentId);
+            advertisment.Title = advertismentEdit.Title ?? advertisment.Title;
+            advertisment.Price = advertismentEdit.Price ?? advertisment.Price;
+            advertisment.Description = advertismentEdit.Description ?? advertisment.Description;
+            try{
+                await _context.SaveChangesAsync();
+                return Ok(advertismentEdit);
+            }catch{
+                 return BadRequest("Advertisment was not updated");
+            }
+
+        }
+
     
     }
 }

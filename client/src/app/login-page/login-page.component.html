@@ -1,4 +1,4 @@
-<div class="login-box">
+<div class="login-box" *ngIf="!resetMode">
   <h2>Login</h2>
   <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
     <div class="user-box">
@@ -18,6 +18,7 @@
         required=""
       />
       <label>Password</label>
+      <div class="reset" (click)="toggleReset()">Forgot your password?</div>
       <div class="capslock" *ngIf="capslockOn">Caps lock on</div>
     </div>
     <button class="blue-light" type="submit">
@@ -25,6 +26,31 @@
       <span></span>
       <span></span>
       <span></span>Login
+    </button>
+  </form>
+</div>
+
+<div class="login-box" *ngIf="resetMode">
+  <div class="back mb-3" (click)="toggleReset()">Back</div>
+  <h2>Recovery</h2>
+  <form #resetForm="ngForm" (ngSubmit)="showEmail()" autocomplete="off">
+    <div class="user-box">
+      <input
+        [(ngModel)]="email.email"
+        type="text"
+        name="email"
+        required=""
+        value=""
+      />
+      <label>Email</label>
+    </div>
+    <div class="capslock" *ngIf="capslockOn">Caps lock on</div>
+
+    <button class="blue-light" type="submit">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>Send
     </button>
   </form>
 </div>

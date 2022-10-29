@@ -6,11 +6,8 @@ import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-d
 import { PhotoLightbox } from '../_models/lightbox';
 import { AuctionService } from '../_services/auction.service';
 import { CardService } from '../_services/card.service';
-import { LightboxOverlayComponent } from 'ngx-lightbox/lightbox-overlay.component';
 import { OfferService } from '../_services/offer.service';
 import { AccountService } from '../_services/account.service';
-import { HttpClient } from '@microsoft/signalr';
-import { identifierModuleUrl } from '@angular/compiler';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -64,7 +61,6 @@ export class VehicleCardAuctionComponent implements OnInit {
     console.log(this.checkIfHighestBidder());
   }
   open(index: number): void {
-    // open lightbox
     this._lightbox.open(this.album, index);
   }
 
@@ -77,7 +73,6 @@ export class VehicleCardAuctionComponent implements OnInit {
     }
 
     this.album.sort((a, b) => a.position - b.position);
-    // console.log(this.album);
   }
 
   getId() {
@@ -99,10 +94,6 @@ export class VehicleCardAuctionComponent implements OnInit {
         .getVehicleById(this.card.vehicleId)
         .subscribe((response) => {
           this.vehicle = response;
-          //this.cardService.getVehicleById
-          // console.log(this.card);
-          //console.log(this.vehicle);
-
           this.saveLightboxPhotos();
         });
     });
@@ -142,7 +133,6 @@ export class VehicleCardAuctionComponent implements OnInit {
         this.newPrice.auctionId = this.auctionId;
         this.newPrice.userOffer = this.bid.offerAmount;
         this.newPrice.username = this.name.userName;
-        //  this.toastr.success('Offer accepted');
         console.log(this.newPrice);
 
         this.offerService.updateCurrentPrice(this.newPrice).subscribe(
@@ -187,12 +177,8 @@ export class VehicleCardAuctionComponent implements OnInit {
   }
   checkIfHighestBidder() {
     if (this.name.userName === this.card.currentBidder) {
-    
-
       return true;
     } else {
-      
-
       return false;
     }
   }
