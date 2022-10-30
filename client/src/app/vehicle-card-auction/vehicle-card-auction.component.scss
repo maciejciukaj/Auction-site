@@ -288,3 +288,19 @@ a {
   -o-transform: rotateX(0deg) translateZ(25px);
   transform: rotateX(0deg) translateZ(25px);
 }
+.timer {
+  margin: auto;
+  width: 90%;
+  margin-top: 3%;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  color: wheat;
+  position: relative;
+  bottom: 0;
+  border: solid 3px #03e9f4;
+  border-radius: 25px;
+}
+.spec {
+  font-size: 110%;
+}

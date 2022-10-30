@@ -57,6 +57,10 @@
           <th>Gearbox:</th>
           <th class="details">{{ vehicle?.gearbox }}</th>
         </tr>
+        <tr>
+          <td>Ready to drive:</td>
+          <td class="details">{{ vehicle?.isCrashed ? "❌" : "✅" }}</td>
+        </tr>
       </table>
     </div>
   </div>
@@ -118,4 +122,3 @@
     Delete advertisment
   </button>
 </div>
-

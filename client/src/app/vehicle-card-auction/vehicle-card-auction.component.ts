@@ -10,6 +10,7 @@ import { OfferService } from '../_services/offer.service';
 import { AccountService } from '../_services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup } from '@angular/forms';
+import { TimerService } from '../_services/timer.service';
 
 @Component({
   selector: 'app-vehicle-card-auction',
@@ -28,6 +29,8 @@ export class VehicleCardAuctionComponent implements OnInit {
   name: any;
   newPrice: any = {};
   pass: any = {};
+  interval;
+  timeLeft: string;
 
   offer = new FormGroup({
     price: new FormControl(null),
@@ -35,7 +38,7 @@ export class VehicleCardAuctionComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-
+    public timerService: TimerService,
     private confirmationDialogService: ConfirmationDialogService,
     config: NgbCarouselConfig,
     private _lightbox: Lightbox,
@@ -85,7 +88,8 @@ export class VehicleCardAuctionComponent implements OnInit {
     this.getId();
     this.cardService.getAuctionById(this.auctionId).subscribe((response) => {
       this.card = response;
-
+      this.timeLeft = this.timerService.differenceBetweenDates(this.card.end);
+      this.startTimer();
       this.cardService.getUserById(this.card.userId).subscribe((response) => {
         this.owner = response;
         console.log(this.owner);
@@ -120,6 +124,19 @@ export class VehicleCardAuctionComponent implements OnInit {
           'User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'
         )
       );
+  }
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      this.timeLeft = this.timerService.differenceBetweenDates(this.card.end);
+      if (this.timeLeft == '0') {
+        this.pauseTimer();
+      }
+    }, 1000);
+  }
+
+  pauseTimer() {
+    clearInterval(this.interval);
   }
 
   addBid(offer: number) {
@@ -181,5 +198,8 @@ export class VehicleCardAuctionComponent implements OnInit {
     } else {
       return false;
     }
+  }
+  checkIfCrashed(check: boolean) {
+    return check ? '❌' : '✅';
   }
 }

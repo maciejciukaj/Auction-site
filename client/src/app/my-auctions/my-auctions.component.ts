@@ -76,7 +76,7 @@ export class MyAuctionsComponent implements OnInit {
         next: (response) => {
           this.auctions = response;
           console.log(this.auctions);
-
+          this.auctions.sort((a, b) => a.auctionId - b.auctionId);
           this.getMainPhotos(this.auctions, true);
           this.getPages(this.auctions);
         },
@@ -126,6 +126,8 @@ export class MyAuctionsComponent implements OnInit {
 
   toggleAuction() {
     this.isAuction = !this.isAuction;
+    console.log(this.auctions);
+
     this.min = 0;
     this.max = 5;
   }

@@ -8,7 +8,7 @@ import { AdvertismentsComponent } from './advertisments/advertisments.component'
 import { AuctionsComponent } from './auctions/auctions.component';
 import { HomeComponent } from './home/home.component';
 import { MainComponent } from './main/main.component';
-import { RegisterComponent } from './minigame/minigame.component';
+
 import { NavComponent } from './nav/nav.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -47,7 +47,7 @@ import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
     AuctionsComponent,
     HomeComponent,
     MainComponent,
-    RegisterComponent,
+
     NavComponent,
     LoginPageComponent,
     RegisterPageComponent,

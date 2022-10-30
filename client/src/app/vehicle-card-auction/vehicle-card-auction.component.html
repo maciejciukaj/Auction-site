@@ -23,42 +23,49 @@
     <div class="spec">
       <table>
         <tr>
-          <th>Brand:</th>
-          <th class="details">{{ vehicle?.brand }}</th>
-          <th>Power:</th>
-          <th class="details">{{ vehicle?.power }} hp</th>
+          <td>Brand:</td>
+          <td class="details">{{ vehicle?.brand }}</td>
+          <td>Power:</td>
+          <td class="details">{{ vehicle?.power }} hp</td>
         </tr>
         <tr>
-          <th>Model:</th>
-          <th class="details">{{ vehicle?.model }}</th>
-          <th>Engine capacity:</th>
-          <th class="details" style="width: 150px">
+          <td>Model:</td>
+          <td class="details">{{ vehicle?.model }}</td>
+          <td>Engine capacity:</td>
+          <td class="details" style="width: 150px">
             {{ vehicle?.engine }} cm3
-          </th>
+          </td>
         </tr>
         <tr>
-          <th>Production year:</th>
-          <th class="details">
+          <td>Production year:</td>
+          <td class="details">
             {{ vehicle?.productionYear }}
-          </th>
-          <th>Color:</th>
-          <th class="details">{{ vehicle?.color }}</th>
+          </td>
+          <td>Color:</td>
+          <td class="details">{{ vehicle?.color }}</td>
         </tr>
         <tr>
-          <th>Mileage:</th>
-          <th class="details">{{ vehicle?.mileage }} km</th>
+          <td>Mileage:</td>
+          <td class="details">{{ vehicle?.mileage }} km</td>
         </tr>
         <tr>
-          <th>Fuel:</th>
-          <th class="details">{{ vehicle?.fuel }}</th>
+          <td>Fuel:</td>
+          <td class="details">{{ vehicle?.fuel }}</td>
         </tr>
         <tr>
-          <th>Gearbox:</th>
-          <th class="details">{{ vehicle?.gearbox }}</th>
+          <td>Gearbox:</td>
+          <td class="details">{{ vehicle?.gearbox }}</td>
+        </tr>
+        <tr>
+          <td>Ready to drive: </td>
+          <td class="details">{{ vehicle?.isCrashed ? "❌" : "✅" }}</td>
         </tr>
       </table>
     </div>
   </div>
+</div>
+<div class="timer">
+  {{ timeLeft }}
 </div>
 <div class="auction mb-3">
   <div class="row">
@@ -104,6 +111,7 @@
     </form>
   </div>
 </div>
+
 <div class="rest">
   <h1 class="mt-2">Description</h1>
   <div class="description mt-3">

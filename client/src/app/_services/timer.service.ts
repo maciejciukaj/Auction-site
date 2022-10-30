@@ -7,7 +7,11 @@ import { Injectable } from '@angular/core';
 export class TimerService {
   format: string = 'MM/dd/yyyy HH:mm:ss';
   locale: string = 'en-US';
-  constructor() {}
+  now: Date;
+  nowDate: string;
+  constructor() {
+    this.nowDate = this.getTime(new Date());
+  }
 
   getTime(date) {
     return formatDate(date, this.format, this.locale);
@@ -31,5 +35,14 @@ export class TimerService {
     valStr += hr != 0 ? hr + ' hr ' : '';
     valStr += min != 0 ? min + ' min ' : '';
     return valStr;
+  }
+  differenceBetweenDates(date2) {
+    this.nowDate = this.getTime(new Date());
+    var diff: any;
+    //  console.log(date1 + ' ' + date2);
+
+    diff = new Date(date2).getTime() - new Date(this.nowDate).getTime();
+
+    return this.transform(diff / 1000);
   }
 }

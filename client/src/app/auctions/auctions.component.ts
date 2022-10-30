@@ -21,8 +21,7 @@ export class AuctionsComponent implements OnInit {
   currentPage: any = 1;
   numberOfAllCards: any;
   vehiclesSorted: any = [];
-  now: Date;
-  nowDate: string;
+ 
 
   pageId: any;
   sub: any;
@@ -52,8 +51,7 @@ export class AuctionsComponent implements OnInit {
       this.getNumberOfAllAuctions();
       this.getAuction();
     });
-    this.nowDate = this.timerService.getTime(new Date());
-    console.log(this.nowDate);
+    
   }
   ngOnDestroy() {
     this.sub.unsubscribe();
@@ -83,12 +81,7 @@ export class AuctionsComponent implements OnInit {
         (response) => {
           this.auctions = response;
 
-          console.log(
-            this.differenceBetweenDates(
-              this.timerService.getTime(this.auctions[0].start),
-              '10/12/2022 13:47:22'
-            )
-          );
+         
 
           for (var i = 0; i < this.auctions.length; i++) {
             this.getVehicles(this.auctions[i].vehicleId);
@@ -116,14 +109,7 @@ export class AuctionsComponent implements OnInit {
     return op;
   }
 
-  differenceBetweenDates(date1, date2) {
-    var diff: any;
-    //  console.log(date1 + ' ' + date2);
-
-    diff = new Date(date2).getTime() - new Date(date1).getTime();
-
-    return this.timerService.transform(diff / 1000);
-  }
+ 
 
   addPageNumber() {
     if (this.pageId * 6 + 1 <= this.numberOfAllCards) {
