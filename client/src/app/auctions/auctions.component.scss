@@ -33,7 +33,7 @@
 }
 .wsk-cp-img img {
   width: 100%;
- 
+
   transition: all 0.2s ease-in-out;
   border-radius: 6px;
 }
@@ -235,4 +235,10 @@ a.buy-btn:focus {
 .eye {
   content: "\f1b9"; /* FontAwesome Unicode */
   font-family: FontAwesome;
+}
+.timer {
+  text-align: center;
+  padding-bottom: 10px;
+  font-weight: 700;
+  font-size: 17px;
 }

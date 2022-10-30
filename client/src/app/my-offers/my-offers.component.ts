@@ -11,17 +11,22 @@ import { OfferService } from '../_services/offer.service';
 })
 export class MyOffersComponent implements OnInit {
   currentUser: any;
-  highestOffers: object;
+  highestOffers: any;
   max: number = 5;
   min: number = 0;
   auctionIdList: any = [];
   mappedIdList: any;
   auctions: any = [];
+  public now: Date = new Date();
   constructor(
     private offerService: OfferService,
     private accountService: AccountService,
     private auctionService: AuctionService
-  ) {}
+  ) {
+    setInterval(() => {
+      this.now = new Date();
+    }, 1);
+  }
 
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe(
@@ -48,6 +53,7 @@ export class MyOffersComponent implements OnInit {
       .subscribe((response) => {
         this.highestOffers = response;
         console.log(this.highestOffers);
+        this.highestOffers.sort((a, b) => a.key - b.key);
         this.getOffersDetails();
       });
   }

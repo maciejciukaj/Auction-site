@@ -2,7 +2,7 @@
   <div class="shell">
     <div class="container">
       <div class="row">
-        <div class="col-md-4" *ngFor="let adv of auctions; let i = index">
+        <div class="col-md-4" *ngFor="let auc of auctions; let i = index">
           <div class="wsk-cp-product">
             <div class="wsk-cp-img">
               <img
@@ -26,18 +26,21 @@
                   }}
                 </p>
               </div>
+              <div class="timer">
+                ⏰ {{ differenceBetweenDates(nowDate, auc.end) }}
+              </div>
               <div class="card-footer">
                 <div class="wcf-left">
                   <span class="price"
-                    >⏰{{
-                      auctionService.numberWithSpaces(adv?.currentPrice)
+                    >{{
+                      auctionService.numberWithSpaces(auc?.currentPrice)
                     }}
                     zł</span
                   >
                 </div>
                 <div class="wcf-right">
                   <a
-                    [routerLink]="['/vehicleA', adv?.auctionId]"
+                    [routerLink]="['/vehicleA', auc?.auctionId]"
                     class="buy-btn eye"
                   >
                     <i class="fa-sharp fa-solid fa-car"></i

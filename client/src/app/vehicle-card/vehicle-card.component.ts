@@ -108,11 +108,7 @@ export class VehicleCardComponent implements OnInit {
         }
       })
 
-      .catch(() =>
-        console.log(
-          'User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'
-        )
-      );
+      .catch(() => console.log('User dismissed the dialog'));
   }
 
   collapse() {
