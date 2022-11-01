@@ -36,13 +36,11 @@ export class TimerService {
     valStr += min != 0 ? min + ' min ' : '';
     return valStr;
   }
+  
   differenceBetweenDates(date2) {
     this.nowDate = this.getTime(new Date());
     var diff: any;
-    //  console.log(date1 + ' ' + date2);
-
     diff = new Date(date2).getTime() - new Date(this.nowDate).getTime();
-
     return this.transform(diff / 1000);
   }
 }

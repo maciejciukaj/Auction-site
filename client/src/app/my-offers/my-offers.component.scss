@@ -7,7 +7,7 @@ h1 {
 .elem {
   background: rgb(34, 34, 34);
   color: white;
-
+  border-radius: 20px;
   width: 20vw;
   max-width: 300px;
   height: 300px;
@@ -17,7 +17,7 @@ h1 {
 
   text-decoration: none;
   font-size: 18px;
-  border-color: rgb(87, 86, 85);
+  border-color: rgb(63, 60, 63);
 }
 .elem:active {
   border-style: outset;
@@ -30,7 +30,8 @@ h1 {
 }
 .price {
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 400;
+  height: 40px;
 }
 .offers {
   display: flex;
@@ -49,5 +50,14 @@ h1 {
   }
 }
 .ifWinner {
-  border: solid 1px yellow;
+  
+  height: 85%;
+  margin-top: 5%;
+}
+.timer {
+  text-align: center;
+  margin-top: 20px;
+  background-color: #667abb;
+  border-radius: 25px;
+  padding: 5px;
 }

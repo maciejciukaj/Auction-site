@@ -12,10 +12,7 @@ export class AppComponent implements OnInit {
   title = 'Auction site';
   users: any;
 
-  constructor(
-    private accountService: AccountService,
-    private http: HttpClient
-  ) {}
+  constructor(private accountService: AccountService) {}
 
   ngOnInit() {
     this.setCurrentUser();

@@ -1,0 +1,115 @@
+.title {
+  text-align: center;
+  color: white;
+  font-size: 90px;
+  font-weight: 300;
+  border-bottom: 8px solid rgba(0, 0, 0, 0.348);
+  width: 80%;
+  padding-bottom: 2%;
+  margin: auto;
+  margin-top: 20px;
+  border-radius: 20px;
+}
+.address {
+  color: white;
+  font-size: 30px;
+  font-weight: 400;
+  display: inline-block;
+  margin-top: 5%;
+}
+.message {
+  color: white;
+  font-size: 30px;
+  font-weight: 400;
+  float: right;
+  margin-top: 2%;
+}
+.msg-title {
+  text-align: center;
+  font-size: 45px;
+  margin-bottom: 30px;
+}
+textarea {
+  background: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  font-size: 17px;
+  color: #fff;
+  width: 100%;
+  height: 150px;
+  resize: none;
+
+  border-radius: 10px;
+}
+input {
+  background: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  font-size: 18px;
+  color: #fff;
+  width: 100%;
+  height: 50px;
+}
+label {
+  font-size: 20px;
+}
+.button-19 {
+  appearance: button;
+  background-color: #1899d6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter 0.2s;
+  margin-top: 20px;
+
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.button-19:after {
+  background-clip: padding-box;
+  background-color: #1cb0f6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.button-19:main,
+.button-19:focus {
+  user-select: auto;
+}
+
+.button-19:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
+
+.button-19:disabled {
+  cursor: auto;
+}

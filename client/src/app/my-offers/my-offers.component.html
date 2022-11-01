@@ -1,11 +1,11 @@
 <div class="container">
-  <h1>My offers</h1>
+  <h1>My Offers</h1>
   <div class="row">
     <div
       class="offers col-lg-4 mt-5"
       *ngFor="let auc of auctions; let i = index"
     >
-      <div class="ifWinner" *ngIf="checkIfUserIsWinning(auc, i)"></div>
+      <div class="ifWinner" *ngIf="checkIfUserIsWinning(auc, i)">👑</div>
       <button class="elem" [routerLink]="['/vehicleA', auc?.auctionId]">
         <div class="photo">
           <span class="mr-3 title">{{ auc.title }}</span>
@@ -19,6 +19,9 @@
             Current price:
             {{ offerService.numberWithSpaces(auc.currentPrice) }} $
           </div>
+        </div>
+        <div class="timer">
+          {{ timerService.differenceBetweenDates(auc.end) }}
         </div>
       </button>
     </div>

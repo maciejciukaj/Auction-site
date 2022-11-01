@@ -201,8 +201,6 @@ export class AuctionFormComponent implements OnInit {
           (this.auction.vehicleId = this.pass.vehicleId),
           (this.formTemplate.value.vehicleId = this.pass.vehicleId),
           (this.auction.userId = this.pass.userId),
-          console.log(this.auction),
-          // this.toastr.success('super'),
           this.addAuction()
         ),
         error: (error) => console.log(error),

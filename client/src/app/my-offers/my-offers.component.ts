@@ -3,6 +3,7 @@ import { log } from 'console';
 import { AccountService } from '../_services/account.service';
 import { AuctionService } from '../_services/auction.service';
 import { OfferService } from '../_services/offer.service';
+import { TimerService } from '../_services/timer.service';
 
 @Component({
   selector: 'app-my-offers',
@@ -21,12 +22,9 @@ export class MyOffersComponent implements OnInit {
   constructor(
     private offerService: OfferService,
     private accountService: AccountService,
-    private auctionService: AuctionService
-  ) {
-    setInterval(() => {
-      this.now = new Date();
-    }, 1);
-  }
+    private auctionService: AuctionService,
+    public timerService: TimerService
+  ) {}
 
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe(
@@ -58,8 +56,6 @@ export class MyOffersComponent implements OnInit {
       });
   }
   checkIfUserIsWinning(auction: any, i: number) {
-    //console.log(auction.currentPrice + ' - ' + this.highestOffers[i].value);
-
     if (auction.currentPrice == this.highestOffers[i].value) {
       return true;
     } else {

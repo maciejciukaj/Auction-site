@@ -1,1 +1,20 @@
-<p>contact works!</p>
+<div class="container">
+  <h1 class="title">Contact</h1>
+
+  <div class="address">
+    CarClub<br />ul. Lipowa 1<br />22-100, Chełm<br />tel: 123 123 123
+  </div>
+  <div class="message">
+    <h2 class="msg-title">Send us a message</h2>
+    <form [formGroup]="email" (ngSubmit)="sendEmail()">
+      <label>Your E-mail</label>
+      <br />
+      <input formControlName="subject" type="text" />
+      <br />
+      <label>Message:</label>
+      <br />
+      <textarea formControlName="body"></textarea>
+      <button class="button-19" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
