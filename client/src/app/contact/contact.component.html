@@ -2,19 +2,21 @@
   <h1 class="title">Contact</h1>
 
   <div class="address">
-    CarClub<br />ul. Lipowa 1<br />22-100, Chełm<br />tel: 123 123 123
+    <div class="carclub">CarClub</div>
+    <div class="carclub-address">ul. Lipowa 1</div>
+    <div class="city">22-100, Chełm</div>
+    <div class="phone">tel: 123 123 123</div>
   </div>
   <div class="message">
-    <h2 class="msg-title">Send us a message</h2>
     <form [formGroup]="email" (ngSubmit)="sendEmail()">
-      <label>Your E-mail</label>
+      <label>Your e-mail:</label>
       <br />
       <input formControlName="subject" type="text" />
       <br />
       <label>Message:</label>
       <br />
       <textarea formControlName="body"></textarea>
-      <button class="button-19" type="submit">Submit</button>
+      <button class="button-19" type="submit">{{ sendingMessage }}</button>
     </form>
   </div>
 </div>

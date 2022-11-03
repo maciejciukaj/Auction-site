@@ -238,7 +238,13 @@ a.buy-btn:focus {
 }
 .timer {
   text-align: center;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
+  padding-top: 5px;
   font-weight: 700;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 10px;
   font-size: 17px;
+  background-color: #51a0d5d5;
+  border-radius: 25px;
 }

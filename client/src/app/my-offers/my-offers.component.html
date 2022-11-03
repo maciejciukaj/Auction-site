@@ -20,7 +20,7 @@
             {{ offerService.numberWithSpaces(auc.currentPrice) }} $
           </div>
         </div>
-        <div class="timer">
+        <div class="{{ styleClass }}">
           {{ timerService.differenceBetweenDates(auc.end) }}
         </div>
       </button>

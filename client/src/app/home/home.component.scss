@@ -1,6 +1,14 @@
-.photo {
-  width: 100%;
-  min-height: 50vh; //was 80%
-  background: url("/assets/mainPage/subaru.jpg") no-repeat;
-  background-size: 100%;
+.title {
+  color: whitesmoke;
+  font-size: 150px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 20px;
+}
+.subTitle {
+  color: whitesmoke;
+  font-size: 38px;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 20px;
 }

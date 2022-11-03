@@ -20,12 +20,7 @@ namespace API.Controllers
         public IActionResult SendEmail(EmailDto request)
         {
             _emailService.SendEmail(request);
-
-    
             return Ok();
-
-    
-    
         }
         
     }

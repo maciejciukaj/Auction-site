@@ -15,6 +15,7 @@ export class MyOffersComponent implements OnInit {
   highestOffers: any;
   max: number = 5;
   min: number = 0;
+  styleClass: string = "timer"
   auctionIdList: any = [];
   mappedIdList: any;
   auctions: any = [];
