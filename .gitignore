@@ -455,4 +455,4 @@ $RECYCLE.BIN/
 
 appsettings.json
 
-client\src\environments
+client/src/environments
