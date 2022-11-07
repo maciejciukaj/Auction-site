@@ -23,6 +23,7 @@ export class TimerService {
       day = Math.floor(miliseconds / cd),
       hr = Math.floor((miliseconds - day * cd) / ch),
       min = Math.round((miliseconds - day * cd - hr * ch) / 60);
+
     if (min === 60) {
       hr++;
       min = 0;
@@ -31,6 +32,7 @@ export class TimerService {
       day++;
       min = 0;
     }
+
     var valStr = day != 0 ? day + ' day(s) ' : '';
     valStr += hr != 0 ? hr + ' hr ' : '';
     valStr += min != 0 ? min + ' min ' : '';
@@ -48,6 +50,8 @@ export class TimerService {
     this.nowDate = this.getTime(new Date());
     var diff: any;
     diff = new Date(date2).getTime() - new Date(this.nowDate).getTime();
+    console.log(diff / 1000);
+
     return diff / 1000;
   }
 }

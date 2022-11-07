@@ -89,7 +89,6 @@ export class VehicleCardAuctionComponent implements OnInit {
     this.cardService.getAuctionById(this.auctionId).subscribe((response) => {
       this.card = response;
       this.timeLeft = this.timerService.differenceBetweenDates(this.card.end);
-      this.startTimer();
       this.cardService.getUserById(this.card.userId).subscribe((response) => {
         this.owner = response;
         console.log(this.owner);
@@ -125,20 +124,6 @@ export class VehicleCardAuctionComponent implements OnInit {
         )
       );
   }
-
-  startTimer() {
-    this.interval = setInterval(() => {
-      this.timeLeft = this.timerService.differenceBetweenDates(this.card.end);
-      if (this.timeLeft == '0') {
-        this.pauseTimer();
-      }
-    }, 1000);
-  }
-
-  pauseTimer() {
-    clearInterval(this.interval);
-  }
-
   addBid(offer: number) {
     this.offerService.getUserId(this.name.userName).subscribe((response) => {
       this.pass = response;

@@ -96,6 +96,12 @@ export class AdvertismentsComponent implements OnInit {
 
   getNumberOfAllAdvertisments() {
     var data = {
+      type: this.filter.type ?? '',
+      brand: this.filter.brand ?? '',
+      fuel: this.filter.fuel ?? '',
+      color: this.filter.color ?? '',
+      minYear: this.minValueYear,
+      maxYear: this.maxValueYear,
       minPrice: this.minValuePrice,
       maxPrice: this.maxValuePrice,
     };
@@ -113,6 +119,12 @@ export class AdvertismentsComponent implements OnInit {
 
   getAdvertisments() {
     var data = {
+      type: this.filter.type ?? '',
+      brand: this.filter.brand ?? '',
+      fuel: this.filter.fuel ?? '',
+      color: this.filter.color ?? '',
+      minYear: this.minValueYear,
+      maxYear: this.maxValueYear,
       minPrice: this.minValuePrice,
       maxPrice: this.maxValuePrice,
     };
@@ -183,7 +195,7 @@ export class AdvertismentsComponent implements OnInit {
     return this.pageId - 1 > 0 ? true : false;
   }
   checkNextPage() {
-    return this.pageId * 6 <= this.advertisments.length ? true : false;
+    return this.pageId * 6 < this.numberOfAllCards ? true : false;
   }
   expand() {
     var coll = document.getElementsByClassName('collapsible');
@@ -205,30 +217,31 @@ export class AdvertismentsComponent implements OnInit {
   filterCars() {
     this.vehicles = [];
     this.advertisments = [];
+    this.pageId = 1;
     this.getNumberOfAllAdvertisments();
     this.getAdvertisments();
   }
 
-  getFiltered() {
-    var data = {
-      type: this.filter.type ?? '',
-      brand: this.filter.brand ?? '',
-      fuel: this.filter.fuel ?? '',
-      color: this.filter.color ?? '',
-      minYear: this.minValueYear,
-      maxYear: this.maxValueYear,
-    };
+  // getFiltered() {
+  //   var data = {
+  //     type: this.filter.type ?? '',
+  //     brand: this.filter.brand ?? '',
+  //     fuel: this.filter.fuel ?? '',
+  //     color: this.filter.color ?? '',
+  //     minYear: this.minValueYear,
+  //     maxYear: this.maxValueYear,
+  //   };
 
-    var config = {
-      params: data,
-      headers: { Accept: 'application/json' },
-    };
-    console.log(data);
+  //   var config = {
+  //     params: data,
+  //     headers: { Accept: 'application/json' },
+  //   };
+  //   console.log(data);
 
-    this.http
-      .get('https://localhost:5001/api/vehicle/getFilteredVehicles', config)
-      .subscribe((response) => {
-        console.log(response);
-      });
-  }
+  //   this.http
+  //     .get('https://localhost:5001/api/vehicle/getFilteredVehicles', config)
+  //     .subscribe((response) => {
+  //       console.log(response);
+  //     });
+  // }
 }

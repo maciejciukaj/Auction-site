@@ -57,16 +57,17 @@
           <td class="details">{{ vehicle?.gearbox }}</td>
         </tr>
         <tr>
-          <td>Ready to drive: </td>
+          <td>Ready to drive:</td>
           <td class="details">{{ vehicle?.isCrashed ? "❌" : "✅" }}</td>
         </tr>
       </table>
     </div>
   </div>
 </div>
-<div class="timer">
-  {{ timeLeft }}
+<div class="timer" *ngIf="timerService.getSeconds(card.end) > 0">
+  {{ timerService.differenceBetweenDates(card.end) }}
 </div>
+<div class="ended" *ngIf="timerService.getSeconds(card.end) <= 0">Ended</div>
 <div class="auction mb-3">
   <div class="row">
     <div class="currentPrice col-md">
@@ -83,7 +84,11 @@
     >
       <div
         class="bid col-md"
-        *ngIf="!checkIfOwner() && !checkIfHighestBidder()"
+        *ngIf="
+          !checkIfOwner() &&
+          !checkIfHighestBidder() &&
+          timerService.getSeconds(card.end) > 0
+        "
       >
         Your offer:
         <input
@@ -100,7 +105,11 @@
       </div>
 
       <button
-        *ngIf="!checkIfOwner() && !checkIfHighestBidder()"
+        *ngIf="
+          !checkIfOwner() &&
+          !checkIfHighestBidder() &&
+          timerService.getSeconds(card.end) > 0
+        "
         class="btn col-sm mt-5"
         type="submit"
       >

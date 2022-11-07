@@ -24,7 +24,9 @@ namespace API.Controllers
         [HttpGet("getNumberOfCards")]
         [AllowAnonymous]
         public async Task<int> GetNumberOfCards([FromQuery] CardParams cardParams){
-            return await _context.Advertisments.Where(x => Convert.ToInt32(x.Price) >= cardParams.MinPrice && Convert.ToInt32(x.Price) <= cardParams.MaxPrice).CountAsync();
+            var query = _context.Advertisments.AsQueryable();
+            query = FilterRecords(query, cardParams);
+            return await query.CountAsync();
         } 
 
         [HttpGet("getCardsByPage/{page}")]
@@ -32,7 +34,7 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<Advertisment>>> getCardsByPage(int page,[FromQuery] CardParams cardParams){
             int startingPoint = ((page - 1 ) * 6);
             var query = _context.Advertisments.AsQueryable();
-            query = query.Where(x => Convert.ToInt32(x.Price) >= cardParams.MinPrice && Convert.ToInt32(x.Price) <= cardParams.MaxPrice);
+            query =  FilterRecords(query, cardParams);
             return await query.OrderBy(i => i.AdvertismentId).Skip(startingPoint).Take(6).ToListAsync();
         }
 
@@ -72,5 +74,20 @@ namespace API.Controllers
                  return BadRequest("Advertisment was not updated");
             }
         }
+    
+
+  private IQueryable<Advertisment> FilterRecords(IQueryable<Advertisment> query, CardParams cardParams){
+            query = query.Where(x => Convert.ToInt32(x.Price) >= cardParams.MinPrice && Convert.ToInt32(x.Price) <= cardParams.MaxPrice);
+            if(cardParams.Type!=null)
+            query = query.Where(x => x.Vehicle.Type == cardParams.Type);
+             if(cardParams.Brand!=null)
+            query = query.Where(x => x.Vehicle.Brand == cardParams.Brand);
+             if(cardParams.Fuel!=null)
+            query = query.Where(x => x.Vehicle.Fuel == cardParams.Fuel);
+             if(cardParams.Color!=null)
+            query = query.Where(x => x.Vehicle.Color == cardParams.Color);
+            query = query.Where(x => x.Vehicle.ProductionYear >= cardParams.MinYear &&  x.Vehicle.ProductionYear <= cardParams.MaxYear);
+            return  query;
+  }
     }
 }
