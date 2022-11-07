@@ -15,7 +15,7 @@ export class MyOffersComponent implements OnInit {
   highestOffers: any;
   max: number = 5;
   min: number = 0;
-  styleClass: string = "timer"
+  styleClass: string = 'timer';
   auctionIdList: any = [];
   mappedIdList: any;
   auctions: any = [];
@@ -40,6 +40,7 @@ export class MyOffersComponent implements OnInit {
         .getAuctionById(this.highestOffers[i].key)
         .subscribe((response) => {
           this.auctions.push(response);
+          this.checkIfAuctionActive();
           this.auctions.sort((a, b) => a.auctionId - b.auctionId);
           console.log(this.auctions);
         });
@@ -61,6 +62,13 @@ export class MyOffersComponent implements OnInit {
       return true;
     } else {
       return false;
+    }
+  }
+  checkIfAuctionActive() {
+    for (var i = 0; i < this.auctions.length; i++) {
+      if (this.timerService.getSeconds(this.auctions[i].end) < 0) {
+        this.auctions.splice(i, 1);
+      }
     }
   }
 }

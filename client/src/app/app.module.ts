@@ -39,6 +39,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { MyOffersComponent } from './my-offers/my-offers.component';
 import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
     ReactiveFormsModule,
     NgbModule,
     LightboxModule,
+    NgxSliderModule,
   ],
 
   providers: [
@@ -87,10 +89,9 @@ import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true,
-    
     },
   ],
-  entryComponents: [ ConfirmationDialogComponent ],
+  entryComponents: [ConfirmationDialogComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

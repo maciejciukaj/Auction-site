@@ -1,4 +1,5 @@
 using API.DTOs;
+using API.Helpers;
 using API.Interfaces;
 using API.Models;
 using AutoMapper;
@@ -107,6 +108,14 @@ namespace API.Controllers
             return newVehicle;
 
         
+        }
+
+        [HttpGet("getFilteredVehicles")]
+        public async Task<ActionResult<IEnumerable<VehicleDto>>> GetVehicles ([FromQuery] VehicleParams vehicleParams){
+            var vehicles =  await _vehicleRepository.GetFilteredVehicles(vehicleParams);
+           
+            return Ok(vehicles);
+
         }
 
         [HttpPut("editVehicle")]

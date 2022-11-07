@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from '../_services/account.service';
-import { isEmpty } from 'rxjs/operators';
+import { AfterViewInit, ElementRef } from '@angular/core';
 
 declare function setCar();
 
@@ -13,7 +13,13 @@ declare function setCar();
 })
 export class HomeComponent implements OnInit {
   registerMode = false;
-  constructor(public accountService: AccountService, private router: Router) {}
+  visible = false;
+
+  constructor(
+    public accountService: AccountService,
+    private router: Router,
+    private elementRef: ElementRef
+  ) {}
 
   ngOnInit(): void {
     this.checkIfLogged();
@@ -22,9 +28,8 @@ export class HomeComponent implements OnInit {
   registerToggle() {
     this.registerMode = !this.registerMode;
   }
-
-  setCarPos() {
-    setCar();
+  toggleCollapse(): void {
+    this.visible = !this.visible;
   }
 
   cancelRegisterMode(event: boolean) {
@@ -38,4 +43,6 @@ export class HomeComponent implements OnInit {
       x != null ? this.router.navigateByUrl('/main') : console.log()
     );
   }
+
+  
 }

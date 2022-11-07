@@ -17,8 +17,7 @@ export class AdvertismentService {
     return this.http.get(this.baseUrl + 'getCardsByPage/', page);
   }
 
-  getNumberOfAdvertisments() {
-    return this.http.get(this.baseUrl + 'getNumberOfCards');
+  getNumberOfAdvertisments(config: any) {
+    return this.http.get(this.baseUrl + 'getNumberOfCards', config);
   }
-  
 }

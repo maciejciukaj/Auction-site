@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Helpers;
 using API.Models;
 
 namespace API.Interfaces
@@ -17,6 +18,8 @@ namespace API.Interfaces
 
         void AddVehicle(Vehicle vehicle);
         Task<Vehicle> DeleteVehicle(Vehicle vehicle);
+        
+        Task<IEnumerable<Vehicle>> GetFilteredVehicles (VehicleParams vehicleParams);
 
     }
 }

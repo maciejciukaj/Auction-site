@@ -21,7 +21,6 @@ export class AuctionsComponent implements OnInit {
   currentPage: any = 1;
   numberOfAllCards: any;
   vehiclesSorted: any = [];
- 
 
   pageId: any;
   sub: any;
@@ -51,7 +50,6 @@ export class AuctionsComponent implements OnInit {
       this.getNumberOfAllAuctions();
       this.getAuction();
     });
-    
   }
   ngOnDestroy() {
     this.sub.unsubscribe();
@@ -80,9 +78,7 @@ export class AuctionsComponent implements OnInit {
       .subscribe(
         (response) => {
           this.auctions = response;
-
-         
-
+          this.checkIfAuctionActive();
           for (var i = 0; i < this.auctions.length; i++) {
             this.getVehicles(this.auctions[i].vehicleId);
           }
@@ -103,13 +99,19 @@ export class AuctionsComponent implements OnInit {
     this.vehicles.sort((a, b) => a.vehicleId - b.vehicleId);
   }
 
+  checkIfAuctionActive() {
+    for (var i = 0; i < this.auctions.length; i++) {
+      if (this.timerService.getSeconds(this.auctions[i].end) < 0) {
+        this.auctions.splice(i, 1);
+      }
+    }
+  }
+
   current() {
     let op = Number(this.pageId);
 
     return op;
   }
-
- 
 
   addPageNumber() {
     if (this.pageId * 6 + 1 <= this.numberOfAllCards) {

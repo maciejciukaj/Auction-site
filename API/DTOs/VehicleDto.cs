@@ -20,7 +20,6 @@ namespace API.DTOs
 
         public string Gearbox {get; set;}
 
-
         public string Color {get;set;}
 
         public int Power {get;set;}
@@ -34,14 +33,7 @@ namespace API.DTOs
         public int ProductionYear{get;set;}
 
         public ICollection<AdvertismentDto> Advertisments {get; set;}
-
         public ICollection<PhotoDto> Photos {get; set;}
         public ICollection<AuctionDto> Auctions {get; set;}
-
-
-
-
-       
-
     }
 }
