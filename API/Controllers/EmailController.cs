@@ -9,7 +9,6 @@ namespace API.Controllers
 {
     public class EmailController : BaseApiController
     {
-
         private readonly IEmailService _emailService;
 
         public EmailController(IEmailService emailService){
@@ -22,6 +21,5 @@ namespace API.Controllers
             _emailService.SendEmail(request);
             return Ok();
         }
-        
     }
 }

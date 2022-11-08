@@ -20,20 +20,15 @@ namespace API.Controllers
          public AuctionController(IMapper mapper, IAuctionRepository auctionRepository){
         _mapper = mapper;
         _auctionRepository = auctionRepository;
-        
-    }
+        }
 
-    [HttpGet("getAuctions")]
-    [AllowAnonymous]
-    public async Task<ActionResult<IEnumerable<AuctionDto>>> GetAuctions(){
-        var auctions = await _auctionRepository.GetAuctionsAsync();
-
-        var auctionsToReturn =  _mapper.Map<IEnumerable<AuctionDto>>(auctions);
-        
-        return  Ok(auctionsToReturn);
-        
-    
-    }
+        [HttpGet("getAuctions")]
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<AuctionDto>>> GetAuctions(){
+            var auctions = await _auctionRepository.GetAuctionsAsync();
+            var auctionsToReturn =  _mapper.Map<IEnumerable<AuctionDto>>(auctions);
+            return  Ok(auctionsToReturn);
+        }
 
         [HttpGet("getAuction/{id}")]
         [AllowAnonymous]
@@ -50,25 +45,19 @@ namespace API.Controllers
         [HttpGet("getAuctionAlt/{id}")]
         [AllowAnonymous]
         public async Task<ActionResult<Auction>> GetAuctionyByIdAlt(long id){
-           
             return  await _auctionRepository.GetAuctionByIdAsync(id);
-           
         }
 
         [HttpPost("editCurrentPrice")]
         [AllowAnonymous]
         public async Task<ActionResult> EditCurrentPrice(PriceEditDto priceEdit){
             var auction = await _auctionRepository.GetAuctionByIdAsync(priceEdit.AuctionId);
-            Console.WriteLine(auction.CurrentPrice+"asfnasdfa"+priceEdit.UserOffer);
-           if(priceEdit.UserOffer > auction.CurrentPrice){
+            if(priceEdit.UserOffer > auction.CurrentPrice){
                 auction.CurrentPrice = priceEdit.UserOffer;
                 auction.CurrentBidder = priceEdit.Username;
            }else{
             return Unauthorized("Your offer is to low");
            }
-            Console.WriteLine(auction.CurrentPrice);
-           // var auctionToReturn = _mapper.Map<AuctionDto>(auction);
-            
              try{
                await _auctionRepository.SaveAllAsync();
                 return Ok();
@@ -84,7 +73,6 @@ namespace API.Controllers
             return auction.CurrentPrice;
         }
 
-
         [HttpGet("getNumberOfAuctions")]
         [AllowAnonymous]
         public async Task<int> GetNumberOfAuctions(){
@@ -94,18 +82,12 @@ namespace API.Controllers
         [HttpGet("getAuctionsByPage/{page}")]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Auction>>> GetCardsByPage(int page){
-           // int pageNumber = Int32.Parse(page);
             return await _auctionRepository.GetAuctionsByPage(page);
         }
-
-      
-
-
 
         [HttpPost("addAuction")]
         [AllowAnonymous]
         public async Task<ActionResult<Auction>> AddAuction(AuctionFormDto auction){
-            
              var newAuction = new Auction{
                Title = auction.Title,
                Description = auction.Description,
@@ -118,24 +100,9 @@ namespace API.Controllers
                UserId = auction.UserId,
                VehicleId = auction.VehicleId
             };
-
-            
             _auctionRepository.AddAuction(newAuction);
             await _auctionRepository.SaveAllAsync();
-
             return newAuction;
-
-        
         }
-
-
-
-    
-
-
-
-
-    }
-
-   
+    } 
 }

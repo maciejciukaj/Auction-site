@@ -9,20 +9,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-
-        
-
     public class VehicleController : BaseApiController
     {
-        
-
          private readonly IMapper _mapper;
 
          private readonly IVehicleRepository _vehicleRepository;
-
         
         public VehicleController( IMapper mapper, IVehicleRepository vehicleRepository){
-            
             _mapper = mapper;
             _vehicleRepository = vehicleRepository;
         }
@@ -30,12 +23,9 @@ namespace API.Controllers
         [HttpGet("getVehicles")]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<VehicleDto>>> GetVehicles(){
-            
             var vehicles =  await _vehicleRepository.GetVehiclesAsync();
-
             var vehiclesToReturn = _mapper.Map<IEnumerable<VehicleDto>>(vehicles);
             return Ok(vehiclesToReturn);
-
         }
 
         [HttpGet("getVehicle/{id}")]
@@ -49,9 +39,6 @@ namespace API.Controllers
             }
         }
 
-
-
-
         [HttpDelete("deleteVehicle/{id}")]
         [Authorize]
         public async Task<ActionResult<Vehicle>> DeleteVehicleById(long id){
@@ -62,13 +49,11 @@ namespace API.Controllers
             }catch{
                 return BadRequest("Error during deleting vehicle");
             }
-      
         }
 
         [HttpGet("getMainPhoto/{id}")]
         [AllowAnonymous]
         public async Task<ActionResult<PhotoDto>> GetMainPhoto(long id){
-           
             var vehicle =  await _vehicleRepository.GetVehicleByIdAsync(id);
             var mappedVehicle =  _mapper.Map<VehicleDto>(vehicle);
             foreach(var photo in mappedVehicle.Photos){
@@ -77,15 +62,12 @@ namespace API.Controllers
                 }
             }
             return BadRequest("Can't find photos");
-            
-             
         }
 
 
         [HttpPost("addVehicles")]
         [Authorize]
         public async Task<ActionResult<Vehicle>> AddVehicle(Vehicle vehicle){
-            
              var newVehicle = new Vehicle{
                 Type = vehicle.Type,
                 Brand = vehicle.Brand,
@@ -100,22 +82,15 @@ namespace API.Controllers
                 ProductionYear = vehicle.ProductionYear,
                 UserId = vehicle.UserId
             };
-
-            //_context.Vehicles.Add(newVehicle);
             _vehicleRepository.AddVehicle(newVehicle);
             await _vehicleRepository.SaveAllAsyc();
-
             return newVehicle;
-
-        
         }
 
         [HttpGet("getFilteredVehicles")]
         public async Task<ActionResult<IEnumerable<VehicleDto>>> GetVehicles ([FromQuery] VehicleParams vehicleParams){
             var vehicles =  await _vehicleRepository.GetFilteredVehicles(vehicleParams);
-           
             return Ok(vehicles);
-
         }
 
         [HttpPut("editVehicle")]
@@ -140,8 +115,5 @@ namespace API.Controllers
                  return BadRequest("Advertisment was not updated");
             }
         }
-
-
-
     }
 }

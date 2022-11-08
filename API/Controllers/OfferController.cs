@@ -25,18 +25,15 @@ namespace API.Controllers
 
         [HttpGet("getOffers")]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<OfferDto>>> GetOffers(){
-            
+        public async Task<ActionResult<IEnumerable<OfferDto>>> GetOffers(){  
            var offers =  await _context.Offers.ToListAsync();
             var offerToReturn =  _mapper.Map<IEnumerable<OfferDto>>(offers);
             return Ok(offerToReturn);
-
         }
 
         [HttpGet("getOffersById")]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<OfferDto>>> GetOffersByAuctionId(long auctionId){
-            
            var offers =  await _context.Offers.Where(i => i.AuctionId == auctionId).ToListAsync();
             var offerToReturn =  _mapper.Map<IEnumerable<OfferDto>>(offers);
             return Ok(offerToReturn);
@@ -45,9 +42,7 @@ namespace API.Controllers
         [HttpGet("getHighestOfferById")]
         [AllowAnonymous]
         public async Task<ActionResult<Offer>> GetHighestOfferByAuctionId(long auctionId){
-            
-           var offer =  await _context.Offers.FirstOrDefaultAsync(i => i.AuctionId == auctionId);
-           
+            var offer =  await _context.Offers.FirstOrDefaultAsync(i => i.AuctionId == auctionId);
             return Ok(offer);
         }
 
@@ -61,13 +56,7 @@ namespace API.Controllers
             };
             _context.Offers.Add(newOffer);
             await _context.SaveChangesAsync();
-
             return newOffer;
-        }
-
-     
-
-        
-        
+        } 
     }
 }

@@ -24,7 +24,6 @@ namespace API.Controllers
             };
             _context.Photos.Add(newPhoto);
             await _context.SaveChangesAsync();
-
             return newPhoto;
         }
 

@@ -41,7 +41,6 @@ namespace API.Controllers
         [HttpGet("getCard/{id}")]
         [AllowAnonymous]
         public async Task<ActionResult<Advertisment>> GetCardById(long id){
-          
             return await _context.Advertisments.FirstOrDefaultAsync(i => i.AdvertismentId == id);
         }
         
@@ -75,8 +74,7 @@ namespace API.Controllers
             }
         }
     
-
-  private IQueryable<Advertisment> FilterRecords(IQueryable<Advertisment> query, CardParams cardParams){
+        private IQueryable<Advertisment> FilterRecords(IQueryable<Advertisment> query, CardParams cardParams){
             query = query.Where(x => Convert.ToInt32(x.Price) >= cardParams.MinPrice && Convert.ToInt32(x.Price) <= cardParams.MaxPrice);
             if(cardParams.Type!=null)
             query = query.Where(x => x.Vehicle.Type == cardParams.Type);
@@ -88,6 +86,6 @@ namespace API.Controllers
             query = query.Where(x => x.Vehicle.Color == cardParams.Color);
             query = query.Where(x => x.Vehicle.ProductionYear >= cardParams.MinYear &&  x.Vehicle.ProductionYear <= cardParams.MaxYear);
             return  query;
-  }
+        }
     }
 }
