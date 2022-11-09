@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
+using API.Helpers;
 using API.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,15 +17,13 @@ namespace API.Interfaces
         Task<IEnumerable<Auction>> GetAuctionsAsync();
 
         Task<Auction> GetAuctionByIdAsync(long id);
-
     
         void AddAuction(Auction auction);
         Task<Auction> DeleteAuction(Auction auction);
 
-         Task<ActionResult<IEnumerable<Auction>>> GetAuctionsByPage(int page);
+         Task<ActionResult<IEnumerable<Auction>>> GetAuctionsByPage(int page,[FromQuery] CardParams cardParams);
 
-          public Task<int> GetNumberOfAuctions();
-
-          //public Task<ActionResult<IEnumerable<Auction>>> GetAuctionsByIdList(List<long> auctionIdList);
+         Task<int> GetNumberOfAuctions([FromQuery] CardParams cardParams);
+          IQueryable<Auction> FilterRecords(IQueryable<Auction> query, CardParams cardParams);
     }
 }

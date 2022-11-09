@@ -209,7 +209,6 @@ export class AdvertFormComponent implements OnInit {
           (this.formTemplate.value.vehicleId = this.pass.vehicleId),
           (this.advertisment.userId = this.pass.userId),
           console.log(this.advertisment),
-          //this.toastr.success('super'),
           this.addAdvertisment()
         ),
         error: (error) => console.log(error),

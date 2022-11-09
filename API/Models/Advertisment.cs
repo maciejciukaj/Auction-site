@@ -13,7 +13,6 @@ namespace API.Models
 
         public string Description{get;set;}
 
-
         public string Price {get;set;}
 
         public long VehicleId {get; set;}

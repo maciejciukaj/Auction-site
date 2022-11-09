@@ -1,0 +1,57 @@
+<div class="container">
+  <button type="button" class="collapsible" (click)="expand()">
+    <!-- Filter 🔍-->
+  </button>
+  <div class="content">
+    <div class="filter-row1">
+      <label>Type: </label>
+      <select [(ngModel)]="filter.type" name="type" required="">
+        <option selected></option>
+        <option *ngFor="let elem of types.typeList" [ngValue]="elem">
+          {{ elem }}
+        </option>
+      </select>
+
+      <label>Brand: </label>
+      <select [(ngModel)]="filter.brand" name="brand" required="">
+        <option selected></option>
+        <option *ngFor="let elem of brands.brandList" [ngValue]="elem">
+          {{ elem }}
+        </option>
+      </select>
+
+      <label>Color: </label>
+      <select [(ngModel)]="filter.color" name="color" required="">
+        <option selected></option>
+        <option *ngFor="let elem of colors.colorList" [ngValue]="elem">
+          {{ elem }}
+        </option>
+      </select>
+
+      <label>Fuel: </label>
+      <select [(ngModel)]="filter.fuel" name="fuel" required="">
+        <option selected></option>
+        <option *ngFor="let elem of fuel.fuelList" [ngValue]="elem">
+          {{ elem }}
+        </option>
+      </select>
+    </div>
+    <div class="filter-row2">
+      <label>Price: </label>
+      <ngx-slider
+        [(value)]="minValuePrice"
+        [(highValue)]="maxValuePrice"
+        [options]="optionsPrice"
+      ></ngx-slider>
+    </div>
+    <div class="filter-row3">
+      <label>Year: </label>
+      <ngx-slider
+        [(value)]="minValueYear"
+        [(highValue)]="maxValueYear"
+        [options]="optionsYear"
+      ></ngx-slider>
+    </div>
+    <button class="button-19" (click)="filterData()">Find</button>
+  </div>
+</div>

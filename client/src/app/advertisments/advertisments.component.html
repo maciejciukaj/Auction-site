@@ -1,66 +1,13 @@
 <div class="container">
-  <div class="container">
-    <button type="button" class="collapsible" (click)="expand()">
-      <!-- Filter 🔍-->
-    </button>
-    <div class="content">
-      <div class="filter-row1">
-        <label>Type: </label>
-        <select [(ngModel)]="filter.type" name="type" required="">
-          <option selected></option>
-          <option *ngFor="let elem of types.typeList" [ngValue]="elem">
-            {{ elem }}
-          </option>
-        </select>
-
-        <label>Brand: </label>
-        <select [(ngModel)]="filter.brand" name="brand" required="">
-          <option selected></option>
-          <option *ngFor="let elem of brands.brandList" [ngValue]="elem">
-            {{ elem }}
-          </option>
-        </select>
-
-        <label>Color: </label>
-        <select [(ngModel)]="filter.color" name="color" required="">
-          <option selected></option>
-          <option *ngFor="let elem of colors.colorList" [ngValue]="elem">
-            {{ elem }}
-          </option>
-        </select>
-
-        <label>Fuel: </label>
-        <select [(ngModel)]="filter.fuel" name="fuel" required="">
-          <option selected></option>
-          <option *ngFor="let elem of fuel.fuelList" [ngValue]="elem">
-            {{ elem }}
-          </option>
-        </select>
-      </div>
-      <div class="filter-row2">
-        <label>Price: </label>
-        <ngx-slider
-          [(value)]="minValuePrice"
-          [(highValue)]="maxValuePrice"
-          [options]="optionsPrice"
-        ></ngx-slider>
-      </div>
-      <div class="filter-row3">
-        <label>Year: </label>
-        <ngx-slider
-          [(value)]="minValueYear"
-          [(highValue)]="maxValueYear"
-          [options]="optionsYear"
-        ></ngx-slider>
-      </div>
-      <button class="button-19" (click)="filterCars()">Find</button>
-    </div>
-  </div>
+  <app-filter-element
+    (newItemEvent)="getFilterData($event)"
+  ></app-filter-element>
 
   <div class="shell">
     <div class="container">
       <h4>Results: {{ numberOfAllCards }}</h4>
-      <div class="row">
+      <h1 *ngIf="numberOfAllCards == 0">No exact matches found ❌</h1>
+      <div class="row" *ngIf="numberOfAllCards > 0">
         <div class="col-md-4" *ngFor="let adv of advertisments; let i = index">
           <div class="wsk-cp-product">
             <div class="wsk-cp-img">
@@ -105,7 +52,7 @@
       </div>
     </div>
   </div>
-  <div class="numbers mt-2">
+  <div class="numbers mt-2" *ngIf="numberOfAllCards > 0">
     <span
       ><button class="page less" (click)="subPageNumber()">
         <i *ngIf="checkPreviousPage()" class="fa-thin fa-arrow-left"></i>

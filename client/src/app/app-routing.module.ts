@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutComponent } from './about/about.component';
 import { AdvertFormComponent } from './advert-form/advert-form.component';
 import { AdvertismentsComponent } from './advertisments/advertisments.component';
 import { AuctionFormComponent } from './auction-form/auction-form.component';
@@ -22,7 +21,6 @@ const routes: Routes = [
   { path: 'log', component: LoginPageComponent },
   { path: 'reg', component: RegisterPageComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'about', component: AboutComponent },
   {
     path: '',
     runGuardsAndResolvers: 'always',

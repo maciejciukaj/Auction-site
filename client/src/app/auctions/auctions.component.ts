@@ -21,7 +21,7 @@ export class AuctionsComponent implements OnInit {
   currentPage: any = 1;
   numberOfAllCards: any;
   vehiclesSorted: any = [];
-
+  filterData: any = {};
   pageId: any;
   sub: any;
   scrollUp: any;
@@ -46,7 +46,6 @@ export class AuctionsComponent implements OnInit {
       this.vehicles = [];
       this.auctions = [];
       this.pageId = params.get('page');
-
       this.getNumberOfAllAuctions();
       this.getAuction();
     });
@@ -54,6 +53,15 @@ export class AuctionsComponent implements OnInit {
   ngOnDestroy() {
     this.sub.unsubscribe();
     this.scrollUp.unsubscribe();
+  }
+  getFilterData(data: any) {
+    this.filterData = data;
+    console.log(this.filterData);
+    this.vehicles = [];
+    this.auctions = [];
+    this.pageId = 1;
+    this.getNumberOfAllAuctions();
+    this.getAuction();
   }
 
   getId() {
@@ -64,16 +72,19 @@ export class AuctionsComponent implements OnInit {
 
   getNumberOfAllAuctions() {
     this.auctionService
-      .getNumberOfAdvertisments()
+      .getNumberOfAdvertisments(this.filterData)
       .subscribe((response) => (this.numberOfAllCards = response));
   }
 
   getAuction() {
+    console.log(this.auctions);
+
     console.log(this.pageId + ' numery strony');
 
     this.http
       .get(
-        'https://localhost:5001/api/auction/getAuctionsByPage/' + this.pageId
+        'https://localhost:5001/api/auction/getAuctionsByPage/' + this.pageId,
+        this.filterData
       )
       .subscribe(
         (response) => {
@@ -109,7 +120,6 @@ export class AuctionsComponent implements OnInit {
 
   current() {
     let op = Number(this.pageId);
-
     return op;
   }
 

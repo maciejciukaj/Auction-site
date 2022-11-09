@@ -16,8 +16,6 @@ namespace API.Services
             _config = config;
         }
 
-
-
     public void SendEmail(EmailDto request)
     {
         var email = new MimeMessage();

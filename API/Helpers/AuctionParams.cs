@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 
 namespace API.Helpers
 {
-    public class VehicleParams
+    public class AuctionParams
     {
-          public string Type {get; set;}
+         public int MinPrice {get; set;}
+
+        public int MaxPrice{get; set;}
+        public string Type {get; set;}
         public string Brand {get; set;}
         public string Color {get; set;}
         public string Fuel {get; set;}

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -8,11 +7,9 @@ import { AdvertismentsComponent } from './advertisments/advertisments.component'
 import { AuctionsComponent } from './auctions/auctions.component';
 import { HomeComponent } from './home/home.component';
 import { MainComponent } from './main/main.component';
-
 import { NavComponent } from './nav/nav.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -35,11 +32,11 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 import { ConfirmationDialogService } from './confirmation-dialog/confirmation-dialog.service';
 import { AuctionFormComponent } from './auction-form/auction-form.component';
 import { VehicleCardAuctionComponent } from './vehicle-card-auction/vehicle-card-auction.component';
-import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { MyOffersComponent } from './my-offers/my-offers.component';
 import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { FilterElementComponent } from './filter-element/filter-element.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +45,6 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     AuctionsComponent,
     HomeComponent,
     MainComponent,
-
     NavComponent,
     LoginPageComponent,
     RegisterPageComponent,
@@ -61,10 +57,10 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     ConfirmationDialogComponent,
     AuctionFormComponent,
     VehicleCardAuctionComponent,
-    AboutComponent,
     ContactComponent,
     MyOffersComponent,
     VehicleEditComponent,
+    FilterElementComponent,
   ],
   imports: [
     BrowserModule,

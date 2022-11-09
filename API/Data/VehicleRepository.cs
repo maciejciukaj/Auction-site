@@ -18,7 +18,6 @@ namespace API.Data
             _context = context;
         }    
         
-        
             public async Task<Vehicle> GetVehicleByIdAsync(long id)
         {
              return await _context.Vehicles.Include(a => a.Advertisments).Include(a => a.Photos).Include(a => a.Auctions).AsSplitQuery().FirstOrDefaultAsync(i => i.VehicleId == id);
@@ -50,7 +49,6 @@ namespace API.Data
             await _context.SaveChangesAsync();
             return vehicle;
         }
-
       
         public async Task<IEnumerable<Vehicle>> GetFilteredVehicles ([FromQuery] VehicleParams vehicleParams){
             var query = _context.Vehicles.AsQueryable();

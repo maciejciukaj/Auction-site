@@ -1,8 +1,7 @@
 import { LabelType, Options } from '@angular-slider/ngx-slider';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { timeStamp } from 'console';
 import { ToastrService } from 'ngx-toastr';
 import {
   BrandClass,
@@ -25,34 +24,7 @@ export class AdvertismentsComponent implements OnInit {
   currentPage: any = 1;
   numberOfAllCards: any;
   vehiclesSorted: any = [];
-  types = new TypeClass();
-  brands = new BrandClass();
-  colors = new ColorClass();
-  fuel = new FuelClass();
-  filter: any = [];
-  minValuePrice: number = 100;
-  maxValuePrice: number = 500000;
-  minValueYear: number = 1960;
-  maxValueYear: number = 2023;
-  optionsPrice: Options = {
-    floor: 100,
-    ceil: 500000,
-    translate: (value: number, label: LabelType): string => {
-      switch (label) {
-        case LabelType.Low:
-          return '<b>Min price:</b> $' + value;
-        case LabelType.High:
-          return '<b>Max price:</b> $' + value;
-        default:
-          return '$' + value;
-      }
-    },
-  };
-  optionsYear: Options = {
-    floor: 1960,
-    ceil: 2023,
-  };
-
+  filterData: any = {};
   pageId: any;
   sub: any;
   scrollUp: any;
@@ -93,53 +65,29 @@ export class AdvertismentsComponent implements OnInit {
       this.pageId = params.get('page');
     });
   }
+  getFilterData(data: any) {
+    this.filterData = data;
+    console.log(this.filterData);
+    this.vehicles = [];
+    this.advertisments = [];
+    this.pageId = 1;
+    this.getNumberOfAllAdvertisments();
+    this.getAdvertisments();
+  }
 
   getNumberOfAllAdvertisments() {
-    var data = {
-      type: this.filter.type ?? '',
-      brand: this.filter.brand ?? '',
-      fuel: this.filter.fuel ?? '',
-      color: this.filter.color ?? '',
-      minYear: this.minValueYear,
-      maxYear: this.maxValueYear,
-      minPrice: this.minValuePrice,
-      maxPrice: this.maxValuePrice,
-    };
-
-    var config = {
-      params: data,
-      headers: { Accept: 'application/json' },
-    };
     this.advertService
-      .getNumberOfAdvertisments(config)
+      .getNumberOfAdvertisments(this.filterData)
       .subscribe((response) => {
         (this.numberOfAllCards = response), console.log(this.numberOfAllCards);
       });
   }
 
   getAdvertisments() {
-    var data = {
-      type: this.filter.type ?? '',
-      brand: this.filter.brand ?? '',
-      fuel: this.filter.fuel ?? '',
-      color: this.filter.color ?? '',
-      minYear: this.minValueYear,
-      maxYear: this.maxValueYear,
-      minPrice: this.minValuePrice,
-      maxPrice: this.maxValuePrice,
-    };
-
-    var config = {
-      params: data,
-      headers: { Accept: 'application/json' },
-    };
-    console.log(this.pageId + ' numery strony');
-    console.log(config);
-
     this.http
       .get(
         'https://localhost:5001/api/card/getCardsByPage/' + this.pageId,
-        config
+        this.filterData
       )
       .subscribe(
         (response) => {
@@ -213,35 +161,4 @@ export class AdvertismentsComponent implements OnInit {
       });
     }
   }
-
-  filterCars() {
-    this.vehicles = [];
-    this.advertisments = [];
-    this.pageId = 1;
-    this.getNumberOfAllAdvertisments();
-    this.getAdvertisments();
-  }
-
-  // getFiltered() {
-  //   var data = {
-  //     type: this.filter.type ?? '',
-  //     brand: this.filter.brand ?? '',
-  //     fuel: this.filter.fuel ?? '',
-  //     color: this.filter.color ?? '',
-  //     minYear: this.minValueYear,
-  //     maxYear: this.maxValueYear,
-  //   };
-
-  //   var config = {
-  //     params: data,
-  //     headers: { Accept: 'application/json' },
-  //   };
-  //   console.log(data);
-
-  //   this.http
-  //     .get('https://localhost:5001/api/vehicle/getFilteredVehicles', config)
-  //     .subscribe((response) => {
-  //       console.log(response);
-  //     });
-  // }
 }

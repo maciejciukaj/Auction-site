@@ -50,7 +50,7 @@ export class TimerService {
     this.nowDate = this.getTime(new Date());
     var diff: any;
     diff = new Date(date2).getTime() - new Date(this.nowDate).getTime();
-    console.log(diff / 1000);
+    //console.log(diff / 1000);
 
     return diff / 1000;
   }

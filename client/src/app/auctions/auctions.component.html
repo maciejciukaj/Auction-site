@@ -1,12 +1,14 @@
 <div class="container">
+  <app-filter-element
+    (newItemEvent)="getFilterData($event)"
+  ></app-filter-element>
   <div class="shell">
     <div class="container">
+      <h4>Results: {{ numberOfAllCards }}</h4>
+      <h1 *ngIf="numberOfAllCards == 0">No exact matches found ❌</h1>
       <div class="row">
         <div class="col-md-4" *ngFor="let auc of auctions; let i = index">
-          <div
-            class="wsk-cp-product"
-            
-          >
+          <div class="wsk-cp-product">
             <div class="wsk-cp-img">
               <img
                 src="{{ imageService.searchForMain(vehicles[i]?.photos) }}"
@@ -44,6 +46,7 @@
                 <div class="wcf-right">
                   <a
                     [routerLink]="['/vehicleA', auc?.auctionId]"
+                    target="_blank"
                     class="buy-btn eye"
                   >
                     <i class="fa-sharp fa-solid fa-car"></i
