@@ -52,7 +52,5 @@ https://localhost:4200
 
 - Add signalR library and related functionalities
 
-- Add filter and sort block
-
 - Password recovery via link sent to users email
 
