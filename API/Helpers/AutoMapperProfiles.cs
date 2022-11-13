@@ -10,7 +10,6 @@ namespace API.Helpers
 {
     public class AutoMapperProfiles : Profile
     {
-
         public AutoMapperProfiles(){
             CreateMap<User, MemberDto>();
             CreateMap<Vehicle, VehicleDto>();
@@ -19,6 +18,5 @@ namespace API.Helpers
             CreateMap<Auction, AuctionDto>();
             CreateMap<Offer, OfferDto>();
         }
-        
     }
 }

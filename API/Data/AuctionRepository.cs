@@ -39,7 +39,6 @@ namespace API.Data
             return await _context.Auctions.Include(o => o.Offers).ToListAsync();
         }
 
-
         public async Task<Auction> GetAuctionByIdAsyncAlternate(long id)
         {
              return await _context.Auctions.Include(o => o.Offers).FirstOrDefaultAsync(i => i.AuctionId == id);
