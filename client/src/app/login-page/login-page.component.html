@@ -33,7 +33,11 @@
 <div class="login-box" *ngIf="resetMode">
   <div class="back mb-3" (click)="toggleReset()">Back</div>
   <h2>Recovery</h2>
-  <form #resetForm="ngForm" (ngSubmit)="showEmail()" autocomplete="off">
+  <form
+    #resetForm="ngForm"
+    (ngSubmit)="forgotPasswordEmail()"
+    autocomplete="off"
+  >
     <div class="user-box">
       <input
         [(ngModel)]="email.email"
@@ -50,7 +54,7 @@
       <span></span>
       <span></span>
       <span></span>
-      <span></span>Send
+      <span></span>{{ sendingMessage }}
     </button>
   </form>
 </div>

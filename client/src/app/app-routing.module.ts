@@ -11,6 +11,7 @@ import { MainComponent } from './main/main.component';
 import { MyAuctionsComponent } from './my-auctions/my-auctions.component';
 import { MyOffersComponent } from './my-offers/my-offers.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { VehicleCardAuctionComponent } from './vehicle-card-auction/vehicle-card-auction.component';
 import { VehicleCardComponent } from './vehicle-card/vehicle-card.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'log', component: LoginPageComponent },
   { path: 'reg', component: RegisterPageComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'reset/:token', component: ResetPasswordComponent },
   {
     path: '',
     runGuardsAndResolvers: 'always',

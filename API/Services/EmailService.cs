@@ -23,7 +23,6 @@ namespace API.Services
         email.To.Add(MailboxAddress.Parse(request.To));
         email.Subject = request.Subject;
         email.Body = new TextPart(MimeKit.Text.TextFormat.Html){Text = request.Body};
-
         using var smtp = new SmtpClient();
         smtp.Connect(_config.GetSection("EmailHost").Value, 587, MailKit.Security.SecureSocketOptions.StartTls);
         smtp.Authenticate(_config.GetSection("EmailUsername").Value,_config.GetSection("EmailPassword").Value);

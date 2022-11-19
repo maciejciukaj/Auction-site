@@ -37,6 +37,7 @@ import { MyOffersComponent } from './my-offers/my-offers.component';
 import { VehicleEditComponent } from './vehicle-edit/vehicle-edit.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { FilterElementComponent } from './filter-element/filter-element.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { FilterElementComponent } from './filter-element/filter-element.componen
     MyOffersComponent,
     VehicleEditComponent,
     FilterElementComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

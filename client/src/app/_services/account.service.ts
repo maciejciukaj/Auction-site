@@ -53,9 +53,14 @@ export class AccountService {
   }
 
   changePassword(model: any) {
-    return this.http.put(
-      this.baseUrl + 'user/changePassword',
-      model
-    );
+    return this.http.put(this.baseUrl + 'user/changePassword', model);
+  }
+
+  forgotPasswordEmail(email: any) {
+    return this.http.post(this.baseUrl + 'account/forgotPassword', email);
+  }
+
+  resetPassword(model: any) {
+    return this.http.post(this.baseUrl + 'account/resetPassword', model);
   }
 }

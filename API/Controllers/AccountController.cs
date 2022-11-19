@@ -13,10 +13,13 @@ namespace API.Controllers
     {
         private readonly AuctionContext _context;
         private readonly ITokenService _tokenService;
-        public AccountController(AuctionContext context, ITokenService tokenService)
+
+        private readonly IEmailService _emailService;
+        public AccountController(AuctionContext context, ITokenService tokenService, IEmailService emailService)
         {
             _tokenService = tokenService;
             _context = context;
+            _emailService = emailService;
         }
 
         [HttpPost("register")]
@@ -57,8 +60,48 @@ namespace API.Controllers
             };
         }
 
+        [HttpPost("forgotPassword")]
+        public async Task<IActionResult> ForgotPassword(EmailSenderDto email){
+            Console.WriteLine("piwo"+email+"piwopiwo");
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == email.email);
+            if(user == null){
+                return BadRequest(email);
+            }
+          
+            user.PasswordResetToken = CreateRandomToken();
+            user.ResetTokenExpires = DateTime.Now.AddDays(1);
+              EmailDto resetEmail = new EmailDto{
+                To = email.email,
+                Body = "Hello its your recovery link: https://localhost:4200/reset/" + user.PasswordResetToken,
+                Subject = "Password recovery"
+            };
+
+            _emailService.SendEmail(resetEmail);
+            await _context.SaveChangesAsync();
+            return Ok(email);
+        }
+
+        [HttpPost("resetPassword")]
+        public async Task<IActionResult> ResetPassword(PasswordRecoveryDto request){
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.PasswordResetToken == request.token);
+            if(user == null || user.ResetTokenExpires < DateTime.Now){
+                return BadRequest(request);
+            }
+            using var hmac = new HMACSHA512();
+            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password));
+            user.PasswordSalt = hmac.Key;
+            user.PasswordResetToken =null;
+            user.ResetTokenExpires = DateTime.Now;
+            await _context.SaveChangesAsync();
+            return Ok(request);
+        }
+
          private async Task<bool> UserExists(string username){
             return await _context.Users.AnyAsync(x => x.UserName == username.ToLower());
-        }   
+        }
+        
+        private string CreateRandomToken(){
+            return Convert.ToHexString(RandomNumberGenerator.GetBytes(64));
+        }
     }
 }

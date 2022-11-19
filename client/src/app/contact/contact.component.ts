@@ -21,7 +21,7 @@ export class ContactComponent implements OnInit {
     body: new FormControl(null, [
       Validators.required,
       Validators.minLength(15),
-      Validators.maxLength(100),
+      Validators.maxLength(500),
     ]),
   });
   constructor(
@@ -62,7 +62,7 @@ export class ContactComponent implements OnInit {
       this.toastr.error('Wrong email');
       return false;
     } else if (!this.email.get('body').valid) {
-      this.toastr.error('Wrong message, 15-100 characters');
+      this.toastr.error('Wrong message, 15-500 characters');
       return false;
     } else {
       return true;

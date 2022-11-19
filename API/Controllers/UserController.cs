@@ -37,7 +37,7 @@ namespace API.Controllers
         }
 
         [HttpPut("changePassword")]
-        [Authorize ]
+        [Authorize]
         public async Task <IActionResult> ChangePassword(PasswordSchemeDto userNewPassword){
             var user =  await _userRepository.GetUserByUsernameAsync(userNewPassword.UserName);
             using var hmacCheck = new HMACSHA512(user.PasswordSalt);

@@ -15,6 +15,7 @@ export class LoginPageComponent implements OnInit {
   email: any = {};
   resetMode: boolean = false;
   capslockOn: boolean;
+  sendingMessage: string = 'Send';
   constructor(
     private accountService: AccountService,
     private toastr: ToastrService,
@@ -48,6 +49,20 @@ export class LoginPageComponent implements OnInit {
 
   toggleReset() {
     this.resetMode = !this.resetMode;
+  }
+
+  forgotPasswordEmail() {
+    this.sendingMessage = 'Sending...';
+    this.accountService.forgotPasswordEmail(this.email).subscribe(
+      () => {
+        this.sendingMessage = 'Check your email';
+        this.toastr.success('Email with recovery link sent');
+      },
+      () => {
+        (this.sendingMessage = 'Send'),
+          this.toastr.error("User with this email doesn't exist");
+      }
+    );
   }
 
   @HostListener('window:keydown', ['$event'])
