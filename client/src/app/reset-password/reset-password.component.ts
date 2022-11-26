@@ -42,10 +42,18 @@ export class ResetPasswordComponent implements OnInit {
 
   resetPassword() {
     console.log(this.reset);
-
-    this.accountService.resetPassword(this.reset).subscribe(() => {
-      this.toastr.success('Password changed');
-      this.router.navigateByUrl('/');
-    });
+    if (this.reset.password == null) {
+      this.toastr.error("Password input can't be empty");
+    } else {
+      this.accountService.resetPassword(this.reset).subscribe(
+        () => {
+          this.toastr.success('Password changed');
+          this.router.navigateByUrl('/');
+        },
+        (error) => {
+          this.toastr.error('Wrong token');
+        }
+      );
+    }
   }
 }
