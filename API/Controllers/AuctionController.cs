@@ -101,19 +101,5 @@ namespace API.Controllers
             await _auctionRepository.SaveAllAsync();
             return newAuction;
         }
-
-          private IQueryable<Advertisment> FilterRecords(IQueryable<Advertisment> query, CardParams cardParams){
-            query = query.Where(x => Convert.ToInt32(x.Price) >= cardParams.MinPrice && Convert.ToInt32(x.Price) <= cardParams.MaxPrice);
-            if(cardParams.Type!=null)
-            query = query.Where(x => x.Vehicle.Type == cardParams.Type);
-             if(cardParams.Brand!=null)
-            query = query.Where(x => x.Vehicle.Brand == cardParams.Brand);
-             if(cardParams.Fuel!=null)
-            query = query.Where(x => x.Vehicle.Fuel == cardParams.Fuel);
-             if(cardParams.Color!=null)
-            query = query.Where(x => x.Vehicle.Color == cardParams.Color);
-            query = query.Where(x => x.Vehicle.ProductionYear >= cardParams.MinYear &&  x.Vehicle.ProductionYear <= cardParams.MaxYear);
-            return  query;
-        }
     } 
 }

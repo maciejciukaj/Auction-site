@@ -62,7 +62,6 @@ namespace API.Controllers
 
         [HttpPost("forgotPassword")]
         public async Task<IActionResult> ForgotPassword(EmailSenderDto email){
-            Console.WriteLine("piwo"+email+"piwopiwo");
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Email == email.email);
             if(user == null){
                 return BadRequest(email);
@@ -72,7 +71,8 @@ namespace API.Controllers
             user.ResetTokenExpires = DateTime.Now.AddDays(1);
               EmailDto resetEmail = new EmailDto{
                 To = email.email,
-                Body = "Hello its your recovery link: https://localhost:4200/reset/" + user.PasswordResetToken,
+                Body = "<h2>Password recovery</h2><br>Click this link to reset your password:<br>  https://localhost:4200/reset/" + user.PasswordResetToken+
+                " It's valid for <b>24 hours</b><br><br>~ Carclub Support",
                 Subject = "Password recovery"
             };
 

@@ -58,10 +58,10 @@ export class VehicleCardComponent implements OnInit {
       this.album.push(this.photo);
       this.photo = { src: '', position: 0 };
     }
-
     this.album.sort((a, b) => a.position - b.position);
     console.log(this.album);
   }
+
   cancelEditMode(event: boolean) {
     this.editMode = event;
     this.album = [];
@@ -107,13 +107,11 @@ export class VehicleCardComponent implements OnInit {
             );
         }
       })
-
       .catch(() => console.log('User dismissed the dialog'));
   }
 
   collapse() {
     var coll = document.getElementsByClassName('collapsible');
-
     for (var i = 0; i < coll.length; i++) {
       coll[i].addEventListener('click', function () {
         this.classList.toggle('active');
@@ -126,6 +124,7 @@ export class VehicleCardComponent implements OnInit {
       });
     }
   }
+
   checkIfOwner() {
     if (this.owner.username == this.name.userName) {
       return true;

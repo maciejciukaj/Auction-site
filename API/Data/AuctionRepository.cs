@@ -79,6 +79,7 @@ namespace API.Data
              if(cardParams.Color!=null)
             query = query.Where(x => x.Vehicle.Color == cardParams.Color);
             query = query.Where(x => x.Vehicle.ProductionYear >= cardParams.MinYear &&  x.Vehicle.ProductionYear <= cardParams.MaxYear);
+             query = query.Where(x => x.End > DateTime.Now);
             return  query;
         }
 

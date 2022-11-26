@@ -11,6 +11,7 @@ import { AccountService } from '../_services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TimerService } from '../_services/timer.service';
+import { BidService } from '../_services/bid.service';
 
 @Component({
   selector: 'app-vehicle-card-auction',
@@ -48,7 +49,8 @@ export class VehicleCardAuctionComponent implements OnInit {
     private router: Router,
     private offerService: OfferService,
     private accountService: AccountService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private signal: BidService
   ) {
     config.interval = 5000;
     config.keyboard = true;
@@ -59,10 +61,9 @@ export class VehicleCardAuctionComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountService.currentUser$.subscribe((val) => (this.name = val));
-
     this.getCard();
-    console.log(this.checkIfHighestBidder());
   }
+
   open(index: number): void {
     this._lightbox.open(this.album, index);
   }
@@ -74,7 +75,6 @@ export class VehicleCardAuctionComponent implements OnInit {
       this.album.push(this.photo);
       this.photo = { src: '', position: 0 };
     }
-
     this.album.sort((a, b) => a.position - b.position);
   }
 
@@ -97,6 +97,11 @@ export class VehicleCardAuctionComponent implements OnInit {
         .getVehicleById(this.card.vehicleId)
         .subscribe((response) => {
           this.vehicle = response;
+          this.signal.startConnection(this.vehicle.vehicleId.toString());
+          this.signal.sendBidMessage(() => {
+            this.album = [];
+            this.getCard();
+          });
           this.saveLightboxPhotos();
         });
     });
@@ -130,22 +135,19 @@ export class VehicleCardAuctionComponent implements OnInit {
       this.bid.userId = this.pass.userId;
       this.bid.auctionId = this.auctionId;
       this.bid.offerAmount = offer;
-      console.log(offer);
       this.offerService.addOffer(this.bid).subscribe((response) => {
         this.newPrice.auctionId = this.auctionId;
         this.newPrice.userOffer = this.bid.offerAmount;
         this.newPrice.username = this.name.userName;
-        console.log(this.newPrice);
-
+        var username = JSON.parse(localStorage.getItem('user')).userName;
         this.offerService.updateCurrentPrice(this.newPrice).subscribe(
           (response) => {
-            this.toastr.success('Offer accepted');
+            this.signal.broadcastBidData(this.vehicle.vehicleId.toString());
             this.album = [];
             this.getCard();
           },
           (error) => {
             this.toastr.error(error.error);
-            this.getCard();
           }
         );
       });

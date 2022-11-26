@@ -49,30 +49,62 @@ export class VehicleEditComponent implements OnInit {
   }
 
   editVehicle() {
-    this.cardService
-      .editVehicleInfo(this.vehicleDetailsControl.value)
-      .subscribe((response) => {
-        this.toastr.success('Vehicle info updated');
-        //this.cancel();
-      });
+    if (this.validationVehicle()) {
+      this.cardService
+        .editVehicleInfo(this.vehicleDetailsControl.value)
+        .subscribe((response) => {
+          this.toastr.success('Vehicle info updated');
+        });
+    }
   }
   cancel() {
     this.cancelEdit.emit(false);
   }
 
   editAdvertisment() {
-    this.cardService
-      .editAdvertismentInfo(this.advertismentDetailsControl.value)
-      .subscribe((response) => {
-        this.toastr.success('Advertisment info updated');
-        //this.cancel();
-      });
+    if (this.validationAdvert()) {
+      this.cardService
+        .editAdvertismentInfo(this.advertismentDetailsControl.value)
+        .subscribe((response) => {
+          this.toastr.success('Advertisment info updated');
+        });
+    }
   }
 
   showData() {
     console.log(this.vehicle.vehicleId);
-
     console.log(this.vehicleDetailsControl.value);
     console.log(this.advertismentDetailsControl.value);
+  }
+  validationVehicle() {
+    if (!this.vehicleDetailsControl.get('model').valid) {
+      this.toastr.error('Wrong model');
+      return false;
+    } else if (!this.vehicleDetailsControl.get('productionYear').valid) {
+      this.toastr.error('Wrong production year');
+      return false;
+    } else if (!this.vehicleDetailsControl.get('mileage').valid) {
+      this.toastr.error('Wrong mileage');
+      return false;
+    } else if (!this.vehicleDetailsControl.get('power').valid) {
+      this.toastr.error('Wrong engine power');
+      return false;
+    } else if (!this.vehicleDetailsControl.get('engine').valid) {
+      this.toastr.error('Wrong capacity');
+      return false;
+    }
+    return true;
+  }
+  validationAdvert() {
+    if (!this.advertismentDetailsControl.get('title').valid) {
+      this.toastr.error('Wrong title');
+      return false;
+    } else if (!this.advertismentDetailsControl.get('price').valid) {
+      this.toastr.error('Wrong price');
+      return false;
+    } else if (!this.advertismentDetailsControl.get('description').valid) {
+      this.toastr.error('Wrong description');
+      return false;
+    }
   }
 }
