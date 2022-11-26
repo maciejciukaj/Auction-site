@@ -47,10 +47,3 @@ https://localhost:4200
 **PostgreSQL** 14.4
 
 </ul>
-
-## 🚧 TODO 🚧
-
-- Add signalR library and related functionalities
-
-- Password recovery via link sent to users email
-
