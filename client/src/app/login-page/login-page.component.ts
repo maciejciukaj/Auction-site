@@ -57,6 +57,7 @@ export class LoginPageComponent implements OnInit {
       () => {
         this.sendingMessage = 'Check your email';
         this.toastr.success('Email with recovery link sent');
+        this.toggleReset();
       },
       () => {
         (this.sendingMessage = 'Send'),

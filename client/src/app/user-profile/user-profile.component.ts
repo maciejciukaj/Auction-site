@@ -38,7 +38,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUser() {
-    //var myToken = JSON.parse(localStorage.getItem('user')).token;
+    //var myToken = JSON.parse(localStorage.getItem('user')).token;;
     this.accountService.currentUser$.subscribe((val) => (this.name = val));
     // console.log(this.name.userName);
 

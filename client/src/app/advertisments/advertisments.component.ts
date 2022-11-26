@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { expand } from 'rxjs/operators';
 import {
   BrandClass,
   ColorClass,
@@ -93,7 +94,6 @@ export class AdvertismentsComponent implements OnInit {
         (response) => {
           this.advertisments = response;
           console.log(this.advertisments.length + ' adv length');
-
           for (var i = 0; i < this.advertisments.length; i++) {
             this.getVehicles(this.advertisments[i].advertismentId);
           }
@@ -107,7 +107,6 @@ export class AdvertismentsComponent implements OnInit {
       .get('https://localhost:5001/api/vehicle/getVehicle/' + id)
       .subscribe((response) => {
         console.log(response);
-
         this.vehicles.push(response), this.sortVehicles();
       });
   }
@@ -118,7 +117,6 @@ export class AdvertismentsComponent implements OnInit {
 
   current() {
     let op = Number(this.pageId);
-
     return op;
   }
 
@@ -131,7 +129,6 @@ export class AdvertismentsComponent implements OnInit {
   }
   subPageNumber() {
     console.log(this.current());
-
     if (this.pageId - 1 > 0) {
       let p = Number(this.pageId) - 1;
       let ps = p.toString();
@@ -142,14 +139,14 @@ export class AdvertismentsComponent implements OnInit {
   checkPreviousPage() {
     return this.pageId - 1 > 0 ? true : false;
   }
+
   checkNextPage() {
     return this.pageId * 6 < this.numberOfAllCards ? true : false;
   }
+
   expand() {
     var coll = document.getElementsByClassName('collapsible');
-    var i;
-
-    for (i = 0; i < coll.length; i++) {
+    for (var i = 0; i < coll.length; i++) {
       coll[i].addEventListener('click', function () {
         this.classList.toggle('active');
         var content = this.nextElementSibling;

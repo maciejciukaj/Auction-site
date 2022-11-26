@@ -36,13 +36,13 @@ export class MyOffersComponent implements OnInit {
 
   getOffersDetails() {
     for (var i = 0; i < Object.keys(this.highestOffers).length; i++) {
+      console.log(this.highestOffers[i].key);
       this.auctionService
         .getAuctionById(this.highestOffers[i].key)
         .subscribe((response) => {
           this.auctions.push(response);
-          this.checkIfAuctionActive();
           this.auctions.sort((a, b) => a.auctionId - b.auctionId);
-          console.log(this.auctions);
+          this.checkIfAuctionActive();
         });
     }
   }
@@ -64,10 +64,17 @@ export class MyOffersComponent implements OnInit {
       return false;
     }
   }
+
   checkIfAuctionActive() {
     for (var i = 0; i < this.auctions.length; i++) {
       if (this.timerService.getSeconds(this.auctions[i].end) < 0) {
+        var idToDelete = this.auctions[i].auctionId;
         this.auctions.splice(i, 1);
+        for (var j = 0; j < this.highestOffers.length; j++) {
+          if (this.highestOffers[j].key == idToDelete) {
+            this.highestOffers.splice(j, 1);
+          }
+        }
       }
     }
   }
