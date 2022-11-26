@@ -25,6 +25,7 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto){
             if(await UserExists(registerDto.UserName)) return BadRequest("Username is taken");
+            if(await EmailExists(registerDto.Email)) return BadRequest("User with this email already exists");
             using var hmac = new HMACSHA512();
             var user = new User{
                 UserName = registerDto.UserName,
@@ -34,7 +35,8 @@ namespace API.Controllers
                 Email = registerDto.Email,
                 PhoneNumber = registerDto.PhoneNumber,
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                PasswordSalt = hmac.Key
+                PasswordSalt = hmac.Key,
+                ResetTokenExpires = DateTime.Now
             };
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -98,6 +100,10 @@ namespace API.Controllers
 
          private async Task<bool> UserExists(string username){
             return await _context.Users.AnyAsync(x => x.UserName == username.ToLower());
+        }
+
+          private async Task<bool> EmailExists(string email){
+            return await _context.Users.AnyAsync(x => x.Email == email);
         }
         
         private string CreateRandomToken(){
