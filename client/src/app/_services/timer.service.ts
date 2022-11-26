@@ -36,6 +36,10 @@ export class TimerService {
     var valStr = day != 0 ? day + ' day(s) ' : '';
     valStr += hr != 0 ? hr + ' hr ' : '';
     valStr += min != 0 ? min + ' min ' : '';
+
+    if (miliseconds < 60) {
+      valStr = '< 1min';
+    }
     return valStr;
   }
 

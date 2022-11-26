@@ -42,9 +42,7 @@ export class AdvertFormComponent implements OnInit {
   colors = new ColorClass();
   fuel = new FuelClass();
   gearbox = new GearboxClass();
-
   advertisment = new AdvertismentClass();
-
   advDetails = new advFormControl();
   advControl = this.advDetails.advDetails;
 
