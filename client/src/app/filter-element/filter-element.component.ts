@@ -25,6 +25,7 @@ export class FilterElementComponent implements OnInit {
   maxValuePrice: number = 500000;
   minValueYear: number = 1960;
   maxValueYear: number = 2023;
+  data: any;
   optionsPrice: Options = {
     floor: 0,
     ceil: 500000,
@@ -48,7 +49,16 @@ export class FilterElementComponent implements OnInit {
   ngOnInit(): void {
     this.brands.brandList.sort();
     this.colors.colorList.sort();
-    var data = {
+
+    this.config = {
+      params: this.data,
+      headers: { Accept: 'application/json' },
+    };
+    this.filterData();
+  }
+
+  resetFilter() {
+    this.data = {
       type: this.filter.type ?? '',
       brand: this.filter.brand ?? '',
       fuel: this.filter.fuel ?? '',
@@ -58,12 +68,12 @@ export class FilterElementComponent implements OnInit {
       minPrice: this.minValuePrice,
       maxPrice: this.maxValuePrice,
     };
-
-    this.config = {
-      params: data,
-      headers: { Accept: 'application/json' },
-    };
-    this.filterData();
+    this.minValuePrice = 0;
+    this.maxValuePrice = 500000;
+    this.minValueYear = 1960;
+    this.maxValueYear = 2023;
+    this.filter = [];
+    // this.filterData();
   }
 
   expand() {
