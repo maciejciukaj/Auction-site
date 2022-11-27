@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize]
     public class AuctionController :BaseApiController
     {
         private readonly IMapper _mapper;
@@ -20,7 +21,7 @@ namespace API.Controllers
         }
 
         [HttpGet("getAuctions")]
-        [AllowAnonymous]
+      
         public async Task<ActionResult<IEnumerable<AuctionDto>>> GetAuctions(){
             var auctions = await _auctionRepository.GetAuctionsAsync();
             var auctionsToReturn =  _mapper.Map<IEnumerable<AuctionDto>>(auctions);
@@ -28,7 +29,7 @@ namespace API.Controllers
         }
 
         [HttpGet("getAuction/{id}")]
-        [AllowAnonymous]
+   
         public async Task<ActionResult<AuctionDto>> GetAuctionyById(long id){
             try{
             var auction =  await _auctionRepository.GetAuctionByIdAsync(id);
@@ -40,13 +41,13 @@ namespace API.Controllers
 
 
         [HttpGet("getAuctionAlt/{id}")]
-        [AllowAnonymous]
+      
         public async Task<ActionResult<Auction>> GetAuctionyByIdAlt(long id){
             return  await _auctionRepository.GetAuctionByIdAsync(id);
         }
 
         [HttpPost("editCurrentPrice")]
-        [AllowAnonymous]
+ 
         public async Task<ActionResult> EditCurrentPrice(PriceEditDto priceEdit){
             var auction = await _auctionRepository.GetAuctionByIdAsync(priceEdit.AuctionId);
             if(priceEdit.UserOffer > auction.CurrentPrice){
@@ -64,26 +65,26 @@ namespace API.Controllers
         }
 
         [HttpGet("getCurrentPrice/{auctionId}")]
-        [Authorize]
+
         public async Task<ActionResult<float>> GetAuctionPrice(long auctionId){
             var auction = await _auctionRepository.GetAuctionByIdAsync(auctionId);
             return auction.CurrentPrice;
         }
 
         [HttpGet("getNumberOfAuctions")]
-        [AllowAnonymous]
+    
         public async Task<int> GetNumberOfAuctions([FromQuery] CardParams cardParams){
             return await _auctionRepository.GetNumberOfAuctions(cardParams);
         } 
 
         [HttpGet("getAuctionsByPage/{page}")]
-        [AllowAnonymous]
+    
         public async Task<ActionResult<IEnumerable<Auction>>> GetCardsByPage(int page, [FromQuery] CardParams cardParams){
             return await _auctionRepository.GetAuctionsByPage(page,cardParams);
         }
 
         [HttpPost("addAuction")]
-        [AllowAnonymous]
+  
         public async Task<ActionResult<Auction>> AddAuction(AuctionFormDto auction){
              var newAuction = new Auction{
                Title = auction.Title,

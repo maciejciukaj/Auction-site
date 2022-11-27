@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
+    [Authorize]
     public class OfferController : BaseApiController
     {
 
@@ -24,7 +25,7 @@ namespace API.Controllers
         }
 
         [HttpGet("getOffers")]
-        [AllowAnonymous]
+       
         public async Task<ActionResult<IEnumerable<OfferDto>>> GetOffers(){  
            var offers =  await _context.Offers.ToListAsync();
             var offerToReturn =  _mapper.Map<IEnumerable<OfferDto>>(offers);
@@ -32,7 +33,7 @@ namespace API.Controllers
         }
 
         [HttpGet("getOffersById")]
-        [AllowAnonymous]
+      
         public async Task<ActionResult<IEnumerable<OfferDto>>> GetOffersByAuctionId(long auctionId){
            var offers =  await _context.Offers.Where(i => i.AuctionId == auctionId).ToListAsync();
             var offerToReturn =  _mapper.Map<IEnumerable<OfferDto>>(offers);
@@ -40,14 +41,14 @@ namespace API.Controllers
         }
 
         [HttpGet("getHighestOfferById")]
-        [AllowAnonymous]
+     
         public async Task<ActionResult<Offer>> GetHighestOfferByAuctionId(long auctionId){
             var offer =  await _context.Offers.FirstOrDefaultAsync(i => i.AuctionId == auctionId);
             return Ok(offer);
         }
 
         [HttpPost("addOffer")]
-        [AllowAnonymous]
+        
         public async Task<ActionResult<Offer>> AddOffer(Offer offer){
             var newOffer = new Offer{
                 OfferAmount = offer.OfferAmount,

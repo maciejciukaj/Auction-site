@@ -82,7 +82,7 @@ namespace API.Controllers
         }
 
         [HttpGet("getUserAuctions/{name}")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<AuctionDto>>> GetUserAuctions(string name){
             var user =  await _userRepository.GetUserByUsernameAsync(name);
             var auctions = user.Auctions.ToList();
@@ -91,7 +91,7 @@ namespace API.Controllers
         }
 
         [HttpGet("getUserOffers/{name}")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<OfferDto>>> GetUserOffers(string name){
             var user =  await _userRepository.GetUserByUsernameAsync(name);
             var offers = user.Offers.ToList();
@@ -100,7 +100,7 @@ namespace API.Controllers
         }
 
         [HttpGet("getUserHighestOffers/{name}")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<ActionResult<Dictionary<long,float>>> GetUserHighestOffers(string name){
             var user =  await _userRepository.GetUserByUsernameAsync(name);
             var offers = user.Offers.ToList();
@@ -118,6 +118,7 @@ namespace API.Controllers
         }
 
         [HttpGet("getUserById/{id}")]
+        [Authorize]
         public async Task<ActionResult<MemberDto>> GetUserById(long id){
              var user =  await _userRepository.GetUserByIdAsync(id);
              return _mapper.Map<MemberDto>(user);

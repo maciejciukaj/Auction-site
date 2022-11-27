@@ -7,7 +7,7 @@ using API.DTOs;
 using API.Helpers;
 
 namespace API.Controllers
-{
+{   [Authorize]
     public class CardController : BaseApiController
     {
         private readonly AuctionContext _context;
@@ -16,13 +16,13 @@ namespace API.Controllers
         }
 
         [HttpGet("getCards")]
-        [AllowAnonymous]
+      
         public async Task<ActionResult<IEnumerable<Advertisment>>> GetCards(){
             return await _context.Advertisments.ToListAsync();
         }
 
         [HttpGet("getNumberOfCards")]
-        [AllowAnonymous]
+       
         public async Task<int> GetNumberOfCards([FromQuery] CardParams cardParams){
             var query = _context.Advertisments.AsQueryable();
             query = FilterRecords(query, cardParams);
@@ -30,7 +30,7 @@ namespace API.Controllers
         } 
 
         [HttpGet("getCardsByPage/{page}")]
-        [AllowAnonymous]
+        
         public async Task<ActionResult<IEnumerable<Advertisment>>> getCardsByPage(int page,[FromQuery] CardParams cardParams){
             int startingPoint = ((page - 1 ) * 6);
             var query = _context.Advertisments.AsQueryable();
@@ -39,13 +39,13 @@ namespace API.Controllers
         }
 
         [HttpGet("getCard/{id}")]
-        [AllowAnonymous]
+     
         public async Task<ActionResult<Advertisment>> GetCardById(long id){
             return await _context.Advertisments.FirstOrDefaultAsync(i => i.AdvertismentId == id);
         }
         
         [HttpPost("addCard")]
-        [Authorize]
+      
         public async Task<ActionResult<Advertisment>> AddCard(Advertisment advertisment){
             var newAdvert = new Advertisment{
                 Title = advertisment.Title,
@@ -60,7 +60,7 @@ namespace API.Controllers
         }
 
         [HttpPut("editCard")]
-        [AllowAnonymous]
+       
         public async Task<IActionResult> EditAdvertisment(AdvertismentEditDto advertismentEdit){
             var advertisment = await _context.Advertisments.FirstOrDefaultAsync(i => i.AdvertismentId == advertismentEdit.AdvertismentId);
             advertisment.Title = advertismentEdit.Title ?? advertisment.Title;

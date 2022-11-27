@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
+    [Authorize]
     public class PhotoController : BaseApiController
     {
         private readonly AuctionContext _context;
@@ -14,7 +15,7 @@ namespace API.Controllers
         }
 
         [HttpPost("addPhoto")]
-        [Authorize]
+       [Authorize]
         public async Task<ActionResult<Photo>> AddPhoto(Photo photo){
             var newPhoto = new Photo{
                 PhotoUrl = photo.PhotoUrl,
@@ -29,7 +30,7 @@ namespace API.Controllers
 
 
         [HttpGet("getPhotos")]
-        [AllowAnonymous]
+   
         public async Task<ActionResult<IEnumerable<Photo>>> GetPhotos(){
             return await  _context.Photos.ToListAsync();
         }

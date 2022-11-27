@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize]
     public class VehicleController : BaseApiController
     {
          private readonly IMapper _mapper;
@@ -21,7 +22,7 @@ namespace API.Controllers
         }
 
         [HttpGet("getVehicles")]
-        [AllowAnonymous]
+       
         public async Task<ActionResult<IEnumerable<VehicleDto>>> GetVehicles(){
             var vehicles =  await _vehicleRepository.GetVehiclesAsync();
             var vehiclesToReturn = _mapper.Map<IEnumerable<VehicleDto>>(vehicles);
@@ -29,7 +30,7 @@ namespace API.Controllers
         }
 
         [HttpGet("getVehicle/{id}")]
-        [AllowAnonymous]
+       
         public async Task<ActionResult<VehicleDto>> getVehicleById(long id){
             try{
             var vehicle =  await _vehicleRepository.GetVehicleByIdAsync(id);
@@ -40,7 +41,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("deleteVehicle/{id}")]
-        [Authorize]
+  
         public async Task<ActionResult<Vehicle>> DeleteVehicleById(long id){
             try{
              var vehicle =  await _vehicleRepository.GetVehicleByIdAsync(id);
@@ -52,7 +53,7 @@ namespace API.Controllers
         }
 
         [HttpGet("getMainPhoto/{id}")]
-        [AllowAnonymous]
+     
         public async Task<ActionResult<PhotoDto>> GetMainPhoto(long id){
             var vehicle =  await _vehicleRepository.GetVehicleByIdAsync(id);
             var mappedVehicle =  _mapper.Map<VehicleDto>(vehicle);
@@ -66,7 +67,7 @@ namespace API.Controllers
 
 
         [HttpPost("addVehicles")]
-        [Authorize]
+       
         public async Task<ActionResult<Vehicle>> AddVehicle(Vehicle vehicle){
              var newVehicle = new Vehicle{
                 Type = vehicle.Type,
@@ -94,7 +95,7 @@ namespace API.Controllers
         }
 
         [HttpPut("editVehicle")]
-        [AllowAnonymous]
+        
         public async Task<IActionResult> EditVehicle(VehicleEditDto vehicleEdit){
             var vehicle = await _vehicleRepository.GetVehicleByIdAsync(vehicleEdit.VehicleId);
             vehicle.Type = vehicleEdit.Type ?? vehicle.Type;
