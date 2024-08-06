@@ -19,38 +19,44 @@ namespace API.Controllers
         private readonly IMapper _mapper;
         private readonly AuctionContext _context;
 
-        public OfferController(AuctionContext context,IMapper mapper){
+        public OfferController(AuctionContext context, IMapper mapper)
+        {
             _context = context;
             _mapper = mapper;
         }
 
         [HttpGet("getOffers")]
-       
-        public async Task<ActionResult<IEnumerable<OfferDto>>> GetOffers(){  
-           var offers =  await _context.Offers.ToListAsync();
-            var offerToReturn =  _mapper.Map<IEnumerable<OfferDto>>(offers);
+
+        public async Task<ActionResult<IEnumerable<OfferDto>>> GetOffers()
+        {
+            var offers = await _context.Offers.ToListAsync();
+            var offerToReturn = _mapper.Map<IEnumerable<OfferDto>>(offers);
             return Ok(offerToReturn);
         }
 
         [HttpGet("getOffersById")]
-      
-        public async Task<ActionResult<IEnumerable<OfferDto>>> GetOffersByAuctionId(long auctionId){
-           var offers =  await _context.Offers.Where(i => i.AuctionId == auctionId).ToListAsync();
-            var offerToReturn =  _mapper.Map<IEnumerable<OfferDto>>(offers);
+
+        public async Task<ActionResult<IEnumerable<OfferDto>>> GetOffersByAuctionId(long auctionId)
+        {
+            var offers = await _context.Offers.Where(i => i.AuctionId == auctionId).ToListAsync();
+            var offerToReturn = _mapper.Map<IEnumerable<OfferDto>>(offers);
             return Ok(offerToReturn);
         }
 
         [HttpGet("getHighestOfferById")]
-     
-        public async Task<ActionResult<Offer>> GetHighestOfferByAuctionId(long auctionId){
-            var offer =  await _context.Offers.FirstOrDefaultAsync(i => i.AuctionId == auctionId);
+
+        public async Task<ActionResult<Offer>> GetHighestOfferByAuctionId(long auctionId)
+        {
+            var offer = await _context.Offers.FirstOrDefaultAsync(i => i.AuctionId == auctionId);
             return Ok(offer);
         }
 
         [HttpPost("addOffer")]
-        
-        public async Task<ActionResult<Offer>> AddOffer(Offer offer){
-            var newOffer = new Offer{
+
+        public async Task<ActionResult<Offer>> AddOffer(Offer offer)
+        {
+            var newOffer = new Offer
+            {
                 OfferAmount = offer.OfferAmount,
                 AuctionId = offer.AuctionId,
                 UserId = offer.UserId
@@ -58,6 +64,6 @@ namespace API.Controllers
             _context.Offers.Add(newOffer);
             await _context.SaveChangesAsync();
             return newOffer;
-        } 
+        }
     }
 }

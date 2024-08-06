@@ -9,9 +9,9 @@ namespace API.DTOs
     {
         public long OfferId { get; set; }
 
-         public float OfferAmount {get;set;}
+        public float OfferAmount { get; set; }
 
-         public long AuctionId {get; set;}
+        public long AuctionId { get; set; }
 
     }
 }

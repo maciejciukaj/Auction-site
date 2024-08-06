@@ -10,7 +10,8 @@ namespace API.Helpers
 {
     public class AutoMapperProfiles : Profile
     {
-        public AutoMapperProfiles(){
+        public AutoMapperProfiles()
+        {
             CreateMap<User, MemberDto>();
             CreateMap<Vehicle, VehicleDto>();
             CreateMap<Advertisment, AdvertismentDto>();

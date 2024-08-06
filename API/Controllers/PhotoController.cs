@@ -10,14 +10,17 @@ namespace API.Controllers
     public class PhotoController : BaseApiController
     {
         private readonly AuctionContext _context;
-        public PhotoController(AuctionContext context){
+        public PhotoController(AuctionContext context)
+        {
             _context = context;
         }
 
         [HttpPost("addPhoto")]
-       [Authorize]
-        public async Task<ActionResult<Photo>> AddPhoto(Photo photo){
-            var newPhoto = new Photo{
+        [Authorize]
+        public async Task<ActionResult<Photo>> AddPhoto(Photo photo)
+        {
+            var newPhoto = new Photo
+            {
                 PhotoUrl = photo.PhotoUrl,
                 IsMain = photo.IsMain,
                 Position = photo.Position,
@@ -30,11 +33,12 @@ namespace API.Controllers
 
 
         [HttpGet("getPhotos")]
-   
-        public async Task<ActionResult<IEnumerable<Photo>>> GetPhotos(){
-            return await  _context.Photos.ToListAsync();
+
+        public async Task<ActionResult<IEnumerable<Photo>>> GetPhotos()
+        {
+            return await _context.Photos.ToListAsync();
         }
 
-        
+
     }
 }

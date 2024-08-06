@@ -18,8 +18,8 @@ namespace API.Interfaces
 
         void AddVehicle(Vehicle vehicle);
         Task<Vehicle> DeleteVehicle(Vehicle vehicle);
-        
-        Task<IEnumerable<Vehicle>> GetFilteredVehicles (VehicleParams vehicleParams);
+
+        Task<IEnumerable<Vehicle>> GetFilteredVehicles(VehicleParams vehicleParams);
 
     }
 }

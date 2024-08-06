@@ -7,9 +7,9 @@ namespace API.DTOs
 {
     public class PriceEditDto
     {
-        public long AuctionId {get; set;}
-        public float UserOffer {get; set;}
+        public long AuctionId { get; set; }
+        public float UserOffer { get; set; }
 
-        public string Username {get; set;}
+        public string Username { get; set; }
     }
 }

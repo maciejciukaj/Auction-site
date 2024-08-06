@@ -7,12 +7,12 @@ namespace API.DTOs
 {
     public class PhotoDto
     {
-        public long PhotoId {get; set;}
+        public long PhotoId { get; set; }
 
-        public string PhotoUrl {get; set;}
+        public string PhotoUrl { get; set; }
 
-        public int Position {get; set;}
+        public int Position { get; set; }
 
-        public Boolean IsMain {get; set;}
+        public Boolean IsMain { get; set; }
     }
 }

@@ -14,9 +14,9 @@ namespace API.Interfaces
 
         Task<User> GetUserByUsernameAsync(string username);
 
-        
 
-       
-      
+
+
+
     }
 }

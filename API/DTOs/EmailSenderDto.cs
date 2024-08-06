@@ -7,6 +7,6 @@ namespace API.DTOs
 {
     public class EmailSenderDto
     {
-        public string email {get; set;}
+        public string email { get; set; }
     }
 }

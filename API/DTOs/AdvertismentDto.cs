@@ -7,12 +7,12 @@ namespace API.DTOs
 {
     public class AdvertismentDto
     {
-        public long AdvertismentId{get;set;}
-        public string Title{get;set;}
+        public long AdvertismentId { get; set; }
+        public string Title { get; set; }
 
-        public string Description{get;set;}
-        public string Price {get;set;}
+        public string Description { get; set; }
+        public string Price { get; set; }
 
-        public long VehicleId {get; set;}
+        public long VehicleId { get; set; }
     }
 }
